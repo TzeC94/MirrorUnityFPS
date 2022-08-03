@@ -7,3 +7,5 @@ This project I'm using the First Person Characters Controller Starter Assets and
 https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525#description
 
 I'm using Unity 2021.3
+
+Everything start in Main Menu Scene
