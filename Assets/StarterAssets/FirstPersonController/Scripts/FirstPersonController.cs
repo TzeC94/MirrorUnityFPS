@@ -136,6 +136,9 @@ namespace StarterAssets
 			}
 		}
 
+        #region Ground Checking
+
+        [Server]
 		private void Server_GroundedCheck()
 		{
 			// set sphere position, with offset
@@ -143,9 +146,14 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
-		[SyncVar]
-		float s_RotationVelocity;
+        #endregion
 
+        #region Camera and Character Rotation
+
+		[SyncVar]
+		float s_RotationVelocity = 0f;
+
+		[Client]
 		private void Client_CameraRotation()
 		{
 			// if there is an input
@@ -166,6 +174,7 @@ namespace StarterAssets
 				// rotate the player left and right
 				//transform.Rotate(Vector3.up * _rotationVelocity);
 				Client_SendRotationVelocity(_rotationVelocity);
+
 			}else{
 
 				Client_SendRotationVelocity(0f);
@@ -181,13 +190,18 @@ namespace StarterAssets
 
 		}
 
+		[Server]
 		private void Server_CameraRotation(){
 
 			transform.Rotate(Vector3.up * s_RotationVelocity);
 
 		}
 
-		[SyncVar]
+        #endregion
+
+        #region Movement
+
+        [SyncVar]
 		bool s_IsSprint = false;
 
 		[SyncVar]
@@ -196,9 +210,14 @@ namespace StarterAssets
 		[SyncVar]
 		Vector2 s_InputMove;
 
+		[Client]
 		private void Client_Move(){
 
-			Client_SyncMovement(PlayerInputInstance.instance.sprint, PlayerInputInstance.instance.analogMovement, PlayerInputInstance.instance.move);
+			if(s_IsSprint != PlayerInputInstance.instance.sprint || s_AnalogMovement != PlayerInputInstance.instance.analogMovement || s_InputMove != PlayerInputInstance.instance.move){
+
+				Client_SyncMovement(PlayerInputInstance.instance.sprint, PlayerInputInstance.instance.analogMovement, PlayerInputInstance.instance.move);
+
+			}
 
 		}
 
@@ -211,6 +230,7 @@ namespace StarterAssets
 
 		}
 
+		[Server]
 		private void Server_Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
@@ -259,7 +279,11 @@ namespace StarterAssets
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
-		bool s_isJump;
+        #endregion
+
+        #region Jump
+
+        bool s_isJump = false;
 
 		//Run on client
 		private void Client_JumpInputCheck(){
@@ -329,7 +353,9 @@ namespace StarterAssets
 
 		}
 
-		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+        #endregion
+
+        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{
 			if (lfAngle < -360f) lfAngle += 360f;
 			if (lfAngle > 360f) lfAngle -= 360f;
