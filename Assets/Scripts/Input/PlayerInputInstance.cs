@@ -14,6 +14,7 @@ public class PlayerInputInstance : StarterAssetsInputs
     }
 
     public override void Start() {
+
         base.Start();
 
         if (_instance == null)
