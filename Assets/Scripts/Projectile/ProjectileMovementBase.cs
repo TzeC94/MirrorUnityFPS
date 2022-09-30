@@ -9,7 +9,7 @@ public abstract class ProjectileMovementBase : NetworkBehaviour
     public enum MoveDirection { Forward, Backward, Left, Right, Up, Down }
 
     //Component
-    private Rigidbody rigidBody;
+    protected Rigidbody rigidBody;
 
     [Header("Movement")]
     public float moveSpeed = 1f;
@@ -57,24 +57,30 @@ public abstract class ProjectileMovementBase : NetworkBehaviour
                 v_MoveDirection = transform.forward;
                 break;
             case MoveDirection.Backward:
-                v_MoveDirection = transform.forward;
+                v_MoveDirection = -transform.forward;
                 break;
             case MoveDirection.Up:
-                v_MoveDirection = transform.forward;
+                v_MoveDirection = transform.up;
                 break;
             case MoveDirection.Down:
-                v_MoveDirection = transform.forward;
+                v_MoveDirection = -transform.up;
                 break;
             case MoveDirection.Left:
-                v_MoveDirection = transform.forward;
+                v_MoveDirection = -transform.right;
                 break;
             case MoveDirection.Right:
-                v_MoveDirection = transform.forward;
+                v_MoveDirection = transform.right;
                 break;
         }
 
+        AddForce(v_MoveDirection);
+
+    }
+
+    public virtual void AddForce(Vector3 direction){
+
         //Add the rigidbody movement
-        rigidBody.AddForce(v_MoveDirection * moveSpeed * Time.fixedDeltaTime);
+        rigidBody.AddForce(direction * moveSpeed * Time.fixedDeltaTime);
 
     }
 
