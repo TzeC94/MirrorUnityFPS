@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerObject: {fileID: 0}
-  prefab_Projectile: {fileID: 6919559175900266252, guid: 05376fe08a083ac4c9570e9f84bbbb5e, type: 3}
+  prefab_Projectile: {fileID: 5986618991811701523, guid: 088d4bc220327fd40b82e16343cb46d5, type: 3}
   fire_FirePoint: {fileID: 4695883728172566001}
 --- !u!1 &5220868166824954166
 GameObject:
