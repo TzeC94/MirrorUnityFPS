@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2273508236059289130}
   - component: {fileID: 5446507329345585785}
   - component: {fileID: 5615721397503697782}
+  - component: {fileID: 3615249164090168002}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -316,7 +317,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce294b3667964614ba1b2bb8249e18f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   maxHealth: 100
+--- !u!114 &3615249164090168002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d481d915b905e64987c1800e6545037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  inventoryMax: 20
+  collectedItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &3875374740734707290
 PrefabInstance:
   m_ObjectHideFlags: 0
