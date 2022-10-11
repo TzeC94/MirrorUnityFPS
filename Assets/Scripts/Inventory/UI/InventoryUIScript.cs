@@ -13,7 +13,6 @@ public class InventoryUIScript : UIBase
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
     }
 
     // Update is called once per frame

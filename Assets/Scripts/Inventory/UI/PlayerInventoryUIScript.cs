@@ -6,14 +6,16 @@ public class PlayerInventoryUIScript : InventoryUIScript
 {
     public static PlayerInventoryUIScript instance;
 
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        if(instance != null){
+    public override void Init() {
+
+        base.Init();
+
+        if (instance == null) {
 
             instance = this;
 
         }
+
     }
 
     private void OnDestroy() {

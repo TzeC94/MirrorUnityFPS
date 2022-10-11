@@ -10,10 +10,12 @@ public class PlayerInventory : InventoryBase
     // Start is called before the first frame update
     public override void Start()
     {
+        base.Start();
+
         if(!isLocalPlayer)
             return;
 
-        if(instance != null){
+        if(instance == null){
 
             instance = this;
 
@@ -25,7 +27,7 @@ public class PlayerInventory : InventoryBase
 
     IEnumerator InitializeUI(){
 
-        if(PlayerInventoryUIScript.instance == null){
+        while(PlayerInventoryUIScript.instance == null){
 
             yield return null;
 
