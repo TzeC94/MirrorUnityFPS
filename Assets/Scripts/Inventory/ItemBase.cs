@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemBase : MonoBehaviour
 {
     public ItemData itemData;
+    public bool canPickUp = true;
 
     // Start is called before the first frame update
     public virtual void Start()

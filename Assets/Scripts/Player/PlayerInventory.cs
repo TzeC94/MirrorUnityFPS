@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInventory : InventoryBase
 {
     //Singleton
-    private static PlayerInventory instance;
+    public static PlayerInventory instance;
 
     // Start is called before the first frame update
     public override void Start()

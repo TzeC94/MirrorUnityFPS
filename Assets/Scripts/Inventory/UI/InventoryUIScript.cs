@@ -37,6 +37,17 @@ public class InventoryUIScript : UIBase
 
     public virtual void FillInventory(){
 
+        //Destroy the list if not match
+        if(itemSlotParent.childCount != maxSlot){
+
+            foreach(Transform childTrans in itemSlotParent){
+
+                Destroy(childTrans.gameObject);
+
+            }
+
+        }
+
         for(int i = 0; i < maxSlot; i++){
 
             Instantiate(itemPrefab, itemSlotParent);

@@ -40,4 +40,10 @@ public class InventoryBase : NetworkBehaviour
     {
         
     }
+
+    public void AddToInventory(ItemData newItemData) {
+
+        collectedItems.Add(newItemData);
+
+    }
 }
