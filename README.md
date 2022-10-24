@@ -7,6 +7,12 @@ This project I'm using the First Person Characters Controller Starter Assets and
 
 https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525#description
 
+Features
+1. Simple movement
+2. Simple Weapon
+3. Simple Pickup & Inventory (In Progress)
+4. Simple Health (On Hold)
+
 I'm using Unity 2021.3
 
 Everything start in Main Menu Scene
