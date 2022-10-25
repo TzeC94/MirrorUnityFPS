@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
             var lookAtTarget = lookAtHitColliders[i];
 
-            if (lookAtTarget.collider.gameObject.GetComponent<ItemBase>()) {
+            if (lookAtTarget.collider.gameObject.GetComponent<BaseScript>()) {
 
                 //Check distance
                 if (lookAtTarget.distance < distance) {
@@ -117,33 +118,18 @@ public class PlayerLookatHandler : MonoBehaviour
 
     public void LookAtAction() {
 
-        bool toDestroy = false;
+        var baseComponent = currentLookAtTarget.GetComponent<BaseScript>();
 
-        if(currentLookAtTarget.GetComponent<ItemBase>()) {
+        if (baseComponent is PickupBase) {
 
-            var itemBase = currentLookAtTarget.GetComponent<ItemBase>();
+            var itemBase = baseComponent as PickupBase;
 
             if (itemBase.canPickUp) {
 
                 //Add to player inventory
-                PlayerInventory.instance.AddToInventory(itemBase.itemData);
-
-                toDestroy = true;
-
-                goto DestroyObject;
+                GameManagerBase.instance.PickupItemToInventory(itemBase.netId, NetworkClient.localPlayer.netId);
             }
 
         }
-
-    DestroyObject:
-        {
-            if (toDestroy) {
-
-                Destroy(currentLookAtTarget);
-
-            }
-        }
-
     }
-
 }

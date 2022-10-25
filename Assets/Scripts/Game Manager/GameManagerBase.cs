@@ -6,16 +6,28 @@ using Mirror;
 
 public class GameManagerBase : NetworkBehaviour
 {
+    public static GameManagerBase instance;
+
     PlayerInventoryUIScript playerInventoryUI;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(isClient){
+        if(instance == null) {
+            instance = this;
+        }
+
+        if (isClient){
 
             LoadUI();
 
         }
+    }
+
+    private void OnDisable() {
+
+        instance = null;
+
     }
 
     // Update is called once per frame
@@ -52,5 +64,46 @@ public class GameManagerBase : NetworkBehaviour
         //Unload this scene
         SceneManager.UnloadSceneAsync("Inventory UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
     }
+
+    #region Pick up
+
+    public void PickupItemToInventory(uint itemNetID, uint targetNetID) {
+
+        CmdPickupItemToInventory(itemNetID, targetNetID);
+
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdPickupItemToInventory(uint itemNetID, uint targetNetID) {
+
+        NetworkIdentity targetNetworkIdentity;
+
+        if (NetworkServer.spawned.TryGetValue(itemNetID, out targetNetworkIdentity)) {
+
+            var itemData =  targetNetworkIdentity.gameObject.GetComponent<PickupBase>().itemData;
+            AddItemToInventory(itemData, targetNetID);
+
+            //Destroy this object from server
+            NetworkServer.Destroy(targetNetworkIdentity.gameObject);
+        }
+
+    }
+
+    public static void AddItemToInventory(ItemData itemData, uint targetNetID) {
+
+        NetworkIdentity targetNetworkIdentity;
+
+        if (NetworkServer.spawned.TryGetValue(targetNetID, out targetNetworkIdentity)) {
+
+            var playerInventory = targetNetworkIdentity.GetComponent<PlayerInventory>();
+
+            //Add
+            playerInventory.AddToInventory(itemData);
+
+        }
+
+    }
+
+    #endregion
 
 }

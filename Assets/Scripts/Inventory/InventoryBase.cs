@@ -9,25 +9,7 @@ public class InventoryBase : NetworkBehaviour
     protected int inventoryMax = 20;
 
     [SerializeField]
-    protected List<ItemData> collectedItems = new List<ItemData>(20);
-
-#if UNITY_EDITOR
-
-    private void OnValidate() {
-        
-        if(collectedItems.Count != inventoryMax){
-
-            collectedItems.Clear();
-
-            for(int i = 0; i < inventoryMax; i++){
-
-                collectedItems.Add(null);
-
-            }
-        }
-    }
-
-#endif
+    protected readonly SyncList<ItemData> collectedItems = new SyncList<ItemData>();
 
     // Start is called before the first frame update
     public virtual void Start()
