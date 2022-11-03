@@ -57,7 +57,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
-        var hitCount = Physics.RaycastNonAlloc(ray, lookAtHitColliders, range, layerToLook);
+        var hitCount = RayTracer.RaycastNonAlloc(ref ray, ref lookAtHitColliders, range, layerToLook);
 
         if(hitCount <= 0) {
             return null;

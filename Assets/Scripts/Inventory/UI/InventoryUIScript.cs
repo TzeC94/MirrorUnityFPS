@@ -10,6 +10,8 @@ public class InventoryUIScript : UIBase
 
     public int maxSlot = 10;
 
+    private List<InventoryUIItemScript> itemSlotList = new List<InventoryUIItemScript>();
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -40,17 +42,20 @@ public class InventoryUIScript : UIBase
         //Destroy the list if not match
         if(itemSlotParent.childCount != maxSlot){
 
-            foreach(Transform childTrans in itemSlotParent){
+            itemSlotList.Clear();
+
+            foreach (Transform childTrans in itemSlotParent){
 
                 Destroy(childTrans.gameObject);
 
             }
-
         }
 
         for(int i = 0; i < maxSlot; i++){
 
-            Instantiate(itemPrefab, itemSlotParent);
+            var uiObject = GameCore.Instantiate(itemPrefab, itemSlotParent);
+            var itemCompoment = uiObject.GetComponent<InventoryUIItemScript>();
+            itemSlotList.Add(itemCompoment);
 
         }
 
