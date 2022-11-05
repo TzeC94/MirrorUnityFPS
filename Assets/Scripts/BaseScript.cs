@@ -16,4 +16,10 @@ public class BaseScript : NetworkBehaviour
     {
         
     }
+
+    /// <summary>
+    /// For action 1 usage
+    /// </summary>
+    public virtual void ActionOne(uint callerPlayerID) {
+    }
 }

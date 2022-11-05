@@ -107,7 +107,9 @@ public class PlayerLookatHandler : MonoBehaviour
 
             if(actionAdded == false) {
 
-                PlayerInputInstance.instance.actionOne_Action += LookAtAction;
+                var baseScript = currentLookAtTarget.GetComponent<BaseScript>();
+
+                PlayerInputInstance.instance.actionOne_Action += () => baseScript.ActionOne(NetworkClient.localPlayer.netId);
 
                 actionAdded = true;
 
@@ -117,32 +119,13 @@ public class PlayerLookatHandler : MonoBehaviour
 
             if (actionAdded) {
 
-                PlayerInputInstance.instance.actionOne_Action -= LookAtAction;
+                var baseScript = currentLookAtTarget.GetComponent<BaseScript>();
+                PlayerInputInstance.instance.actionOne_Action -= () => baseScript.ActionOne(NetworkClient.localPlayer.netId);
                 currentLookAtTarget = null;
                 actionAdded = false;
 
             }
         }
 
-    }
-
-    /// <summary>
-    /// Action when player press teh action 1 button
-    /// </summary>
-    public void LookAtAction() {
-
-        var baseComponent = currentLookAtTarget.GetComponent<BaseScript>();
-
-        if (baseComponent is PickupBase) {
-
-            var itemBase = baseComponent as PickupBase;
-
-            if (itemBase.canPickUp) {
-
-                //Add to player inventory
-                GameManagerBase.instance.PickupItemToInventory(itemBase.netId, NetworkClient.localPlayer.netId);
-            }
-
-        }
     }
 }
