@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8997996947095583982}
   - component: {fileID: 8616685848737228382}
-  - component: {fileID: 8616685848737228371}
+  - component: {fileID: 3534637146022182587}
   - component: {fileID: 8186667459668633024}
   - component: {fileID: 1978471637655604388}
   - component: {fileID: 2273508236059289130}
@@ -189,7 +189,7 @@ CharacterController:
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.93, z: 0}
---- !u!114 &8616685848737228371
+--- !u!114 &3534637146022182587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8616685848737228372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
+  m_Script: {fileID: 11500000, guid: ff3f257c14b68f54a8a4780c3dd355a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
@@ -216,12 +216,13 @@ MonoBehaviour:
   GroundedRadius: 0.5
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 1
   prefab_Camera: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
   prefab_CinematicVirtualCamera: {fileID: 8762286023885395077, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
   CinemachineCameraTarget: {fileID: 4135013735270702863}
-  TopClamp: 89
-  BottomClamp: -89
+  TopClamp: 90
+  BottomClamp: -90
+  inventory: {fileID: 3615249164090168002}
 --- !u!114 &8186667459668633024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,27 +336,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   inventoryMax: 20
-  collectedItems:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1001 &3875374740734707290
 PrefabInstance:
   m_ObjectHideFlags: 0

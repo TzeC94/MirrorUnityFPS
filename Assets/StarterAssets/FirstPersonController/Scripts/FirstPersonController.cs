@@ -80,7 +80,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Awake()
+		public virtual void Awake()
 		{
 			if(isLocalPlayer){
 				// get a reference to our main camera
@@ -90,7 +90,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Start()
+        public virtual void Start()
 		{
 			_controller = GetComponent<CharacterController>();
 
@@ -111,7 +111,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Update()
+        public virtual void Update()
 		{
 			if(isLocalPlayer){
 				Client_JumpInputCheck();
@@ -125,7 +125,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void LateUpdate()
+        public virtual void LateUpdate()
 		{
 			if(isLocalPlayer){
 				Client_CameraRotation();

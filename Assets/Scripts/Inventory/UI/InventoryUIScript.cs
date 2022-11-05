@@ -10,7 +10,7 @@ public class InventoryUIScript : UIBase
 
     public int maxSlot = 10;
 
-    private List<InventoryUIItemScript> itemSlotList = new List<InventoryUIItemScript>();
+    protected List<InventoryUIItemScript> itemSlotList = new List<InventoryUIItemScript>();
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -26,8 +26,6 @@ public class InventoryUIScript : UIBase
     public override void Open() {
 
         base.Open();
-
-        FillInventory();
 
     }
 

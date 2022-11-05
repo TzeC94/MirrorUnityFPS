@@ -4,15 +4,15 @@ using UnityEngine;
 
 public static class GameCore
 {
-    public static GameObject Instantiate(GameObject objectToSpawn, Vector3 position, Quaternion quaternion, Transform parent) {
+    public static T Instantiate<T>(T objectToSpawn, Vector3 position, Quaternion quaternion, Transform parent) where T : Object {
 
-        return GameObject.Instantiate(objectToSpawn, position, quaternion, parent);
+        return (T)Object.Instantiate(objectToSpawn, position, quaternion, parent);
 
     }
 
-    public static GameObject Instantiate(GameObject objectToSpawn, Transform parent) {
+    public static T Instantiate<T>(T objectToSpawn, Transform parent) where T : Object {
 
-        return GameObject.Instantiate(objectToSpawn, parent);
+        return (T)Object.Instantiate(objectToSpawn, parent);
 
     }
 

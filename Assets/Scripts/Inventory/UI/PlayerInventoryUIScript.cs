@@ -24,11 +24,42 @@ public class PlayerInventoryUIScript : InventoryUIScript
 
     }
 
+    public override void Open() {
+
+        base.Open();
+
+        PopulateItem();
+
+    }
+
     public void FillInventory(int slot){
 
         maxSlot = slot;
 
         FillInventory();
+
+    }
+
+    /// <summary>
+    /// To populate the item you owned on UI
+    /// </summary>
+    private void PopulateItem() {
+
+        var localPlayer = GameManagerBase.LocalPlayer;
+
+        if (localPlayer != null) {
+
+            int totalCount = localPlayer.inventory.collectedItems.Count;
+
+            for(int i = 0; i < totalCount; i++) {
+
+                var itemSlot = itemSlotList[i];
+                itemSlot.itemData = localPlayer.inventory.collectedItems[i];
+                itemSlot.Setup();
+
+            }
+
+        }
 
     }
 

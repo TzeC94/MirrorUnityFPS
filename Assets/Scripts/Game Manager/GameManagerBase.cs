@@ -8,6 +8,8 @@ public class GameManagerBase : NetworkBehaviour
 {
     public static GameManagerBase instance;
 
+    public static PlayerBase LocalPlayer;
+
     PlayerInventoryUIScript playerInventoryUI;
 
     // Start is called before the first frame update

@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
-  m_Name: Pistol Data
+  m_Script: {fileID: 11500000, guid: 3a189bb168d8d90478a09ea08c2f3d72, type: 3}
+  m_Name: DefaultObject
   m_EditorClassIdentifier: 
-  itemName: Pistol
-  itemDescription: Small handgun with low damage
-  itemIcon: Icons/ReadMeImg
+  m_AddressableAssetSettingsGuid: 11dfbf2985608a04fb902fc1a128fa67

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
-  m_Name: Pistol Data
+  m_Script: {fileID: 11500000, guid: b1487f5d688e4f94f828f879d599dbdc, type: 3}
+  m_Name: Built In Data_PlayerDataGroupSchema
   m_EditorClassIdentifier: 
-  itemName: Pistol
-  itemDescription: Small handgun with low damage
-  itemIcon: Icons/ReadMeImg
+  m_Group: {fileID: 11400000, guid: e95b26d4598491243b7cfec476cfd396, type: 2}
+  m_IncludeResourcesFolders: 1
+  m_IncludeBuildSettingsScenes: 1

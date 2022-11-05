@@ -9,7 +9,7 @@ public class InventoryBase : NetworkBehaviour
     protected int inventoryMax = 20;
 
     [SerializeField]
-    protected readonly SyncList<ItemData> collectedItems = new SyncList<ItemData>();
+    public readonly SyncList<ItemData> collectedItems = new SyncList<ItemData>();
 
     // Start is called before the first frame update
     public virtual void Start()
