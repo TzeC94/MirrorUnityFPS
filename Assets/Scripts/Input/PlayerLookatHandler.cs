@@ -49,6 +49,10 @@ public class PlayerLookatHandler : MonoBehaviour
         SetLookAtTarget(lookedTarget);
     }
 
+    /// <summary>
+    /// Raycast and check the look at target
+    /// </summary>
+    /// <returns></returns>
     GameObject LookAtUpdate() {
 
         if(playerCamera == null) {
@@ -64,9 +68,10 @@ public class PlayerLookatHandler : MonoBehaviour
         }
 
         float distance = range * 1.1f;
-        RaycastHit currentHitTarget = default;
-        bool hasTarget = false;
+        GameObject currentHitTarget = null;
 
+        //Loop through and check 1 by 1
+        //Can't sort due to non alloc raycast
         for (int i = 0; i < hitCount; i++) {
 
             var lookAtTarget = lookAtHitColliders[i];
@@ -77,22 +82,26 @@ public class PlayerLookatHandler : MonoBehaviour
                 if (lookAtTarget.distance < distance) {
 
                     //Update to this target
-                    currentHitTarget = lookAtTarget;
+                    currentHitTarget = lookAtTarget.collider.gameObject;
 
                     distance = lookAtTarget.distance;
-
-                    hasTarget = true;
-
                 }
             }
         }
 
-        return hasTarget ? currentHitTarget.collider.gameObject : null;
+        return currentHitTarget;
     }
 
+    /// <summary>
+    /// Set the look at target
+    /// </summary>
+    /// <param name="lookAtTarget"></param>
     void SetLookAtTarget(GameObject lookAtTarget) {
 
-        if(lookAtTarget != null) {
+        if (lookAtTarget == currentLookAtTarget)
+            return;
+
+        if(lookAtTarget != null && lookAtTarget != currentLookAtTarget) {
 
             currentLookAtTarget = lookAtTarget;
 
@@ -109,13 +118,17 @@ public class PlayerLookatHandler : MonoBehaviour
             if (actionAdded) {
 
                 PlayerInputInstance.instance.actionOne_Action -= LookAtAction;
-                actionAdded = true;
+                currentLookAtTarget = null;
+                actionAdded = false;
 
             }
         }
 
     }
 
+    /// <summary>
+    /// Action when player press teh action 1 button
+    /// </summary>
     public void LookAtAction() {
 
         var baseComponent = currentLookAtTarget.GetComponent<BaseScript>();
