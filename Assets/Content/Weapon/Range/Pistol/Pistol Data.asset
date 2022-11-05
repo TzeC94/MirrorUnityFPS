@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pistol
   itemDescription: Small handgun with low damage
-  itemIcon: Icons/ReadMeImg
+  itemIcon: Circle
