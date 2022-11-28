@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,4 +49,16 @@ public class PlayerInventory : InventoryBase
     {
         
     }
+
+    public override void OnInventoryChanged(SyncList<ItemData>.Operation op, int itemIndex, ItemData oldItem, ItemData newItem) {
+
+        //IF the UI is open, then we need to refresh it
+        if (PlayerInventoryUIScript.instance.isOpen) {
+
+            PlayerInventoryUIScript.instance.RefreshItem();
+
+        }
+
+    }
+
 }

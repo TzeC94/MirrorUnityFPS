@@ -21,4 +21,10 @@ public static class ResourceManage
 
     }
 
+    public static void UnloadAsset<T>(T target) {
+
+        Addressables.Release<T>(target);
+
+    }
+
 }

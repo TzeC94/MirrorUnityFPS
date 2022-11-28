@@ -8,8 +8,28 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 {
     public ItemData itemData;
     public Image ui_Icon;
+    public int itemIndex;
+    public uint ownerID;
 
-    public void Setup() {
+    public void Setup(ItemData itemData, int itemIndex, uint ownerID) {
+
+        if (this.itemData == itemData)
+            return;
+
+        if (itemData == null) {
+
+            //Need remove the icon if is available
+            this.itemData = null;
+            itemIndex = -1;
+            ui_Icon.sprite = null;
+
+            return;
+
+        }
+
+        this.itemData = itemData;
+        this.itemIndex = itemIndex;
+        this.ownerID = ownerID;
 
         ResourceManage.LoadAsset<Sprite>(itemData.itemIcon, LoadComplete);
 
@@ -29,7 +49,8 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 
             if(itemData != null) {
 
-                Debug.Log($"Right Click on {itemData.itemName}");
+                //Remove it
+                GameManagerBase.instance.DropItemFromInventory(itemIndex, itemData, ownerID);
 
             }else {
 
@@ -37,7 +58,6 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 
             }
             
-
         }
 
     }

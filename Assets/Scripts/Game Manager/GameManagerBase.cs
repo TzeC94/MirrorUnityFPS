@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 
-public class GameManagerBase : NetworkBehaviour
+public partial class GameManagerBase : NetworkBehaviour
 {
     public static GameManagerBase instance;
 
@@ -38,37 +38,9 @@ public class GameManagerBase : NetworkBehaviour
         
     }
 
-    void LoadUI(){
-
-        var loadMasterAsync = SceneManager.LoadSceneAsync("Master UI", LoadSceneMode.Additive);
-        loadMasterAsync.allowSceneActivation = true;
-        loadMasterAsync.completed += LoadMasterUICompleted;
-
-    }
-
-    void LoadMasterUICompleted(AsyncOperation asyncOperation) {
-
-        var loadInventoryAynsc = SceneManager.LoadSceneAsync("Inventory UI", LoadSceneMode.Additive);
-        loadInventoryAynsc.allowSceneActivation = true;
-        loadInventoryAynsc.completed += LoadInventoryUICompleted;
-
-    }
-
-    void LoadInventoryUICompleted(AsyncOperation asyncOperation){
-
-        var uiObject = GameObject.Find("Inventory Panel");
-        uiObject.transform.SetParent(MasterUIScript.instance.transform);
-
-        playerInventoryUI = uiObject.GetComponent<PlayerInventoryUIScript>();
-        playerInventoryUI.Init();
-        playerInventoryUI.Close();
-
-        //Unload this scene
-        SceneManager.UnloadSceneAsync("Inventory UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-    }
-
     #region Pick up
 
+    //Call on Client
     public void PickupItemToInventory(uint itemNetID, uint targetNetID) {
 
         CmdPickupItemToInventory(itemNetID, targetNetID);
@@ -91,6 +63,7 @@ public class GameManagerBase : NetworkBehaviour
 
     }
 
+    //Server Code
     public static void AddItemToInventory(ItemData itemData, uint targetNetID) {
 
         NetworkIdentity targetNetworkIdentity;
@@ -104,6 +77,40 @@ public class GameManagerBase : NetworkBehaviour
 
         }
 
+    }
+
+    #endregion
+
+    #region Drop
+
+    //Client Code
+    public void DropItemFromInventory(int inventoryIndex, ItemData itemData, uint targetNetID) {
+
+        CmdDropItemFromInventory(inventoryIndex, itemData.itemIndex, targetNetID);
+
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDropItemFromInventory(int inventoryIndex, int itemIndex, uint targetNetID) {
+
+        //Remove from player inventory
+        NetworkIdentity targetNetworkIdentity;
+
+        if (NetworkServer.spawned.TryGetValue(targetNetID, out targetNetworkIdentity)) {
+
+            var playerInventory = targetNetworkIdentity.GetComponent<PlayerInventory>();
+
+            //Remove and success
+            if(playerInventory.RemoveFromInventory(inventoryIndex)) {
+
+                //Spawn the item to the world
+                var playerPosFront = targetNetworkIdentity.transform.position + targetNetworkIdentity.transform.forward + Vector3.up;
+                var toSpawnPrefab = MyNetworkManager.instance.spawnPrefabs[itemIndex];
+                GameCore.NetworkInstantiate(toSpawnPrefab, playerPosFront);
+
+            }
+
+        }
     }
 
     #endregion

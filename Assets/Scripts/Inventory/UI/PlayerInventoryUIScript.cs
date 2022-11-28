@@ -54,12 +54,17 @@ public class PlayerInventoryUIScript : InventoryUIScript
             for(int i = 0; i < totalCount; i++) {
 
                 var itemSlot = itemSlotList[i];
-                itemSlot.itemData = localPlayer.inventory.collectedItems[i];
-                itemSlot.Setup();
+                itemSlot.Setup(localPlayer.inventory.collectedItems[i], i, localPlayer.netId);
 
             }
 
         }
+
+    }
+
+    public void RefreshItem() {
+
+        PopulateItem();
 
     }
 
