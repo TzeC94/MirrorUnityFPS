@@ -1,4 +1,6 @@
 using StarterAssets;
+using System;
+using System.Diagnostics;
 using UnityEngine.InputSystem;
 
 public class PlayerInputInstance : StarterAssetsInputs
@@ -13,6 +15,8 @@ public class PlayerInputInstance : StarterAssetsInputs
         }
     }
 
+    public Action actionOne_Action;
+
     public override void Start() {
 
         base.Start();
@@ -21,5 +25,36 @@ public class PlayerInputInstance : StarterAssetsInputs
             _instance = this;
 
         PlayerInputInstance._playerInput = GetComponent<PlayerInput>();
+    }
+
+    public void OnInventory(InputValue value) {
+
+        if (value.isPressed) {
+
+            if (PlayerInventoryUIScript.instance.isOpen) {
+
+                PlayerInventoryUIScript.instance.Close();
+
+            } else {
+
+                PlayerInventoryUIScript.instance.Open();
+
+            }
+
+            //Lock the input base on inventory
+            cursorInputForLook = PlayerInventoryUIScript.instance.isOpen == false;
+
+        }
+
+    }
+
+    public void OnActionOne(InputValue value) {
+
+        if (value.isPressed) {
+
+            actionOne_Action?.Invoke();
+
+        }
+
     }
 }
