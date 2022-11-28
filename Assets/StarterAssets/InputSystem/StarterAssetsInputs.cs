@@ -50,7 +50,11 @@ namespace StarterAssets
 
 		public void OnFire(InputValue value)
 		{
-			FireInput(value.isPressed);
+			if (cursorInputForLook) {
+
+                FireInput(value.isPressed);
+
+            }
 		}
 #endif
 
