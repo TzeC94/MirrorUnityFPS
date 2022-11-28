@@ -10,7 +10,10 @@ https://assetstore.unity.com/packages/essentials/starter-assets-first-person-cha
 Features
 1. Simple movement
 2. Simple Weapon
-3. Simple Pickup & Inventory (In Progress)
+3. Simple Pickup & Inventory
+  3.1 Simple Pickup
+  3.2 Simple Inventory UI
+  3.3 Simple drop from inventory
 4. Simple Health (On Hold)
 
 I'm using Unity 2021.3
