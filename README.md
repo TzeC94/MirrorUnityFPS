@@ -14,7 +14,9 @@ Features
     - Simple Pickup Simple 
     - Inventory UI 
     - Simple drop from inventory
-4. Simple Health (On Hold)
+4. Simple Health
+    - Simple Health
+    - Simple Hit Information
 
 I'm using Unity 2021.3
 
