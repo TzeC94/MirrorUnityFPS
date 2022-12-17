@@ -9,7 +9,20 @@ public partial class MainMenuScript : MonoBehaviour
 
     [Header("Client Join")]
     [SerializeField] private TMP_InputField client_IPInputField;
-    
+
+    private IEnumerator Start() {
+
+        yield return new WaitForSeconds(1f);
+
+        //Start Server IF is server
+        if (GlobalVar.isServerBuild) {
+
+            Server_Start();
+
+        }
+
+    }
+
     public void Server_Start(){
 
         MyNetworkManager.instance.StartServer();

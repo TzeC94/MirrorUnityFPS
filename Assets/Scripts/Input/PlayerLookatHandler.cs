@@ -20,20 +20,23 @@ public class PlayerLookatHandler : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        if(instance == null) {
+        if(MyNetworkManager.instance.mode != NetworkManagerMode.ServerOnly) {
 
-            instance = this;
+            if (instance == null) {
+
+                instance = this;
+
+            }
+
+            if (Camera.main == null) {
+
+                yield return null;
+
+            }
+
+            playerCamera = Camera.main.transform;
 
         }
-
-        if(Camera.main == null) {
-
-            yield return null;
-
-        }
-
-        playerCamera = Camera.main.transform;
-
     }
 
     private void OnDestroy() {
@@ -45,8 +48,12 @@ public class PlayerLookatHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        var lookedTarget = LookAtUpdate();
-        SetLookAtTarget(lookedTarget);
+        if (MyNetworkManager.instance.mode != NetworkManagerMode.ServerOnly) {
+
+            var lookedTarget = LookAtUpdate();
+            SetLookAtTarget(lookedTarget);
+
+        }
     }
 
     /// <summary>
