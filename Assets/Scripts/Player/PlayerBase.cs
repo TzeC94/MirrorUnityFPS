@@ -1,3 +1,4 @@
+using Mirror;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,12 @@ public class PlayerBase : FirstPersonController {
     [Header("Inventory")]
     public PlayerInventory inventory;
 
+    [Header("Weapon")]
+    public Transform weaponHoldingRoot;
+
+    [Header("Default")]
+    public GameObject weaponDefault;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -16,6 +23,8 @@ public class PlayerBase : FirstPersonController {
             //Register yourself with Game Manager
             GameManagerBase.LocalPlayer = this;
 
+            //Spawn your default Weapon
+            Cmd_SpawnDefaultWeapon();
         }
         
         base.Start();
@@ -26,5 +35,17 @@ public class PlayerBase : FirstPersonController {
     {
         base.Update();
     }
+
+    #region Default Weapon
+
+    [Command]
+    private void Cmd_SpawnDefaultWeapon() {
+
+        var weaponSpawned = Instantiate(weaponDefault);
+        NetworkServer.Spawn(weaponSpawned, gameObject);
+
+    }
+
+    #endregion
 
 }

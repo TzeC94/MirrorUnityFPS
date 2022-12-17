@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBase : MonoBehaviour
+public abstract class ItemBase : NetworkBehaviour
 {
     public ItemData itemData;
 

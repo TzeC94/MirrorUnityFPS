@@ -34,6 +34,12 @@ public class PlayerHeld : NetworkBehaviour
         }
     }
 
+    public void SetCurrentHeld(HeldBase heldObject) {
+
+        currentHeld = heldObject;
+
+    }
+
     #region Fire Button
 
     void Client_FirePressed(){

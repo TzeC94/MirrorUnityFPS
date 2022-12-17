@@ -10,12 +10,48 @@ public class HeldRange : HeldBase
     [Header("Fire")]
     public Transform fire_FirePoint;
 
+    [Header("Bullet")]
+    public int maxBullet = 30;
+    public int bulletPerShot = 1;
+    [SyncVar]
+    private int _currentBullet;
+    public int currentBullet {
+        get { return _currentBullet; }
+    }
+    public bool enoughBullet {
+        get { return _currentBullet > 0; }
+    }
+
+    public override void Start() {
+
+        base.Start();
+
+        if (isServer) {
+
+            _currentBullet = maxBullet;
+
+        }
+        
+    }
+
     public override void Fire() {
 
-        base.Fire();
+        if (enoughBullet) {
 
-        var projectileObject = Instantiate(prefab_Projectile, fire_FirePoint.position, fire_FirePoint.rotation);
-        NetworkServer.Spawn(projectileObject, ownerObject);
+            base.Fire();
+
+            var projectileObject = Instantiate(prefab_Projectile, fire_FirePoint.position, fire_FirePoint.rotation);
+            NetworkServer.Spawn(projectileObject, ownerObject);
+
+            ReduceCurrentBullet(bulletPerShot);
+
+        }
+
+    }
+
+    private void ReduceCurrentBullet(int count) {
+
+        _currentBullet -= count;
 
     }
 
