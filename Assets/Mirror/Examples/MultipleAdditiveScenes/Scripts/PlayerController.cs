@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Mirror.Examples.MultipleAdditiveScenes
 {
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(NetworkTransform))]
+    // [RequireComponent(typeof(NetworkTransform))] we support multiple NTs atm
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : NetworkBehaviour
     {
@@ -18,7 +17,7 @@ namespace Mirror.Examples.MultipleAdditiveScenes
 
             characterController.enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<NetworkTransform>().clientAuthority = true;
+            GetComponent<NetworkTransform>().syncDirection = SyncDirection.ClientToServer;
         }
 
         public override void OnStartLocalPlayer()
