@@ -116,7 +116,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
                 var baseScript = currentLookAtTarget.GetComponent<BaseScript>();
 
-                PlayerInputInstance.instance.actionOne_Action += () => baseScript.ActionOne(NetworkClient.localPlayer.netId);
+                PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
 
                 actionAdded = true;
 
@@ -127,7 +127,7 @@ public class PlayerLookatHandler : MonoBehaviour
             if (actionAdded) {
 
                 var baseScript = currentLookAtTarget.GetComponent<BaseScript>();
-                PlayerInputInstance.instance.actionOne_Action -= () => baseScript.ActionOne(NetworkClient.localPlayer.netId);
+                PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
                 currentLookAtTarget = null;
                 actionAdded = false;
 
