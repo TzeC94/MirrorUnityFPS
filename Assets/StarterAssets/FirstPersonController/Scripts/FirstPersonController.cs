@@ -48,6 +48,7 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
+		private Quaternion lastCameraRot;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -168,27 +169,29 @@ namespace StarterAssets
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+                // Update Cinemachine camera target pitch
+                lastCameraRot = CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
 				// rotate the player left and right
 				//transform.Rotate(Vector3.up * _rotationVelocity);
-				Client_SendRotationVelocity(_rotationVelocity);
+				Client_SendRotationVelocity(_rotationVelocity, CinemachineCameraTarget.transform.localRotation);
 
 			}else{
 
-				Client_SendRotationVelocity(0f);
+				Client_SendRotationVelocity(0f, lastCameraRot);
 
 			}
 			
 		}
 
 		[Command]
-		private void Client_SendRotationVelocity(float velocity){
+		private void Client_SendRotationVelocity(float velocity, Quaternion cameraLocalRot){
 
 			s_RotationVelocity = velocity;
+			CinemachineCameraTarget.transform.localRotation = cameraLocalRot;
 
-		}
+
+        }
 
 		[Server]
 		private void Server_CameraRotation(){

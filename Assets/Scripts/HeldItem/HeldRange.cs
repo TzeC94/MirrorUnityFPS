@@ -40,8 +40,7 @@ public class HeldRange : HeldBase
 
             base.Fire();
 
-            var projectileObject = Instantiate(prefab_Projectile, fire_FirePoint.position, fire_FirePoint.rotation);
-            NetworkServer.Spawn(projectileObject, ownerObject);
+            GameCore.NetworkInstantiate(prefab_Projectile, fire_FirePoint.position, fire_FirePoint.rotation);
 
             ReduceCurrentBullet(bulletPerShot);
 

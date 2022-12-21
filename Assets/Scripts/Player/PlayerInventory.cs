@@ -50,7 +50,7 @@ public class PlayerInventory : InventoryBase
         
     }
 
-    public override void OnInventoryChanged(SyncList<ItemData>.Operation op, int itemIndex, ItemData oldItem, ItemData newItem) {
+    public override void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
 
         //IF the UI is open, then we need to refresh it
         if (PlayerInventoryUIScript.instance.isOpen) {

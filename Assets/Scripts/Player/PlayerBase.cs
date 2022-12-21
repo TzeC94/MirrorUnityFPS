@@ -1,8 +1,10 @@
 using Mirror;
 using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerBase : FirstPersonController {
 
@@ -16,8 +18,10 @@ public class PlayerBase : FirstPersonController {
     public GameObject weaponDefault;
 
     // Start is called before the first frame update
-    public override void Start()
+    public override void OnStartClient() 
     {
+        base.OnStartClient();
+
         if (isLocalPlayer) {
 
             //Register yourself with Game Manager
@@ -26,8 +30,6 @@ public class PlayerBase : FirstPersonController {
             //Spawn your default Weapon
             Cmd_SpawnDefaultWeapon();
         }
-        
-        base.Start();
     }
 
     // Update is called once per frame
@@ -41,8 +43,10 @@ public class PlayerBase : FirstPersonController {
     [Command]
     private void Cmd_SpawnDefaultWeapon() {
 
-        var weaponSpawned = Instantiate(weaponDefault);
-        NetworkServer.Spawn(weaponSpawned, gameObject);
+        var spawnedObject = GameObject.Instantiate(weaponDefault);
+        var heldBase = spawnedObject.GetComponent<HeldBase>();
+        heldBase.parentNetID = netIdentity.netId;
+        NetworkServer.Spawn(spawnedObject);
 
     }
 

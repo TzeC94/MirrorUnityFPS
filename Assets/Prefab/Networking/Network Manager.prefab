@@ -48,7 +48,8 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   runInBackground: 1
   autoStartServerBuild: 1
-  serverTickRate: 30
+  autoConnectClientBuild: 0
+  sendRate: 30
   offlineScene: Assets/Scenes/Main Menu.unity
   onlineScene: Assets/StarterAssets/FirstPersonController/Scenes/Playground.unity
   transport: {fileID: 3863060069754316772}
@@ -64,6 +65,8 @@ MonoBehaviour:
   - {fileID: 5986618991811701523, guid: 088d4bc220327fd40b82e16343cb46d5, type: 3}
   - {fileID: 4726437905770876371, guid: f419f648c600bb140a1ccbc3925e7e1d, type: 3}
   - {fileID: 8973200446373226253, guid: a5b6897dcde07714c872a70f86eee305, type: 3}
+  - {fileID: 4726437905770876371, guid: d26e9abbf6099804d8c329509bc14e2f, type: 3}
+  timeInterpolationGui: 0
 --- !u!114 &3863060069754316772
 MonoBehaviour:
   m_ObjectHideFlags: 0

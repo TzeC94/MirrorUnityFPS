@@ -38,6 +38,7 @@ public class PlayerHeld : NetworkBehaviour
 
     #region Fire Button
 
+    [Client]
     void Client_FirePressed(){
 
         if(PlayerInputInstance.instance.fire){
@@ -58,6 +59,7 @@ public class PlayerHeld : NetworkBehaviour
 
     }
 
+    [Server]
     void Server_FirePressed(){
 
         if(s_FirePressed){

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PickupBase : BaseScript
 {
-    public ItemData itemData;
+    public Item itemData;
     public bool canPickUp = true;
 
     public virtual void Pickup(uint callerPlayerID) {

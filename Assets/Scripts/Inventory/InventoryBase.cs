@@ -10,7 +10,7 @@ public class InventoryBase : NetworkBehaviour
     protected int inventoryMax = 20;
 
     [SerializeField]
-    public readonly SyncList<ItemData> collectedItems = new SyncList<ItemData>();
+    public readonly SyncList<Item> collectedItems = new SyncList<Item>();
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -24,7 +24,8 @@ public class InventoryBase : NetworkBehaviour
         
     }
 
-    public void AddToInventory(ItemData newItemData) {
+    [Server]
+    public void AddToInventory(Item newItemData) {
 
         //Try fill into empty slot if is possible
         if(collectedItems.Count > 0) {
@@ -45,6 +46,7 @@ public class InventoryBase : NetworkBehaviour
 
     }
 
+    [Server]
     public bool RemoveFromInventory(int itemIndex) {
 
         if (collectedItems[itemIndex] != null) {
@@ -57,7 +59,19 @@ public class InventoryBase : NetworkBehaviour
         return false;
     }
 
-    public virtual void OnInventoryChanged(SyncList<ItemData>.Operation op, int itemIndex, ItemData oldItem, ItemData newItem) {
+    public Item FindItemInInventory(int itemIndex) {
+
+        if(collectedItems.Count > itemIndex) {
+
+            return collectedItems[itemIndex];
+
+        }
+
+        return null;
+
+    }
+
+    public virtual void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
 
         
 

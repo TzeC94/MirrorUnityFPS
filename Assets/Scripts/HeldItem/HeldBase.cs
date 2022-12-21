@@ -7,24 +7,35 @@ public abstract class HeldBase : ItemBase
 {
     [HideInInspector] public GameObject ownerObject;
 
-    public override void Start() {
+    [SyncVar(hook = nameof(Reparent))]
+    public uint parentNetID;
 
-        base.Start();
+    public override void OnStartServer() {
 
-        //Reparent to player weapon root
-        var clientConnection = netIdentity.connectionToClient;
+        base.OnStartServer();
 
-        if (clientConnection != null) {
+        Reparent(0, this.parentNetID);
 
-            var clientObject = clientConnection.identity.gameObject;
+    }
 
-            if(clientObject != null) {
+    private void Reparent(uint oldParentNetID, uint newParentNetID) {
+
+        NetworkIdentity targetNetIdentity;
+        bool found = false;
+
+        found = (isServer) ? NetworkServer.spawned.TryGetValue(newParentNetID, out targetNetIdentity) : NetworkClient.spawned.TryGetValue(parentNetID, out targetNetIdentity);
+
+        if (found) {
+
+            var clientObject = targetNetIdentity.gameObject;
+
+            if (clientObject != null) {
 
                 ownerObject = clientObject;
 
                 var playerBase = clientObject.GetComponent<PlayerBase>();
 
-                if(playerBase != null) {
+                if (playerBase != null) {
 
                     gameObject.transform.SetParent(playerBase.weaponHoldingRoot, false);
 
@@ -37,7 +48,7 @@ public abstract class HeldBase : ItemBase
                     }
 
                 }
-                
+
             }
 
         }

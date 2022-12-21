@@ -6,20 +6,20 @@ using UnityEngine.EventSystems;
 
 public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 {
-    public ItemData itemData;
+    public Item item;
     public Image ui_Icon;
     public int itemIndex;
     public uint ownerID;
 
-    public void Setup(ItemData itemData, int itemIndex, uint ownerID) {
+    public void Setup(Item item, int itemIndex, uint ownerID) {
 
-        if (this.itemData == itemData)
+        if (this.item == item)
             return;
 
-        if (itemData == null) {
+        if (item == null) {
 
             //Need remove the icon if is available
-            this.itemData = null;
+            this.item = null;
             itemIndex = -1;
             ui_Icon.sprite = null;
 
@@ -27,11 +27,11 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 
         }
 
-        this.itemData = itemData;
+        this.item = item;
         this.itemIndex = itemIndex;
         this.ownerID = ownerID;
 
-        ResourceManage.LoadAsset<Sprite>(itemData.itemIcon, LoadComplete);
+        ResourceManage.LoadAsset<Sprite>(item.itemData.itemIcon, LoadComplete);
 
     }
 
@@ -47,10 +47,10 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
         
         if(eventData.button == PointerEventData.InputButton.Right) {
 
-            if(itemData != null) {
+            if(item != null) {
 
                 //Remove it
-                GameManagerBase.instance.DropItemFromInventory(itemIndex, itemData, ownerID);
+                GameManagerBase.instance.DropItemFromInventory(itemIndex, item, ownerID);
 
             }else {
 

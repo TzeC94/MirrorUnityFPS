@@ -28,7 +28,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
             }
 
-            if (Camera.main == null) {
+            while (Camera.main == null) {
 
                 yield return null;
 
