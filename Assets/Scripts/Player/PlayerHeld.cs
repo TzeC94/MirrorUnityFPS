@@ -5,17 +5,13 @@ using Mirror;
 
 public class PlayerHeld : NetworkBehaviour
 {
-
-    public HeldBase currentHeld;
+    private HeldBase _currentHeld;
+    public HeldBase currentHeld { get { return _currentHeld; } }
 
     // Start is called before the first frame update
     void Start()
     {
-        if(currentHeld != null){
 
-            currentHeld.ownerObject = gameObject;
-
-        }
     }
 
     // Update is called once per frame
@@ -36,7 +32,7 @@ public class PlayerHeld : NetworkBehaviour
 
     public void SetCurrentHeld(HeldBase heldObject) {
 
-        currentHeld = heldObject;
+        _currentHeld = heldObject;
 
     }
 
@@ -67,7 +63,7 @@ public class PlayerHeld : NetworkBehaviour
         if(s_FirePressed){
 
             //Do Something
-            currentHeld.Fire();
+            _currentHeld.Fire();
 
             s_FirePressed = false;
 
