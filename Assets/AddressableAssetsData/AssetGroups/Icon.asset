@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f7126fd6d2c154e46b7f49dfc79a095a
   m_SerializeEntries:
-  - m_GUID: b74c31d447d2f5d41a61081bdf5e7126
-    m_Address: Circle
+  - m_GUID: 118f37763586e174595d5771d93818d1
+    m_Address: Pistol Normal
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
