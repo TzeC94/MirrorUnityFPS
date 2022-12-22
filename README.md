@@ -1,9 +1,9 @@
-# MirrorSC_UnityFPSStarterAssets
-Mirror Server Client Authority networking for Unity FPS Starter Assets
+# Mirror Networking with Unity FPS Starter Assets
+Mirror Server Client Authority networking with Unity FPS Starter Assets
 
 This is an experimental project of Server and Client Authority with Mirror Networking for Unity
 Will add more features as the time goes
-This project I'm using the First Person Characters Controller Starter Assets and converted to support Server and Client Networking that based on Mirror
+I'm using the First Person Characters Controller Starter Assets and converted to support Server and Client Networking that based on Mirror
 
 https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525#description
 
