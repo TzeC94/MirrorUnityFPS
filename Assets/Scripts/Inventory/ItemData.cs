@@ -11,5 +11,9 @@ public class ItemData : ScriptableObject
     public string itemIcon;
     public int itemIndex;   //The item index that in the network object list, require to setup through Custom/Setup All Item Data
 
+    [Header("Quantity")]
+    public bool stackable = false;
     public uint defaultQuantity = 1;
+    public uint maxStack = 26;
+    
 }

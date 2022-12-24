@@ -4,18 +4,24 @@ using UnityEngine;
 using Mirror;
 using System;
 
-public class InventoryBase : NetworkBehaviour
-{
+public class InventoryBase : NetworkBehaviour {
+
     [SerializeField]
     protected int inventoryMax = 20;
 
-    [SerializeField]
-    public readonly SyncList<Item> collectedItems = new SyncList<Item>();
+    public readonly SyncList<Item> collectedItems = new SyncList<Item>(new Item());
 
     // Start is called before the first frame update
     public virtual void Start()
     {
+        
+    }
+
+    public override void OnStartClient() {
+
+        base.OnStartClient();
         collectedItems.Callback += OnInventoryChanged;
+
     }
 
     // Update is called once per frame
@@ -25,24 +31,53 @@ public class InventoryBase : NetworkBehaviour
     }
 
     [Server]
-    public void AddToInventory(Item newItemData) {
+    public void AddToInventory(Item newItem) {
 
-        //Try fill into empty slot if is possible
+        //Try fill into empty slot or stack if is possible
         if(collectedItems.Count > 0) {
 
-            for(int i = 0; i < collectedItems.Count;i++) {
+            var newItemData = newItem.itemData;
 
-                if (collectedItems[i] == null) {
+            //Loop the Item in inventory first to stack first
+            if (newItemData.stackable) {
 
-                    collectedItems[i] = newItemData;
+                for (int i = 0; i < collectedItems.Count; i++) {
+
+                    var currentItem = collectedItems[i];
+
+                    if (currentItem != null) {
+
+                        if (currentItem.itemData.itemID == newItemData.itemID && currentItem.itemData.stackable && currentItem.EnoughToStack(newItem.quantity)) {
+
+                            //Add to stack
+                            Item newModItem = new Item(currentItem);
+                            newModItem.quantity += newItem.quantity;
+                            collectedItems[i] = newModItem;
+                            return;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            for (int i = 0; i < collectedItems.Count; i++) {
+
+                var currentItem = collectedItems[i];
+
+                if (currentItem == null) {
+
+                    collectedItems[i] = newItem;
                     return;
+
                 }
 
             }
 
         }
         
-        collectedItems.Add(newItemData);
+        collectedItems.Add(newItem);
 
     }
 

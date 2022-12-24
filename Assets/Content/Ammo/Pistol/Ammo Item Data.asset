@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
-  m_Name: Pistol Data
+  m_Name: Ammo Item Data
   m_EditorClassIdentifier: 
-  itemID: weapon.pistol
-  itemName: Pistol
-  itemDescription: Small handgun with low damage
-  itemIcon: Pistol Normal
-  itemIndex: 3
-  defaultQuantity: 1
+  itemID: ammo.pistol
+  itemName: Ammo Pistol
+  itemDescription: Ammo for Pistol
+  itemIcon: Ammo Pistol
+  itemIndex: 6
+  stackable: 1
+  defaultQuantity: 6
+  maxStack: 26

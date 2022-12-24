@@ -53,6 +53,7 @@ public class InventoryUIScript : UIBase
 
             var uiObject = GameCore.Instantiate(itemPrefab, itemSlotParent);
             var itemCompoment = uiObject.GetComponent<InventoryUIItemScript>();
+            itemCompoment.Initialize();
             itemSlotList.Add(itemCompoment);
 
         }

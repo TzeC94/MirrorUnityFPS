@@ -21,6 +21,10 @@ MonoBehaviour:
     m_Address: Pistol Normal
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 2ea8cc35ddf155d408c6bda82d7ee959
+    m_Address: Ammo Pistol
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 11dfbf2985608a04fb902fc1a128fa67, type: 2}
   m_SchemaSet:

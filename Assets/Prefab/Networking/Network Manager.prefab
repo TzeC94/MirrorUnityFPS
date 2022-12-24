@@ -66,6 +66,7 @@ MonoBehaviour:
   - {fileID: 4726437905770876371, guid: f419f648c600bb140a1ccbc3925e7e1d, type: 3}
   - {fileID: 8973200446373226253, guid: a5b6897dcde07714c872a70f86eee305, type: 3}
   - {fileID: 4726437905770876371, guid: d26e9abbf6099804d8c329509bc14e2f, type: 3}
+  - {fileID: 143558739867442044, guid: 042ceddc02dc85c4db88c063c2214529, type: 3}
   timeInterpolationGui: 0
 --- !u!114 &3863060069754316772
 MonoBehaviour:
