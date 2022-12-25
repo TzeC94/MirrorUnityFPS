@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System;
+using System.Linq;
 
 public class InventoryBase : NetworkBehaviour {
 
@@ -94,12 +95,75 @@ public class InventoryBase : NetworkBehaviour {
         return false;
     }
 
+    [Server]
+    public void RemoveQuantityFromInventory(uint quantityToRemove, Item targetItem) {
+
+        for(int i = 0; i < collectedItems.Count; i++) {
+
+            var cItem = collectedItems[i];
+
+            if(cItem == targetItem) {
+
+                //If empty need remove this item from inventory
+                if(cItem.quantity - quantityToRemove == 0) {
+
+                    RemoveFromInventory(i);
+                    return;
+
+                } else {
+
+                    Item newItemData = new Item(cItem);
+                    newItemData.quantity -= quantityToRemove;
+                    collectedItems[i] = newItemData;
+                    return;
+
+                }
+
+            }
+
+        }
+
+    }
+
     public Item FindItemInInventory(int itemIndex) {
 
         if(collectedItems.Count > itemIndex) {
 
             return collectedItems[itemIndex];
 
+        }
+
+        return null;
+
+    }
+
+    public Item FindItemInInventory(string itemID, bool reorderIfStackable = true) {
+
+        List<Item> collectedItem = new List<Item>();
+
+        for(int i = 0; i < collectedItems.Count; i++) {
+
+            var cItem = collectedItems[i];
+
+            if (cItem.itemData.itemID == itemID) {
+
+                collectedItem.Add(cItem);
+
+            }
+
+        }
+
+        //Mean we find something
+        if(collectedItem.Count > 0) {
+
+            //Reorder if is stackable
+            if (collectedItem[0].itemData.stackable && reorderIfStackable) {
+
+                collectedItem = collectedItem.OrderByDescending(x => x.quantity).ToList();
+
+            }
+
+            return collectedItem[0];
         }
 
         return null;

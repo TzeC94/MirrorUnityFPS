@@ -11,11 +11,12 @@ public class HeldRange : HeldBase
     public Transform fire_FirePoint;
 
     [Header("Bullet")]
-    public int maxBullet = 30;
-    public int bulletPerShot = 1;
+    public uint maxBullet = 30;
+    public uint bulletPerShot = 1;
+    public virtual string bulletItemID { get; }
     [SyncVar]
-    private int _currentBullet;
-    public int currentBullet {
+    private uint _currentBullet;
+    public uint currentBullet {
         get { return _currentBullet; }
     }
     public bool enoughBullet {
@@ -48,9 +49,29 @@ public class HeldRange : HeldBase
 
     }
 
-    private void ReduceCurrentBullet(int count) {
+    private void ReduceCurrentBullet(uint count) {
 
         _currentBullet -= count;
+
+    }
+
+    /// <summary>
+    /// To reload the weapon
+    /// </summary>
+    [Server]
+    public void ServerReload() {
+
+        //Check whether inventory have this item
+        var inventory = ownerObject.GetComponent<InventoryBase>();
+
+        var bulletItem = inventory.FindItemInInventory(bulletItemID);
+
+        var maxReloadableBullet = bulletItem.quantity > maxBullet ? maxBullet : bulletItem.quantity;
+
+        _currentBullet = maxReloadableBullet;
+
+        //Need to remove the quantity from inventory
+        inventory.RemoveQuantityFromInventory(maxReloadableBullet, bulletItem);
 
     }
 

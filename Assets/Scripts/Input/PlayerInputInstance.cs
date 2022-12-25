@@ -17,6 +17,22 @@ public class PlayerInputInstance : StarterAssetsInputs
 
     public Action actionOne_Action;
 
+    private bool _reload;
+    public bool reload {
+
+        get {
+            if (_reload) {
+                var oldValue = _reload;
+                _reload = false;
+                return oldValue;
+            } else {
+                return false;
+            }
+            
+        }
+
+    }
+
     public override void Start() {
 
         base.Start();
@@ -55,6 +71,12 @@ public class PlayerInputInstance : StarterAssetsInputs
             actionOne_Action?.Invoke();
 
         }
+
+    }
+
+    public void OnReload(InputValue value) {
+
+        _reload = value.isPressed;
 
     }
 }

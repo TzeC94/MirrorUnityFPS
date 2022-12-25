@@ -20,6 +20,7 @@ public class PlayerHeld : NetworkBehaviour
         if(isClient){
 
             Client_FirePressed();
+            Client_ReloadPressed();
 
         }
 
@@ -68,6 +69,32 @@ public class PlayerHeld : NetworkBehaviour
             _currentHeld.Fire();
 
             s_FirePressed = false;
+
+        }
+
+    }
+
+    #endregion
+
+    #region Reload
+
+    [Client]
+    void Client_ReloadPressed() {
+
+        if (PlayerInputInstance.instance.reload) {
+
+            Cmd_Reload();
+
+        }
+
+    }
+
+    [Command]
+    void Cmd_Reload() {
+
+        if(_currentHeld is HeldRange heldRange) {
+
+            heldRange.ServerReload();
 
         }
 
