@@ -22,4 +22,4 @@ Features
 
 I'm using Unity 2021.3
 
-Everything start in Main Menu Scene
+Everything start in Bootstrap Scene
