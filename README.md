@@ -10,6 +10,8 @@ https://assetstore.unity.com/packages/essentials/starter-assets-first-person-cha
 Features
 1. Simple movement
 2. Simple Weapon
+    - Shot
+    - Reload
 3. Simple Pickup & Inventory
     - Simple Pickup Simple 
     - Inventory UI 
