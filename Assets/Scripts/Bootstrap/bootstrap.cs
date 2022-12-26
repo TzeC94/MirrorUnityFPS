@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class bootstrap : MonoBehaviour
 {
+    private const string trueString = "true";
+    private const string falseString = "false";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,11 +16,16 @@ public class bootstrap : MonoBehaviour
 
         for(int i = 0; i < envArgs.Length; i++) {
 
-            Debug.Log($"Processing {envArgs[i]}");
+            var envToCheck = envArgs[i];
 
-            if (envArgs[i] == "-ServerBuild") {
+            if (envToCheck.StartsWith("-")) {
 
-                GlobalVar.isServerBuild = true;
+                if (envToCheck == "-ServerBuild") {
+
+                    if (envArgs[i+1] == trueString)
+                        GlobalVar.isServerBuild = true;
+
+                }
 
             }
 

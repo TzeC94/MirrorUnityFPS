@@ -1,1 +1,1 @@
-start Build\MirrorTest.exe -ServerBuild
+start Build\MirrorTest.exe -ServerBuild true
