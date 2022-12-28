@@ -7,7 +7,7 @@ using TMPro;
 
 public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 {
-    public Item item;
+    private Item item = null;
     public Image ui_Icon;
     public int itemIndex;
     public uint ownerID;
@@ -24,10 +24,7 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 
     public void Setup(Item item, int itemIndex, uint ownerID, InventoryBase container) {
 
-        if (this.item == null)
-            return;
-
-        if (this.item == item) {
+        if (this.item == item && item != null) {
 
             if (item.itemData.stackable) {
 

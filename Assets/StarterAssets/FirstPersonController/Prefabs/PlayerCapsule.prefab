@@ -272,7 +272,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  currentHeld: {fileID: 0}
+  _inventoryType: 1
+  inventoryMax: 1
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,4 +367,5 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  _inventoryType: 0
   inventoryMax: 20
