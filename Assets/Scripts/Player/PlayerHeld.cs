@@ -3,20 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerHeld : NetworkBehaviour
+public class PlayerHeld : InventoryBase
 {
     private HeldBase _currentHeld;
     public HeldBase currentHeld { get { return _currentHeld; } }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private const int defaultWeaponIndex = 0;
+
+    public override void OnStartServer() {
+
+        base.OnStartServer();
+
+        for (int i = 0; i < inventoryMax; i++) {
+
+            collectedItems.Add(null);
+
+        }
 
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if(isClient){
 
             Client_FirePressed();
@@ -34,6 +44,7 @@ public class PlayerHeld : NetworkBehaviour
     public void SetCurrentHeld(HeldBase heldObject) {
 
         _currentHeld = heldObject;
+        PutItemAtIndex(defaultWeaponIndex, heldObject.itemData);
 
     }
 
@@ -66,7 +77,7 @@ public class PlayerHeld : NetworkBehaviour
         if(s_FirePressed){
 
             //Do Something
-            _currentHeld.Fire();
+            _currentHeld?.Fire();
 
             s_FirePressed = false;
 
@@ -92,14 +103,41 @@ public class PlayerHeld : NetworkBehaviour
     [Command]
     void Cmd_Reload() {
 
-        if(_currentHeld is HeldRange heldRange) {
+        if(_currentHeld != null) {
 
-            heldRange.ServerReload();
+            if (_currentHeld is HeldRange heldRange) {
+
+                heldRange.ServerReload();
+
+            }
 
         }
 
     }
 
     #endregion
+
+    public override void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
+
+        base.OnInventoryChanged(op, itemIndex, oldItem, newItem);
+
+        if (newItem == null) {
+
+            //IF new is null mean remove, then destroy current
+            if (isServer) {
+                NetworkServer.Destroy(_currentHeld.gameObject);
+            }
+                
+            _currentHeld = null;
+
+            if (isLocalPlayer && PlayerInventoryUIScript.instance.isOpen) {
+
+                PlayerInventoryUIScript.instance.RefreshEquip();
+
+            }
+            
+        }
+
+    }
 
 }

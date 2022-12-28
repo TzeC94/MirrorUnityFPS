@@ -32,7 +32,7 @@ public class PlayerInventoryUIScript : InventoryUIScript
         base.Open();
 
         PopulateItem();
-
+        PopulateEquip();
     }
 
     public void FillInventory(int slot){
@@ -57,15 +57,25 @@ public class PlayerInventoryUIScript : InventoryUIScript
             for(int i = 0; i < totalCount; i++) {
 
                 var itemSlot = itemSlotList[i];
-                itemSlot.Setup(localPlayer.inventory.collectedItems[i], i, localPlayer.netId);
+                itemSlot.Setup(localPlayer.inventory.collectedItems[i], i, localPlayer.netId, localPlayer.inventory);
 
             }
+        }
+
+    }
+
+    private void PopulateEquip() {
+
+        var localPlayer = GameManagerBase.LocalPlayer;
+
+        if (localPlayer != null) {
 
             //The held slot
             var playerHeld = localPlayer.gameObject.GetComponent<PlayerHeld>();
-            if(playerHeld != null) {
+            if (playerHeld != null) {
 
-                weapon_EquipSlot.Setup(playerHeld.currentHeld.itemData, 0, localPlayer.netId);
+                var currentHeldData = playerHeld.currentHeld == null ? null : playerHeld.currentHeld.itemData;
+                weapon_EquipSlot.Setup(currentHeldData, 0, localPlayer.netId, playerHeld);
 
             }
 
@@ -76,6 +86,12 @@ public class PlayerInventoryUIScript : InventoryUIScript
     public void RefreshItem() {
 
         PopulateItem();
+
+    }
+
+    public void RefreshEquip() {
+
+        PopulateEquip();
 
     }
 

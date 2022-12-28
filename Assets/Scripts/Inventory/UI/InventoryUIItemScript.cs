@@ -13,13 +13,19 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
     public uint ownerID;
     public TextMeshProUGUI itemAmount;
 
+    //Reference to inventory base
+    public InventoryBase inventoryContainer;
+
     public void Initialize() {
 
         this.itemAmount.gameObject.SetActive(false);
 
     }
 
-    public void Setup(Item item, int itemIndex, uint ownerID) {
+    public void Setup(Item item, int itemIndex, uint ownerID, InventoryBase container) {
+
+        if (this.item == null)
+            return;
 
         if (this.item == item) {
 
@@ -49,6 +55,7 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
         this.ownerID = ownerID;
         this.itemAmount.text = item.quantity.ToString();
         this.itemAmount.gameObject.SetActive(true);
+        this.inventoryContainer = container;
 
         ResourceManage.LoadAsset<Sprite>(item.itemData.itemIcon, LoadComplete);
 
@@ -69,7 +76,7 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
             if(item != null) {
 
                 //Remove it
-                GameManagerBase.instance.DropItemFromInventory(itemIndex, item, ownerID);
+                GameManagerBase.instance.DropItemFromInventory(itemIndex, item, ownerID, inventoryContainer.inventoryType);
 
             }else {
 

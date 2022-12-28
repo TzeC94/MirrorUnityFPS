@@ -7,6 +7,12 @@ using System.Linq;
 
 public class InventoryBase : NetworkBehaviour {
 
+    public enum InventoryType { main = 0, held = 1 };
+
+    [SerializeField]
+    private InventoryType _inventoryType = InventoryType.main;
+    public InventoryType inventoryType { get { return _inventoryType; } }
+
     [SerializeField]
     protected int inventoryMax = 20;
 
@@ -15,14 +21,7 @@ public class InventoryBase : NetworkBehaviour {
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
-    }
-
-    public override void OnStartClient() {
-
-        base.OnStartClient();
         collectedItems.Callback += OnInventoryChanged;
-
     }
 
     // Update is called once per frame
@@ -93,6 +92,13 @@ public class InventoryBase : NetworkBehaviour {
         }
 
         return false;
+    }
+
+    [Server]
+    public void PutItemAtIndex(int index, Item item) {
+
+        collectedItems[index] = item;
+
     }
 
     [Server]
