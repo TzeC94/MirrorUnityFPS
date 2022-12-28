@@ -6,6 +6,9 @@ public class PlayerInventoryUIScript : InventoryUIScript
 {
     public static PlayerInventoryUIScript instance;
 
+    [Header("Player Equipment")]
+    public InventoryUIItemScript weapon_EquipSlot;
+
     public override void Init() {
 
         base.Init();
@@ -55,6 +58,14 @@ public class PlayerInventoryUIScript : InventoryUIScript
 
                 var itemSlot = itemSlotList[i];
                 itemSlot.Setup(localPlayer.inventory.collectedItems[i], i, localPlayer.netId);
+
+            }
+
+            //The held slot
+            var playerHeld = localPlayer.gameObject.GetComponent<PlayerHeld>();
+            if(playerHeld != null) {
+
+                weapon_EquipSlot.Setup(playerHeld.currentHeld.itemData, 0, localPlayer.netId);
 
             }
 

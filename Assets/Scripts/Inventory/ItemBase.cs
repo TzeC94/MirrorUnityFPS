@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class ItemBase : NetworkBehaviour
 {
-    public ItemData itemData;
+    public Item itemData;
 
     // Start is called before the first frame update
     public virtual void Start() {
