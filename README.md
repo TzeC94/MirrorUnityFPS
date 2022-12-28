@@ -16,6 +16,7 @@ Features
     - Simple Pickup Simple 
     - Inventory UI 
     - Simple drop from inventory
+    - Current Weapon Equip (In Progress)
 4. Simple Health
     - Simple Health
     - Simple Hit Information
