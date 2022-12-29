@@ -62,16 +62,20 @@ public class HeldRange : HeldBase
     public void ServerReload() {
 
         //Check whether inventory have this item
-        var inventory = ownerObject.GetComponent<InventoryBase>();
+        var inventory = ownerObject.inventory;
 
         var bulletItem = inventory.FindItemInInventory(bulletItemID);
 
-        var maxReloadableBullet = bulletItem.quantity > maxBullet ? maxBullet : bulletItem.quantity;
+        if(bulletItem != null) {
 
-        _currentBullet = maxReloadableBullet;
+            var maxReloadableBullet = bulletItem.quantity > maxBullet ? maxBullet : bulletItem.quantity;
 
-        //Need to remove the quantity from inventory
-        inventory.RemoveQuantityFromInventory(maxReloadableBullet, bulletItem);
+            _currentBullet = maxReloadableBullet;
+
+            //Need to remove the quantity from inventory
+            inventory.RemoveQuantityFromInventory(maxReloadableBullet, bulletItem);
+
+        }
 
     }
 

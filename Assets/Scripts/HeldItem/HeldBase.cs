@@ -5,7 +5,7 @@ using Mirror;
 
 public abstract class HeldBase : ItemBase
 {
-    [HideInInspector] public GameObject ownerObject;
+    [HideInInspector] public PlayerBase ownerObject;
 
     [SyncVar(hook = nameof(Reparent))]
     public uint parentNetID;
@@ -31,7 +31,7 @@ public abstract class HeldBase : ItemBase
 
             if (clientObject != null) {
 
-                ownerObject = clientObject;
+                ownerObject = clientObject.GetComponent<PlayerBase>();
 
                 var playerBase = clientObject.GetComponent<PlayerBase>();
 

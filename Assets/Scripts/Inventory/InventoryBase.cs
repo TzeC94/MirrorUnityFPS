@@ -242,7 +242,7 @@ public abstract class InventoryBase : NetworkBehaviour {
 
             var cItem = collectedItems[i];
 
-            if (cItem.itemData.itemID == itemID) {
+            if (cItem != null && cItem.itemData.itemID == itemID) {
 
                 collectedItem.Add(cItem);
 
