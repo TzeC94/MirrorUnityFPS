@@ -6,9 +6,10 @@ using UnityEngine.EventSystems;
 using TMPro;
 using Mirror;
 
-public partial class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
+public partial class InventoryUIItemScript : MonoBehaviour
 {
-    private Item item = null;
+    [HideInInspector]
+    public Item item = null;
     public Image ui_Icon;
     public int itemIndex;
     public uint ownerID;
@@ -18,16 +19,17 @@ public partial class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
     public InventoryBase inventoryContainer;
 
     [Client]
-    public void Initialize(int defaultIndex, InventoryBase container) {
+    public void Initialize(int defaultIndex, InventoryBase container, uint ownerID) {
 
         this.itemAmount.gameObject.SetActive(false);
         this.itemIndex = defaultIndex;
         this.inventoryContainer = container;
+        this.ownerID = ownerID;
 
     }
 
     [Client]
-    public void Setup(Item item, uint ownerID) {
+    public void Setup(Item item) {
 
         if (this.item == item && item != null) {
 
@@ -52,7 +54,6 @@ public partial class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
         }
 
         this.item = item;
-        this.ownerID = ownerID;
         this.itemAmount.text = item.quantity.ToString();
         this.itemAmount.gameObject.SetActive(true);
 
@@ -66,29 +67,5 @@ public partial class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
         ui_Icon.sprite = itemSprite;
 
     }
-
-    #region IPointerClickHandler
-
-    [Client]
-    public void OnPointerClick(PointerEventData eventData) {
-        
-        if(eventData.button == PointerEventData.InputButton.Right) {
-
-            if(item != null) {
-
-                //Remove it
-                GameManagerBase.instance.DropItemFromInventory(itemIndex, item, ownerID, inventoryContainer.inventoryType);
-
-            }else {
-
-                Debug.Log("Right Click on nothing");
-
-            }
-            
-        }
-
-    }
-
-    #endregion
 
 }

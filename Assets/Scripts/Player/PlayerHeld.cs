@@ -10,6 +10,19 @@ public class PlayerHeld : InventoryBase
 
     private const int defaultWeaponIndex = 0;
 
+    [Header("Default")]
+    public ItemData heldDefault;
+
+    public override void InitializeCollectedItem() {
+        //SyncList only able to initialize on server side, let server handle the initialization
+        for (int i = 0; i < inventoryMax; i++) {
+
+            var item = new Item(heldDefault);
+            collectedItems.Add(new Item(heldDefault));
+            //SpawnHeldItem(item);
+        }
+    }
+
     public override IEnumerator InitializeUI() {
 
         while (PlayerInventoryUIScript.instance == null) {
@@ -42,7 +55,6 @@ public class PlayerHeld : InventoryBase
     public void SetCurrentHeld(HeldBase heldObject) {
 
         _currentHeld = heldObject;
-        PutItemAtIndex(defaultWeaponIndex, heldObject.itemData);
 
     }
 
@@ -117,23 +129,55 @@ public class PlayerHeld : InventoryBase
 
     public override void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
 
-        base.OnInventoryChanged(op, itemIndex, oldItem, newItem);
+        if (isServer) {
+
+            //IF new is null no item
+            if (newItem == null ) {
+
+                if(_currentHeld != null) {
+
+                    NetworkServer.Destroy(_currentHeld.gameObject);
+
+                }
+                
+            } else {
+
+                if (oldItem != null && _currentHeld != null) {
+
+                    NetworkServer.Destroy(_currentHeld.gameObject);
+
+                }
+
+                SpawnHeldItem(newItem);
+
+            }
+
+        }
 
         if (newItem == null) {
-
-            //IF new is null mean remove, then destroy current
-            if (isServer) {
-                NetworkServer.Destroy(_currentHeld.gameObject);
-            }
                 
             _currentHeld = null;
 
-            if (isLocalPlayer && PlayerInventoryUIScript.instance.isOpen) {
+        }
 
-                PlayerInventoryUIScript.instance.RefreshEquip();
+        if (isLocalPlayer && PlayerInventoryUIScript.instance != null && PlayerInventoryUIScript.instance.isOpen) {
 
-            }
-            
+            PlayerInventoryUIScript.instance.RefreshEquip();
+
+        }
+
+    }
+
+    private void SpawnHeldItem(Item itemToSpawn) {
+
+        //Need check is weapon before spawn
+        if(itemToSpawn.itemData.itemType == ItemData.ItemType.Weapon) {
+
+            var spawnedObject = GameObject.Instantiate(itemToSpawn.itemData.itemHeldPrefab);
+            var heldBase = spawnedObject.GetComponent<HeldBase>();
+            heldBase.parentNetID = netIdentity.netId;
+            NetworkServer.Spawn(spawnedObject);
+
         }
 
     }

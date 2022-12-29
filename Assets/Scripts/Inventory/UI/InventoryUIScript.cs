@@ -35,7 +35,7 @@ public class InventoryUIScript : UIBase
 
     }
 
-    public void FillInventory(InventoryBase inventoryContainer) {
+    public void FillInventory(InventoryBase inventoryContainer, uint ownerID) {
 
         //Destroy the list if not match
         if(itemSlotParent.childCount != maxSlot){
@@ -53,7 +53,7 @@ public class InventoryUIScript : UIBase
 
             var uiObject = GameCore.Instantiate(itemPrefab, itemSlotParent);
             var itemCompoment = uiObject.GetComponent<InventoryUIItemScript>();
-            itemCompoment.Initialize(i, inventoryContainer);
+            itemCompoment.Initialize(i, inventoryContainer, ownerID);
             itemSlotList.Add(itemCompoment);
 
         }

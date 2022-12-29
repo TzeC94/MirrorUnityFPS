@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public partial class InventoryUIItemScript : IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler {
 
-    private static InventoryUIItemScript dragTargetUIItem;
+    public static InventoryUIItemScript dragTargetUIItem;
     private static GameObject dragTarget;
     private static Vector3 dragTarget_OriPos;
 
@@ -32,10 +32,14 @@ public partial class InventoryUIItemScript : IBeginDragHandler, IDragHandler, IE
     public void OnDrop(PointerEventData eventData) {
 
         //IF move within same inventory
-        if(dragTargetUIItem.inventoryContainer == inventoryContainer) {
+        if (dragTargetUIItem.inventoryContainer == inventoryContainer) {
 
-            //Ask server to move it
             inventoryContainer.CmdMoveItemFromToIndex(dragTargetUIItem.itemIndex, itemIndex);
+
+        } else {    // Cross Inventory
+
+            dragTargetUIItem.inventoryContainer.CmdMoveItemFromToInventory(dragTargetUIItem.itemIndex,
+                ownerID, inventoryContainer.inventoryType, itemIndex);
 
         }
 

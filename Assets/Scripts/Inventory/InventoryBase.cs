@@ -23,9 +23,14 @@ public abstract class InventoryBase : NetworkBehaviour {
 
         collectedItems.Callback += OnInventoryChanged;
 
+        if (isServer) {
+
+            InitializeCollectedItem();
+
+        }
     }
 
-    public override void OnStartServer() {
+    public virtual void InitializeCollectedItem() {
 
         //SyncList only able to initialize on server side, let server handle the initialization
         for (int i = 0; i < inventoryMax; i++) {
@@ -155,14 +160,62 @@ public abstract class InventoryBase : NetworkBehaviour {
     [Command]
     public void CmdMoveItemFromToIndex(int oldIndex, int newIndex) {
 
-        var toMoveItemData = collectedItems[oldIndex];
-        collectedItems[oldIndex] = null;
-        collectedItems[newIndex] = toMoveItemData;
+        var item1 = FindItemInInventory(oldIndex);
+        var item2 = FindItemInInventory(newIndex);
 
-        /*
-         * This will trigger sync automatically on Client side and update the UI
-         */
+        RemoveFromInventory(oldIndex);
 
+        //Swap
+        if (item2 != null) {
+
+            RemoveFromInventory(newIndex);
+            PutItemAtIndex(oldIndex, item2);
+
+        }
+
+        PutItemAtIndex(newIndex, item1);
+
+    }
+
+    /// <summary>
+    /// To Move Item from this Inventory to new Inventory
+    /// </summary>
+    [Command]
+    public void CmdMoveItemFromToInventory(int oldIndex, uint targetNetID, InventoryType inventoryType, int newIndex) {
+
+        //Copy my current data and remove from this inventory
+        var item1 = FindItemInInventory(oldIndex);
+        RemoveFromInventory(oldIndex);
+
+        //Find the new inventory
+        NetworkIdentity targetPlayerNI;
+
+        if (NetworkServer.spawned.TryGetValue(targetNetID, out targetPlayerNI)) {
+
+            var inventory = targetPlayerNI.gameObject.GetComponents<InventoryBase>();
+
+            for (int i = 0; i < inventory.Length; i++) {
+
+                var cInventory = inventory[i];
+
+                if (cInventory.inventoryType != inventoryType)
+                    continue;
+
+                //Swap
+                var item2 = cInventory.FindItemInInventory(newIndex);
+                if (item2 != null) {
+
+                    cInventory.RemoveFromInventory(newIndex);
+                    PutItemAtIndex(oldIndex, item2);
+
+                }
+
+                cInventory.PutItemAtIndex(newIndex, item1);
+                break;
+
+            }
+
+        }
     }
 
     #endregion
@@ -218,11 +271,7 @@ public abstract class InventoryBase : NetworkBehaviour {
 
     #region Callback
 
-    public virtual void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
-
-
-
-    }
+    public abstract void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem);
 
     #endregion
 

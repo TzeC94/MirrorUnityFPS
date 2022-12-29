@@ -1,6 +1,7 @@
 using StarterAssets;
 using System;
 using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputInstance : StarterAssetsInputs
@@ -50,11 +51,14 @@ public class PlayerInputInstance : StarterAssetsInputs
             if (PlayerInventoryUIScript.instance.isOpen) {
 
                 PlayerInventoryUIScript.instance.Close();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
             } else {
 
                 PlayerInventoryUIScript.instance.Open();
-
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
 
             //Lock the input base on inventory

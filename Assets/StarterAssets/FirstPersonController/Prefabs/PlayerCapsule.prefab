@@ -255,8 +255,8 @@ MonoBehaviour:
   TopClamp: 90
   BottomClamp: -90
   inventory: {fileID: 3615249164090168002}
+  playerHeld: {fileID: 8186667459668633024}
   weaponHoldingRoot: {fileID: 4333389928889098638}
-  weaponDefault: {fileID: 4726437905770876371, guid: d26e9abbf6099804d8c329509bc14e2f, type: 3}
 --- !u!114 &8186667459668633024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _inventoryType: 1
   inventoryMax: 1
+  heldDefault: {fileID: 11400000, guid: 1afa83e89d28a7b418719dc9bc44f967, type: 2}
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
