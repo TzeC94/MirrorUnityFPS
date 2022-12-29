@@ -5,7 +5,7 @@ using Mirror;
 using System;
 using System.Linq;
 
-public class InventoryBase : NetworkBehaviour {
+public abstract class InventoryBase : NetworkBehaviour {
 
     public enum InventoryType { main = 0, held = 1 };
 
@@ -19,22 +19,38 @@ public class InventoryBase : NetworkBehaviour {
     public readonly SyncList<Item> collectedItems = new SyncList<Item>(new Item());
 
     // Start is called before the first frame update
-    public virtual void Start()
-    {
+    public virtual void Start() {
+
         collectedItems.Callback += OnInventoryChanged;
+
     }
 
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        
+    public override void OnStartServer() {
+
+        //SyncList only able to initialize on server side, let server handle the initialization
+        for (int i = 0; i < inventoryMax; i++) {
+
+            collectedItems.Add(null);
+
+        }
+
     }
+
+    public override void OnStartLocalPlayer() {
+
+        StartCoroutine(InitializeUI());
+
+    }
+
+    public abstract IEnumerator InitializeUI();
+
+    #region Move or Add or Delete item in inventory
 
     [Server]
     public void AddToInventory(Item newItem) {
 
         //Try fill into empty slot or stack if is possible
-        if(collectedItems.Count > 0) {
+        if (collectedItems.Count > 0) {
 
             var newItemData = newItem.itemData;
 
@@ -76,7 +92,7 @@ public class InventoryBase : NetworkBehaviour {
             }
 
         }
-        
+
         collectedItems.Add(newItem);
 
     }
@@ -104,14 +120,14 @@ public class InventoryBase : NetworkBehaviour {
     [Server]
     public void RemoveQuantityFromInventory(uint quantityToRemove, Item targetItem) {
 
-        for(int i = 0; i < collectedItems.Count; i++) {
+        for (int i = 0; i < collectedItems.Count; i++) {
 
             var cItem = collectedItems[i];
 
-            if(cItem == targetItem) {
+            if (cItem == targetItem) {
 
                 //If empty need remove this item from inventory
-                if(cItem.quantity - quantityToRemove == 0) {
+                if (cItem.quantity - quantityToRemove == 0) {
 
                     RemoveFromInventory(i);
                     return;
@@ -131,9 +147,31 @@ public class InventoryBase : NetworkBehaviour {
 
     }
 
+    /// <summary>
+    /// To move item from old Index to new Index on Server
+    /// </summary>
+    /// <param name="oldIndex"></param>
+    /// <param name="newIndex"></param>
+    [Command]
+    public void CmdMoveItemFromToIndex(int oldIndex, int newIndex) {
+
+        var toMoveItemData = collectedItems[oldIndex];
+        collectedItems[oldIndex] = null;
+        collectedItems[newIndex] = toMoveItemData;
+
+        /*
+         * This will trigger sync automatically on Client side and update the UI
+         */
+
+    }
+
+    #endregion
+
+    #region Finding
+
     public Item FindItemInInventory(int itemIndex) {
 
-        if(collectedItems.Count > itemIndex) {
+        if (collectedItems.Count > itemIndex) {
 
             return collectedItems[itemIndex];
 
@@ -147,7 +185,7 @@ public class InventoryBase : NetworkBehaviour {
 
         List<Item> collectedItem = new List<Item>();
 
-        for(int i = 0; i < collectedItems.Count; i++) {
+        for (int i = 0; i < collectedItems.Count; i++) {
 
             var cItem = collectedItems[i];
 
@@ -160,7 +198,7 @@ public class InventoryBase : NetworkBehaviour {
         }
 
         //Mean we find something
-        if(collectedItem.Count > 0) {
+        if (collectedItem.Count > 0) {
 
             //Reorder if is stackable
             if (collectedItem[0].itemData.stackable && reorderIfStackable) {
@@ -176,10 +214,16 @@ public class InventoryBase : NetworkBehaviour {
 
     }
 
+    #endregion
+
+    #region Callback
+
     public virtual void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
 
-        
+
 
     }
+
+    #endregion
 
 }

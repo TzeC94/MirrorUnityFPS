@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Mirror;
 
-public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
+public partial class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 {
     private Item item = null;
     public Image ui_Icon;
@@ -16,13 +17,17 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
     //Reference to inventory base
     public InventoryBase inventoryContainer;
 
-    public void Initialize() {
+    [Client]
+    public void Initialize(int defaultIndex, InventoryBase container) {
 
         this.itemAmount.gameObject.SetActive(false);
+        this.itemIndex = defaultIndex;
+        this.inventoryContainer = container;
 
     }
 
-    public void Setup(Item item, int itemIndex, uint ownerID, InventoryBase container) {
+    [Client]
+    public void Setup(Item item, uint ownerID) {
 
         if (this.item == item && item != null) {
 
@@ -39,7 +44,6 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 
             //Need remove the icon if is available
             this.item = null;
-            itemIndex = -1;
             ui_Icon.sprite = null;
             this.itemAmount.gameObject.SetActive(false);
 
@@ -48,16 +52,15 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
         }
 
         this.item = item;
-        this.itemIndex = itemIndex;
         this.ownerID = ownerID;
         this.itemAmount.text = item.quantity.ToString();
         this.itemAmount.gameObject.SetActive(true);
-        this.inventoryContainer = container;
 
         ResourceManage.LoadAsset<Sprite>(item.itemData.itemIcon, LoadComplete);
 
     }
 
+    [Client]
     private void LoadComplete(Sprite itemSprite) {
 
         ui_Icon.sprite = itemSprite;
@@ -66,6 +69,7 @@ public class InventoryUIItemScript : MonoBehaviour, IPointerClickHandler
 
     #region IPointerClickHandler
 
+    [Client]
     public void OnPointerClick(PointerEventData eventData) {
         
         if(eventData.button == PointerEventData.InputButton.Right) {

@@ -10,23 +10,21 @@ public class PlayerHeld : InventoryBase
 
     private const int defaultWeaponIndex = 0;
 
-    public override void OnStartServer() {
+    public override IEnumerator InitializeUI() {
 
-        base.OnStartServer();
+        while (PlayerInventoryUIScript.instance == null) {
 
-        for (int i = 0; i < inventoryMax; i++) {
-
-            collectedItems.Add(null);
+            yield return null;
 
         }
+
+        PlayerInventoryUIScript.instance.InitializeWeaponEquip(this);
 
     }
 
     // Update is called once per frame
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-
         if(isClient){
 
             Client_FirePressed();

@@ -104,22 +104,23 @@ public partial class GameManagerBase : NetworkBehaviour
 
                 var cInventory = inventory[i];
 
-                if(cInventory.inventoryType == inventoryType) {
+                if (cInventory.inventoryType != inventoryType)
+                    continue;
 
-                    //Get the Item Data first
-                    var item = cInventory.FindItemInInventory(inventoryIndex);
+                //Get the Item Data first
+                var item = cInventory.FindItemInInventory(inventoryIndex);
 
-                    if (item != null) {
+                if (item != null) {
 
-                        //Remove and success
-                        if (cInventory.RemoveFromInventory(inventoryIndex)) {
+                    //Remove and success
+                    if (cInventory.RemoveFromInventory(inventoryIndex)) {
 
-                            //Spawn the item to the world
-                            var playerPosFront = targetNetworkIdentity.transform.position + targetNetworkIdentity.transform.forward + Vector3.up;
-                            var toSpawnPrefab = MyNetworkManager.instance.spawnPrefabs[itemIndex];
-                            GameCore.DropItemNetworkInstantiate(toSpawnPrefab, playerPosFront, item);
+                        //Spawn the item to the world
+                        var playerPosFront = targetNetworkIdentity.transform.position + targetNetworkIdentity.transform.forward + Vector3.up;
+                        var toSpawnPrefab = MyNetworkManager.instance.spawnPrefabs[itemIndex];
+                        GameCore.DropItemNetworkInstantiate(toSpawnPrefab, playerPosFront, item);
 
-                        }
+                        break;
 
                     }
 
