@@ -3,19 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerHeld : NetworkBehaviour
+public class PlayerHeld : InventoryBase
 {
     private HeldBase _currentHeld;
     public HeldBase currentHeld { get { return _currentHeld; } }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private const int defaultWeaponIndex = 0;
+
+    [Header("Default")]
+    public ItemData heldDefault;
+
+    public override void InitializeCollectedItem() {
+        //SyncList only able to initialize on server side, let server handle the initialization
+        for (int i = 0; i < inventoryMax; i++) {
+
+            var item = new Item(heldDefault);
+            collectedItems.Add(new Item(heldDefault));
+            //SpawnHeldItem(item);
+        }
+    }
+
+    public override IEnumerator InitializeUI() {
+
+        while (PlayerInventoryUIScript.instance == null) {
+
+            yield return null;
+
+        }
+
+        PlayerInventoryUIScript.instance.InitializeWeaponEquip(this);
 
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(isClient){
 
@@ -66,7 +87,7 @@ public class PlayerHeld : NetworkBehaviour
         if(s_FirePressed){
 
             //Do Something
-            _currentHeld.Fire();
+            _currentHeld?.Fire();
 
             s_FirePressed = false;
 
@@ -92,14 +113,73 @@ public class PlayerHeld : NetworkBehaviour
     [Command]
     void Cmd_Reload() {
 
-        if(_currentHeld is HeldRange heldRange) {
+        if(_currentHeld != null) {
 
-            heldRange.ServerReload();
+            if (_currentHeld is HeldRange heldRange) {
+
+                heldRange.ServerReload();
+
+            }
 
         }
 
     }
 
     #endregion
+
+    public override void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
+
+        if (isServer) {
+
+            //IF new is null no item
+            if (newItem == null ) {
+
+                if(_currentHeld != null) {
+
+                    NetworkServer.Destroy(_currentHeld.gameObject);
+
+                }
+                
+            } else {
+
+                if (oldItem != null && _currentHeld != null) {
+
+                    NetworkServer.Destroy(_currentHeld.gameObject);
+
+                }
+
+                SpawnHeldItem(newItem);
+
+            }
+
+        }
+
+        if (newItem == null) {
+                
+            _currentHeld = null;
+
+        }
+
+        if (isLocalPlayer && PlayerInventoryUIScript.instance != null && PlayerInventoryUIScript.instance.isOpen) {
+
+            PlayerInventoryUIScript.instance.RefreshEquip();
+
+        }
+
+    }
+
+    private void SpawnHeldItem(Item itemToSpawn) {
+
+        //Need check is weapon before spawn
+        if(itemToSpawn.itemData.itemType == ItemData.ItemType.Weapon) {
+
+            var spawnedObject = GameObject.Instantiate(itemToSpawn.itemData.itemHeldPrefab);
+            var heldBase = spawnedObject.GetComponent<HeldBase>();
+            heldBase.parentNetID = netIdentity.netId;
+            NetworkServer.Spawn(spawnedObject);
+
+        }
+
+    }
 
 }

@@ -6,6 +6,9 @@ public class PlayerInventoryUIScript : InventoryUIScript
 {
     public static PlayerInventoryUIScript instance;
 
+    [Header("Player Equipment")]
+    public InventoryUIItemScript weapon_EquipSlot;
+
     public override void Init() {
 
         base.Init();
@@ -29,14 +32,20 @@ public class PlayerInventoryUIScript : InventoryUIScript
         base.Open();
 
         PopulateItem();
-
+        PopulateEquip();
     }
 
-    public void FillInventory(int slot){
+    public void InitializeInventory(int slot, InventoryBase inventoryContainer){
 
         maxSlot = slot;
 
-        FillInventory();
+        FillInventory(inventoryContainer, GameManagerBase.LocalPlayer.netId);
+
+    }
+
+    public void InitializeWeaponEquip(InventoryBase inventoryContainer) {
+
+        weapon_EquipSlot.Initialize(0, inventoryContainer, GameManagerBase.LocalPlayer.netId);
 
     }
 
@@ -54,7 +63,26 @@ public class PlayerInventoryUIScript : InventoryUIScript
             for(int i = 0; i < totalCount; i++) {
 
                 var itemSlot = itemSlotList[i];
-                itemSlot.Setup(localPlayer.inventory.collectedItems[i], i, localPlayer.netId);
+                itemSlot.Setup(localPlayer.inventory.collectedItems[i]);
+
+            }
+        }
+
+    }
+
+    private void PopulateEquip() {
+
+        var localPlayer = GameManagerBase.LocalPlayer;
+
+        if (localPlayer != null) {
+
+            //The held slot
+            var playerHeld = localPlayer.gameObject.GetComponent<PlayerHeld>();
+            if (playerHeld != null) {
+
+                //Get Item Data
+                var itemData = playerHeld.FindItemInInventory(0);
+                weapon_EquipSlot.Setup(itemData);
 
             }
 
@@ -65,6 +93,12 @@ public class PlayerInventoryUIScript : InventoryUIScript
     public void RefreshItem() {
 
         PopulateItem();
+
+    }
+
+    public void RefreshEquip() {
+
+        PopulateEquip();
 
     }
 

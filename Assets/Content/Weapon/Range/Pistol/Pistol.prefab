@@ -48,13 +48,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2cf7f640fdc7544becdac5f3559770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  itemData: {fileID: 11400000, guid: 1afa83e89d28a7b418719dc9bc44f967, type: 2}
+  itemData:
+    itemData: {fileID: 11400000, guid: 1afa83e89d28a7b418719dc9bc44f967, type: 2}
+    quantity: 1
   ownerObject: {fileID: 0}
+  parentNetID: 0
   prefab_Projectile: {fileID: 5986618991811701523, guid: 088d4bc220327fd40b82e16343cb46d5, type: 3}
   fire_FirePoint: {fileID: 4695883728172566001}
   maxBullet: 12
+  bulletPerShot: 1
 --- !u!65 &2952081892203787458
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81,9 +86,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
+  _assetId: 890072817
   serverOnly: 0
   visible: 0
-  m_AssetId: d26e9abbf6099804d8c329509bc14e2f
   hasSpawned: 0
 --- !u!1 &5220868166824954166
 GameObject:

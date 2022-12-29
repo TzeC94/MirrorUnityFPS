@@ -20,6 +20,13 @@ public class Item : IEqualityComparer<Item> {
 
     }
 
+    public Item(ItemData itemData) {
+
+        this.itemData = itemData;
+        quantity = itemData.defaultQuantity;
+
+    }
+
     public bool EnoughToStack(uint nextQuantity) {
 
         return quantity + nextQuantity <= itemData.maxStack;

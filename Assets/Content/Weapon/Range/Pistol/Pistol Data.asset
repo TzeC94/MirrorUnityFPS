@@ -17,4 +17,8 @@ MonoBehaviour:
   itemDescription: Small handgun with low damage
   itemIcon: Pistol Normal
   itemIndex: 3
+  itemType: 1
+  itemHeldPrefab: {fileID: 4726437905770876371, guid: d26e9abbf6099804d8c329509bc14e2f, type: 3}
+  stackable: 0
   defaultQuantity: 1
+  maxStack: 1

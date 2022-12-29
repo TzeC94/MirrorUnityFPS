@@ -84,34 +84,45 @@ public partial class GameManagerBase : NetworkBehaviour
     #region Drop
 
     [Client]
-    public void DropItemFromInventory(int inventoryIndex, Item item, uint targetNetID) {
+    public void DropItemFromInventory(int inventoryIndex, Item item, uint targetNetID, InventoryBase.InventoryType inventoryType) {
 
-        CmdDropItemFromInventory(inventoryIndex, item.itemData.itemIndex, targetNetID);
+        CmdDropItemFromInventory(inventoryIndex, item.itemData.itemIndex, targetNetID, inventoryType);
 
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdDropItemFromInventory(int inventoryIndex, int itemIndex, uint targetNetID) {
+    private void CmdDropItemFromInventory(int inventoryIndex, int itemIndex, uint targetNetID, InventoryBase.InventoryType inventoryType) {
 
         //Remove from player inventory
         NetworkIdentity targetNetworkIdentity;
 
         if (NetworkServer.spawned.TryGetValue(targetNetID, out targetNetworkIdentity)) {
 
-            var playerInventory = targetNetworkIdentity.GetComponent<PlayerInventory>();
+            var inventory = targetNetworkIdentity.GetComponents<InventoryBase>();
 
-            //Get the Item Data first
-            var item = playerInventory.FindItemInInventory(inventoryIndex);
+            for(int i = 0; i < inventory.Length; i++) {
 
-            if(item != null) {
+                var cInventory = inventory[i];
 
-                //Remove and success
-                if (playerInventory.RemoveFromInventory(inventoryIndex)) {
+                if (cInventory.inventoryType != inventoryType)
+                    continue;
 
-                    //Spawn the item to the world
-                    var playerPosFront = targetNetworkIdentity.transform.position + targetNetworkIdentity.transform.forward + Vector3.up;
-                    var toSpawnPrefab = MyNetworkManager.instance.spawnPrefabs[itemIndex];
-                    GameCore.DropItemNetworkInstantiate(toSpawnPrefab, playerPosFront, item);
+                //Get the Item Data first
+                var item = cInventory.FindItemInInventory(inventoryIndex);
+
+                if (item != null) {
+
+                    //Remove and success
+                    if (cInventory.RemoveFromInventory(inventoryIndex)) {
+
+                        //Spawn the item to the world
+                        var playerPosFront = targetNetworkIdentity.transform.position + targetNetworkIdentity.transform.forward + Vector3.up;
+                        var toSpawnPrefab = MyNetworkManager.instance.spawnPrefabs[itemIndex];
+                        GameCore.DropItemNetworkInstantiate(toSpawnPrefab, playerPosFront, item);
+
+                        break;
+
+                    }
 
                 }
 

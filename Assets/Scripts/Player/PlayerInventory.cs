@@ -9,24 +9,18 @@ public class PlayerInventory : InventoryBase
     public static PlayerInventory instance;
 
     // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
+    public override void OnStartLocalPlayer() {
 
-        if(!isLocalPlayer)
-            return;
-
-        if(instance == null){
+        if (instance == null) {
 
             instance = this;
 
         }
 
-        StartCoroutine(InitializeUI());
-
+        base.OnStartLocalPlayer();
     }
 
-    IEnumerator InitializeUI(){
+    public override IEnumerator InitializeUI(){
 
         while(PlayerInventoryUIScript.instance == null){
 
@@ -34,7 +28,7 @@ public class PlayerInventory : InventoryBase
 
         }
 
-        PlayerInventoryUIScript.instance.FillInventory(inventoryMax);
+        PlayerInventoryUIScript.instance.InitializeInventory(inventoryMax, this);
 
     }
 
@@ -44,16 +38,10 @@ public class PlayerInventory : InventoryBase
 
     }
 
-    // Update is called once per frame
-    public override void Update()
-    {
-        
-    }
-
     public override void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
 
         //IF the UI is open, then we need to refresh it
-        if (PlayerInventoryUIScript.instance.isOpen) {
+        if (isLocalPlayer && PlayerInventoryUIScript.instance != null && PlayerInventoryUIScript.instance.isOpen) {
 
             PlayerInventoryUIScript.instance.RefreshItem();
 
