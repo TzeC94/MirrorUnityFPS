@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5986618991126949909}
   - component: {fileID: 5986618991126949896}
   - component: {fileID: 5986618991126949899}
-  - component: {fileID: 5986618991126949898}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5986618991126949898
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5986618991126949908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5986618991811701523
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +97,7 @@ GameObject:
   - component: {fileID: 5986618991811701526}
   - component: {fileID: 5986618991811701521}
   - component: {fileID: 5986618991811701520}
+  - component: {fileID: 4035982648544480591}
   m_Layer: 0
   m_Name: Trajectory Bullet
   m_TagString: Untagged
@@ -147,8 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb412124923bd242bbf2ddebdd7ab82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  damageSO: {fileID: 11400000, guid: 32211613e1e9f454d95c246e8296001b, type: 2}
 --- !u!114 &5986618991811701527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,9 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b185ee29a080b74794cb955538db779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  moveSpeed: 1000
+  moveSpeed: 100
   moveDirection: 0
 --- !u!114 &5986618991811701526
 MonoBehaviour:
@@ -178,9 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
+  _assetId: 3254657720
   serverOnly: 0
   visible: 0
-  m_AssetId: 088d4bc220327fd40b82e16343cb46d5
   hasSpawned: 0
 --- !u!114 &5986618991811701521
 MonoBehaviour:
@@ -194,8 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   target: {fileID: 5986618991811701520}
   clientAuthority: 0
   syncVelocity: 1
@@ -219,7 +209,21 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!136 &4035982648544480591
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986618991811701523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.4
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5986618992620819986
 GameObject:
   m_ObjectHideFlags: 0

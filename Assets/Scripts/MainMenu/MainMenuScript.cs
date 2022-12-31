@@ -21,6 +21,14 @@ public partial class MainMenuScript : MonoBehaviour
 
         }
 
+#if UNITY_EDITOR
+        if (ParrelSync.ClonesManager.IsClone()) {
+
+            Server_Start();
+
+        }
+#endif
+
     }
 
     public void Server_Start(){

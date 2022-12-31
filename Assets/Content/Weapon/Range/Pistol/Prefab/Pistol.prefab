@@ -51,15 +51,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  itemData:
-    itemData: {fileID: 11400000, guid: 1afa83e89d28a7b418719dc9bc44f967, type: 2}
-    quantity: 1
   ownerObject: {fileID: 0}
   parentNetID: 0
-  prefab_Projectile: {fileID: 5986618991811701523, guid: 088d4bc220327fd40b82e16343cb46d5, type: 3}
+  fireInterval: 0.2
+  projectileInfo: {fileID: 11400000, guid: 84dacd9c25c023d49b20741ab84843db, type: 2}
   fire_FirePoint: {fileID: 4695883728172566001}
   maxBullet: 12
   bulletPerShot: 1
+  bulletItemID: ammo.pistol
 --- !u!65 &2952081892203787458
 BoxCollider:
   m_ObjectHideFlags: 0

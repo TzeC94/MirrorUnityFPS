@@ -5,7 +5,10 @@ using Mirror;
 
 public class HeldRange : HeldBase
 {
-    public GameObject prefab_Projectile;   //Projectile Game Object
+    [Header("Projectile")]
+    public ProjectileInfoSO projectileInfo;
+    private Ray ray;
+    private RaycastHit[] hit;
 
     [Header("Fire")]
     public Transform fire_FirePoint;
@@ -13,7 +16,7 @@ public class HeldRange : HeldBase
     [Header("Bullet")]
     public uint maxBullet = 30;
     public uint bulletPerShot = 1;
-    public virtual string bulletItemID { get; }
+    public string bulletItemID;
     [SyncVar]
     private uint _currentBullet;
     public uint currentBullet {
@@ -23,25 +26,43 @@ public class HeldRange : HeldBase
         get { return _currentBullet > 0; }
     }
 
-    public override void Start() {
-
-        base.Start();
+    public virtual void Start() {
 
         if (isServer) {
 
             _currentBullet = maxBullet;
 
+            //Initialize the Raycast if needed
+            if(projectileInfo.type == ProjectileInfoSO.ProjectileType.raycast) {
+                ray = new Ray();
+            }
         }
         
     }
 
-    public override void Fire() {
+    [Server]
+    public override void FireHeld() {
 
         if (enoughBullet) {
 
-            base.Fire();
+            if(projectileInfo.type == ProjectileInfoSO.ProjectileType.spawn) {
 
-            GameCore.NetworkInstantiate(prefab_Projectile, fire_FirePoint.position, fire_FirePoint.rotation);
+                GameCore.NetworkInstantiate(projectileInfo.projectilePrefab, fire_FirePoint.position, fire_FirePoint.rotation);
+
+            } else {
+
+                ray.origin = fire_FirePoint.position;
+                ray.direction = fire_FirePoint.forward;
+                var hitCount = RayTracer.RaycastNonAlloc(ref ray, ref hit, projectileInfo.distance, projectileInfo.layerHit);
+
+                if(hitCount> 0) {
+
+                    //Always target the first hit only
+                    AttackHelper.Attack(gameObject, hit[0].transform.gameObject, projectileInfo.damageSO);
+
+                }
+
+            }
 
             ReduceCurrentBullet(bulletPerShot);
 

@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   _inventoryType: 1
   inventoryMax: 1
   heldDefault: {fileID: 11400000, guid: 1afa83e89d28a7b418719dc9bc44f967, type: 2}

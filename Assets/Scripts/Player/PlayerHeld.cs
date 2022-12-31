@@ -65,9 +65,14 @@ public class PlayerHeld : InventoryBase
 
         if(PlayerInputInstance.instance.fire){
 
-            CmdFirePressed();
+            //To Prevent Spam command to server, we do a safety check here
+            if(_currentHeld != null && _currentHeld.canFire 
+                && (_currentHeld.holdFire || PlayerInputInstance.instance.firePressed)) {
 
-            PlayerInputInstance.instance.fire = false;
+                CmdFirePressed();
+                
+            }
+
         }
 
     }
@@ -78,6 +83,8 @@ public class PlayerHeld : InventoryBase
     void CmdFirePressed(){
 
         s_FirePressed = true;
+
+        Debug.Log("Fire");
 
     }
 

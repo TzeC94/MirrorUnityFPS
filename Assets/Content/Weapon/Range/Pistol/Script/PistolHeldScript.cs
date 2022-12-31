@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PistolHeldScript : HeldRange
 {
-    public override string bulletItemID => "ammo.pistol";
+    
 }

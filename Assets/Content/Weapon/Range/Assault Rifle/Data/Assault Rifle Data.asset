@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
-  m_Name: Ammo Item Data
+  m_Name: Assault Rifle Data
   m_EditorClassIdentifier: 
-  itemID: ammo.pistol
-  itemName: Ammo Pistol
-  itemDescription: Ammo for Pistol
-  itemIcon: Ammo Pistol
-  itemIndex: 5
-  itemType: 0
-  itemHeldPrefab: {fileID: 0}
-  stackable: 1
-  defaultQuantity: 6
-  maxStack: 26
+  itemID: weapon.assaultrifle
+  itemName: Assault Rifle
+  itemDescription: Assault Rifle with high fire rate
+  itemIcon: Pistol Normal
+  itemIndex: 10
+  itemType: 1
+  itemHeldPrefab: {fileID: 4726437905770876371, guid: d645c7128319ad8409e225ddd508fb5d, type: 3}
+  stackable: 0
+  defaultQuantity: 1
+  maxStack: 1

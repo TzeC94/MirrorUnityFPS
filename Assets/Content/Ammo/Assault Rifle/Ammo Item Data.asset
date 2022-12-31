@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
   m_Name: Ammo Item Data
   m_EditorClassIdentifier: 
-  itemID: ammo.pistol
-  itemName: Ammo Pistol
-  itemDescription: Ammo for Pistol
+  itemID: ammo.AR
+  itemName: Ammo Assault Rifle
+  itemDescription: Ammo for Assault Rifle
   itemIcon: Ammo Pistol
-  itemIndex: 5
+  itemIndex: 6
   itemType: 0
   itemHeldPrefab: {fileID: 0}
   stackable: 1
-  defaultQuantity: 6
-  maxStack: 26
+  defaultQuantity: 20
+  maxStack: 60

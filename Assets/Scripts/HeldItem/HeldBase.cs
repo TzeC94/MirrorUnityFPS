@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public abstract class HeldBase : ItemBase
+public abstract class HeldBase : NetworkBehaviour
 {
     [HideInInspector] public PlayerBase ownerObject;
 
     [SyncVar(hook = nameof(Reparent))]
     public uint parentNetID;
+
+    [Header("Fire Rate")]
+    public float fireInterval = 1;
+    public bool holdFire = false;
+    [SyncVar]
+    public bool canFire = true;
 
     public override void OnStartServer() {
 
@@ -55,7 +61,28 @@ public abstract class HeldBase : ItemBase
 
     }
 
-    public virtual void Fire(){
+    [Server]
+    public void Fire() {
+
+        if (canFire) {
+
+            FireHeld();
+
+            canFire = false;
+
+            //Enter the cooldown
+            Invoke(nameof(FireCooldownFinish), fireInterval);
+        }
+
     }
+
+    [Server]
+    void FireCooldownFinish() {
+
+        canFire = true;
+
+    }
+
+    public abstract void FireHeld();
 
 }
