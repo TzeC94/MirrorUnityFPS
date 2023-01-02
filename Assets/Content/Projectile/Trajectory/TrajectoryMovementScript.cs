@@ -8,8 +8,9 @@ public class TrajectoryMovementScript : ProjectileMovementBase
         
         base.Start();
 
-        MoveProjectile();
-
+        if (isServer) {
+            MoveProjectile();
+        }
     }
 
     public override void FixedUpdate() {
@@ -20,7 +21,7 @@ public class TrajectoryMovementScript : ProjectileMovementBase
 
     public override void AddForce(Vector3 direction) {
         
-        rigidBody.AddForce(direction * moveSpeed);
+        rigidBody.AddForce(direction * moveSpeed, ForceMode.Impulse);
 
     }
 }

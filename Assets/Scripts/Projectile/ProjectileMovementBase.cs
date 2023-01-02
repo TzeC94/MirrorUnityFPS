@@ -14,6 +14,7 @@ public abstract class ProjectileMovementBase : NetworkBehaviour
     [Header("Movement")]
     public float moveSpeed = 1f;
     public MoveDirection moveDirection = MoveDirection.Forward;
+    private Vector3 movDirection;   //This will assign on runtime
 
     public virtual void Awake() {
 
@@ -21,16 +22,29 @@ public abstract class ProjectileMovementBase : NetworkBehaviour
 
     }
 
-    // Start is called before the first frame update
-    public virtual void Start()
-    {
-        
-    }
+    public virtual void Start() {
 
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        
+        switch (moveDirection) {
+            case MoveDirection.Forward:
+                movDirection = transform.forward;
+                break;
+            case MoveDirection.Backward:
+                movDirection = -transform.forward;
+                break;
+            case MoveDirection.Up:
+                movDirection = transform.up;
+                break;
+            case MoveDirection.Down:
+                movDirection = -transform.up;
+                break;
+            case MoveDirection.Left:
+                movDirection = -transform.right;
+                break;
+            case MoveDirection.Right:
+                movDirection = transform.right;
+                break;
+        }
+
     }
 
     public virtual void FixedUpdate() {
@@ -38,7 +52,7 @@ public abstract class ProjectileMovementBase : NetworkBehaviour
         if(isServer){
 
             MoveProjectile();
-
+            
         }
 
     }
@@ -50,30 +64,7 @@ public abstract class ProjectileMovementBase : NetworkBehaviour
     /// </summary>
     public virtual void MoveProjectile(){
 
-        Vector3 v_MoveDirection = Vector3.zero;
-
-        switch(moveDirection){
-            case MoveDirection.Forward:
-                v_MoveDirection = transform.forward;
-                break;
-            case MoveDirection.Backward:
-                v_MoveDirection = -transform.forward;
-                break;
-            case MoveDirection.Up:
-                v_MoveDirection = transform.up;
-                break;
-            case MoveDirection.Down:
-                v_MoveDirection = -transform.up;
-                break;
-            case MoveDirection.Left:
-                v_MoveDirection = -transform.right;
-                break;
-            case MoveDirection.Right:
-                v_MoveDirection = transform.right;
-                break;
-        }
-
-        AddForce(v_MoveDirection);
+        AddForce(movDirection);
 
     }
 

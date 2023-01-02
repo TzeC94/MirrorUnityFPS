@@ -16,7 +16,9 @@ MonoBehaviour:
   itemName: Ammo Pistol
   itemDescription: Ammo for Pistol
   itemIcon: Ammo Pistol
-  itemIndex: 6
+  itemIndex: 5
+  itemType: 0
+  itemHeldPrefab: {fileID: 0}
   stackable: 1
   defaultQuantity: 6
   maxStack: 26

@@ -13,6 +13,21 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool fire;
+		public bool fired;
+		public bool firePressed {
+			get {
+				if(fire && !fired) {
+
+					fired = true;
+					return true;
+
+				} else {
+
+					return false;
+
+				}
+			}
+		}
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -52,7 +67,8 @@ namespace StarterAssets
 		{
 			if (cursorInputForLook) {
 
-                FireInput(value.isPressed);
+                var isPress = value.Get<float>() == 1f?true:false;
+                FireInput(isPress);
 
             }
 		}
@@ -80,7 +96,10 @@ namespace StarterAssets
 
 		public void FireInput(bool newFireState)
 		{
-			fire = newFireState;
+			if(!newFireState)
+				fired = false;
+
+            fire = newFireState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

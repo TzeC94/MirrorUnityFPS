@@ -83,7 +83,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
             var lookAtTarget = lookAtHitColliders[i];
 
-            if (lookAtTarget.collider.gameObject.GetComponent<BaseScript>()) {
+            if (lookAtTarget.collider.gameObject.GetComponentInParent<BaseScript>()) {
 
                 //Check distance
                 if (lookAtTarget.distance < distance) {
@@ -114,7 +114,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
             if(actionAdded == false) {
 
-                var baseScript = currentLookAtTarget.GetComponent<BaseScript>();
+                var baseScript = currentLookAtTarget.GetComponentInParent<BaseScript>();
 
                 PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
 
@@ -126,8 +126,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
             if (actionAdded) {
 
-                var baseScript = currentLookAtTarget.GetComponent<BaseScript>();
-                PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
+                PlayerInputInstance.instance.actionOne_Action = null;
                 currentLookAtTarget = null;
                 actionAdded = false;
 

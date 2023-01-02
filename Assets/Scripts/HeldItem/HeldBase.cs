@@ -1,14 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using MyBox;
 
-public abstract class HeldBase : ItemBase
+public abstract partial class HeldBase : NetworkBehaviour
 {
     [HideInInspector] public PlayerBase ownerObject;
 
+    [Header("Parent")]
     [SyncVar(hook = nameof(Reparent))]
+    [ReadOnly]
     public uint parentNetID;
+
+    [Header("Fire Rate")]
+    public float fireInterval = 1;
+    public bool holdFire = false;
+    [SyncVar]
+    [ReadOnly]
+    public bool canFire = true;
 
     public override void OnStartServer() {
 
@@ -23,7 +31,7 @@ public abstract class HeldBase : ItemBase
         NetworkIdentity targetNetIdentity;
         bool found = false;
 
-        found = (isServer) ? NetworkServer.spawned.TryGetValue(newParentNetID, out targetNetIdentity) : NetworkClient.spawned.TryGetValue(parentNetID, out targetNetIdentity);
+        found = (isServer) ? NetworkServer.spawned.TryGetValue(parentNetID, out targetNetIdentity) : NetworkClient.spawned.TryGetValue(newParentNetID, out targetNetIdentity);
 
         if (found) {
 
@@ -33,11 +41,9 @@ public abstract class HeldBase : ItemBase
 
                 ownerObject = clientObject.GetComponent<PlayerBase>();
 
-                var playerBase = clientObject.GetComponent<PlayerBase>();
+                if (ownerObject != null) {
 
-                if (playerBase != null) {
-
-                    gameObject.transform.SetParent(playerBase.weaponHoldingRoot, false);
+                    gameObject.transform.SetParent(ownerObject.weaponHoldingRoot, false);
 
                     var playerHeld = clientObject.GetComponent<PlayerHeld>();
 
@@ -55,7 +61,28 @@ public abstract class HeldBase : ItemBase
 
     }
 
-    public virtual void Fire(){
+    [Server]
+    public void Fire() {
+
+        if (canFire) {
+
+            FireHeld();
+
+            canFire = false;
+
+            //Enter the cooldown
+            Invoke(nameof(FireCooldownFinish), fireInterval);
+        }
+
     }
+
+    [Server]
+    void FireCooldownFinish() {
+
+        canFire = true;
+
+    }
+
+    public abstract void FireHeld();
 
 }

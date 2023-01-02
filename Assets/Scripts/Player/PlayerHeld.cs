@@ -65,9 +65,14 @@ public class PlayerHeld : InventoryBase
 
         if(PlayerInputInstance.instance.fire){
 
-            CmdFirePressed();
+            //To Prevent Spam command to server, we do a safety check here
+            if(_currentHeld != null && _currentHeld.canFire 
+                && (_currentHeld.holdFire || PlayerInputInstance.instance.firePressed)) {
 
-            PlayerInputInstance.instance.fire = false;
+                CmdFirePressed();
+                
+            }
+
         }
 
     }
@@ -129,18 +134,24 @@ public class PlayerHeld : InventoryBase
 
     public override void OnInventoryChanged(SyncList<Item>.Operation op, int itemIndex, Item oldItem, Item newItem) {
 
-        if (isServer) {
+        //IF new is null no item
+        if (newItem == null ) {
 
-            //IF new is null no item
-            if (newItem == null ) {
+            if (isServer) {
 
-                if(_currentHeld != null) {
+                if (_currentHeld != null) {
 
                     NetworkServer.Destroy(_currentHeld.gameObject);
 
                 }
-                
-            } else {
+
+            }
+
+            _currentHeld = null;
+
+        } else {
+
+            if (isServer) {
 
                 if (oldItem != null && _currentHeld != null) {
 
@@ -151,12 +162,6 @@ public class PlayerHeld : InventoryBase
                 SpawnHeldItem(newItem);
 
             }
-
-        }
-
-        if (newItem == null) {
-                
-            _currentHeld = null;
 
         }
 

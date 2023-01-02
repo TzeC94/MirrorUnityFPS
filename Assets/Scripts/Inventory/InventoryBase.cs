@@ -163,13 +163,14 @@ public abstract class InventoryBase : NetworkBehaviour {
         var item1 = FindItemInInventory(oldIndex);
         var item2 = FindItemInInventory(newIndex);
 
-        RemoveFromInventory(oldIndex);
-
         //Swap
         if (item2 != null) {
 
-            RemoveFromInventory(newIndex);
             PutItemAtIndex(oldIndex, item2);
+
+        } else {
+
+            RemoveFromInventory(oldIndex);
 
         }
 
@@ -185,7 +186,6 @@ public abstract class InventoryBase : NetworkBehaviour {
 
         //Copy my current data and remove from this inventory
         var item1 = FindItemInInventory(oldIndex);
-        RemoveFromInventory(oldIndex);
 
         //Find the new inventory
         NetworkIdentity targetPlayerNI;
@@ -205,8 +205,11 @@ public abstract class InventoryBase : NetworkBehaviour {
                 var item2 = cInventory.FindItemInInventory(newIndex);
                 if (item2 != null) {
 
-                    cInventory.RemoveFromInventory(newIndex);
                     PutItemAtIndex(oldIndex, item2);
+
+                }else {
+
+                    RemoveFromInventory(oldIndex);
 
                 }
 

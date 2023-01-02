@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 6919559175900266252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -157,7 +157,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &8505810333675135445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  moveSpeed: 100
+  moveSpeed: 500
   moveDirection: 0
 --- !u!114 &-1834020939607022669
 MonoBehaviour:
@@ -190,4 +190,4 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  damage: 10
+  damageSO: {fileID: 11400000, guid: 32211613e1e9f454d95c246e8296001b, type: 2}
