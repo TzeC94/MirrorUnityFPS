@@ -12,6 +12,9 @@ Features
 2. Simple Weapon
     - Shot
     - Reload
+    - Hold to fire
+    - Animation Handling
+    - Effect Handling
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Shot%20Reload.gif)
 3. Simple Pickup & Inventory
     - Simple Pickup Simple 
