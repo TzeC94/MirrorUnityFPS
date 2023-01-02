@@ -12,14 +12,19 @@ Features
 2. Simple Weapon
     - Shot
     - Reload
+![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Shot%20Reload.gif)
 3. Simple Pickup & Inventory
     - Simple Pickup Simple 
+![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryPickup.gif)
     - Inventory UI 
-    - Simple drop from inventory
-    - Current Weapon Equip (In Progress)
+![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryOpenClose.gif)
+    - Drag and Drop
+    - Weapon Slot
+![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventorySwapDrop.gif)
 4. Simple Health
     - Simple Health
     - Simple Hit Information
+![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Kill.gif)
 
 I'm using Unity 2021.3
 
