@@ -26,6 +26,9 @@ public class HeldRange : HeldBase
         get { return _currentBullet > 0; }
     }
 
+    [Header("Reload")]
+    public float reload_Duration = 1f;
+
     public virtual void Start() {
 
         if (isServer) {
@@ -64,6 +67,7 @@ public class HeldRange : HeldBase
 
             }
 
+            AnimFire();
             ReduceCurrentBullet(bulletPerShot);
 
         }
@@ -91,12 +95,23 @@ public class HeldRange : HeldBase
 
             var maxReloadableBullet = bulletItem.quantity > maxBullet ? maxBullet : bulletItem.quantity;
 
-            _currentBullet = maxReloadableBullet;
+            StartCoroutine(ReloadGun(inventory, maxReloadableBullet, bulletItem));
 
-            //Need to remove the quantity from inventory
-            inventory.RemoveQuantityFromInventory(maxReloadableBullet, bulletItem);
+            AnimReload();
 
         }
+
+    }
+
+    [Server]
+    private IEnumerator ReloadGun(PlayerInventory inventory, uint maxReloadBullet, Item bulletItem) {
+
+        yield return new WaitForSeconds(reload_Duration);
+
+        _currentBullet = maxReloadBullet;
+
+        //Need to remove the quantity from inventory
+        inventory.RemoveQuantityFromInventory(maxReloadBullet, bulletItem);
 
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public abstract class HeldBase : NetworkBehaviour
+public abstract partial class HeldBase : NetworkBehaviour
 {
     [HideInInspector] public PlayerBase ownerObject;
 
