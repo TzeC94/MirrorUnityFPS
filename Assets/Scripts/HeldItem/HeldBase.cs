@@ -31,7 +31,7 @@ public abstract partial class HeldBase : NetworkBehaviour
         NetworkIdentity targetNetIdentity;
         bool found = false;
 
-        found = (isServer) ? NetworkServer.spawned.TryGetValue(newParentNetID, out targetNetIdentity) : NetworkClient.spawned.TryGetValue(parentNetID, out targetNetIdentity);
+        found = (isServer) ? NetworkServer.spawned.TryGetValue(parentNetID, out targetNetIdentity) : NetworkClient.spawned.TryGetValue(newParentNetID, out targetNetIdentity);
 
         if (found) {
 
@@ -41,11 +41,9 @@ public abstract partial class HeldBase : NetworkBehaviour
 
                 ownerObject = clientObject.GetComponent<PlayerBase>();
 
-                var playerBase = clientObject.GetComponent<PlayerBase>();
+                if (ownerObject != null) {
 
-                if (playerBase != null) {
-
-                    gameObject.transform.SetParent(playerBase.weaponHoldingRoot, false);
+                    gameObject.transform.SetParent(ownerObject.weaponHoldingRoot, false);
 
                     var playerHeld = clientObject.GetComponent<PlayerHeld>();
 
