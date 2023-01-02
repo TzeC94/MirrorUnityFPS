@@ -68,6 +68,7 @@ public class HeldRange : HeldBase
             }
 
             AnimFire();
+            ServerPlayerEffect(EffectType.Fire);
             ReduceCurrentBullet(bulletPerShot);
 
         }
