@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
+using Mirror;
 using UnityEngine;
+
+/*
+ * Call this on server
+ * Let Mirror Network Animator to sync the animation event from Server to Client
+ */
 
 public abstract partial class HeldBase
 {
     [Header("Animation")]
-    public Animator animator;
+    public NetworkAnimator animator;
 
-    private int anim_Fire = Animator.StringToHash("Fire");
-    private int anim_Reload = Animator.StringToHash("Reload");
+    private static int anim_Fire = Animator.StringToHash("Fire");
+    private static int anim_Reload = Animator.StringToHash("Reload");
 
     public void AnimFire() {
 
