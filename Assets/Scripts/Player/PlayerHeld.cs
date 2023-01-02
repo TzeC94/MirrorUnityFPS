@@ -84,8 +84,6 @@ public class PlayerHeld : InventoryBase
 
         s_FirePressed = true;
 
-        Debug.Log("Fire");
-
     }
 
     [Server]
