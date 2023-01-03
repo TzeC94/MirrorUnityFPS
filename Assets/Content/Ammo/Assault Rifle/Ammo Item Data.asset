@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: ammo.AR
   itemName: Ammo Assault Rifle
   itemDescription: Ammo for Assault Rifle
-  itemIcon: Ammo Pistol
+  itemIcon: AR Ammo
   itemIndex: 6
   itemType: 0
   itemHeldPrefab: {fileID: 0}

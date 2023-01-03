@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: weapon.assaultrifle
   itemName: Assault Rifle
   itemDescription: Assault Rifle with high fire rate
-  itemIcon: Pistol Normal
+  itemIcon: AR Icon
   itemIndex: 10
   itemType: 1
   itemHeldPrefab: {fileID: 4726437905770876371, guid: d645c7128319ad8409e225ddd508fb5d, type: 3}

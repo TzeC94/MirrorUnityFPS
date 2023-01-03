@@ -17,12 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f7126fd6d2c154e46b7f49dfc79a095a
   m_SerializeEntries:
-  - m_GUID: 118f37763586e174595d5771d93818d1
-    m_Address: Pistol Normal
+  - m_GUID: 0962f4db158140e428aa85d68ddd79d4
+    m_Address: AR Ammo
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 2ea8cc35ddf155d408c6bda82d7ee959
-    m_Address: Ammo Pistol
+  - m_GUID: 633dfb68bce29674fac1d0c9efdf21c5
+    m_Address: Pistol Ammo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b5df6b713ce488a44a18f4d19adb281e
+    m_Address: AR Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c1f404ab4f1a75d41ab0b51084202bd0
+    m_Address: Pistol Icon
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

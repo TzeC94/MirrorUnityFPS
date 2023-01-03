@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: ammo.pistol
   itemName: Ammo Pistol
   itemDescription: Ammo for Pistol
-  itemIcon: Ammo Pistol
+  itemIcon: Pistol Ammo
   itemIndex: 5
   itemType: 0
   itemHeldPrefab: {fileID: 0}
