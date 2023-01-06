@@ -41,4 +41,11 @@ public abstract partial class HeldBase
         }
 
     }
+
+    [Server]
+    protected void PlayHitDecal(Collider hitCollider, Vector3 pos, Quaternion rot) {
+
+        DecalSpawner.instance.SpawnDecal(hitCollider, pos, rot);
+
+    }
 }

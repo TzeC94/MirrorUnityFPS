@@ -68,35 +68,18 @@ public class PlayerLookatHandler : MonoBehaviour
 
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
-        var hitCount = RayTracer.RaycastNonAlloc(ref ray, ref lookAtHitColliders, range, layerToLook);
+        var hitObject = RayTracer.RaycastNonAllocNearest(ray, range, layerToLook);
 
-        if(hitCount <= 0) {
+        if(hitObject == null) {
+
             return null;
+
+        } else {
+
+            return hitObject.GetComponent<BaseScript>() == null ? null : hitObject;
+
         }
 
-        float distance = range * 1.1f;
-        GameObject currentHitTarget = null;
-
-        //Loop through and check 1 by 1
-        //Can't sort due to non alloc raycast
-        for (int i = 0; i < hitCount; i++) {
-
-            var lookAtTarget = lookAtHitColliders[i];
-
-            if (lookAtTarget.collider.gameObject.GetComponentInParent<BaseScript>()) {
-
-                //Check distance
-                if (lookAtTarget.distance < distance) {
-
-                    //Update to this target
-                    currentHitTarget = lookAtTarget.collider.gameObject;
-
-                    distance = lookAtTarget.distance;
-                }
-            }
-        }
-
-        return currentHitTarget;
     }
 
     /// <summary>
