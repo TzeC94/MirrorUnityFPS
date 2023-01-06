@@ -7,8 +7,6 @@ public class HeldRange : HeldBase
 {
     [Header("Projectile")]
     public ProjectileInfoSO projectileInfo;
-    private Ray ray;
-    private RaycastHit[] hit;
 
     [Header("Fire")]
     public Transform fire_FirePoint;
@@ -35,10 +33,6 @@ public class HeldRange : HeldBase
 
             _currentBullet = maxBullet;
 
-            //Initialize the Raycast if needed
-            if(projectileInfo.type == ProjectileInfoSO.ProjectileType.raycast) {
-                ray = new Ray();
-            }
         }
         
     }
@@ -54,14 +48,16 @@ public class HeldRange : HeldBase
 
             } else {
 
-                ray.origin = fire_FirePoint.position;
-                ray.direction = fire_FirePoint.forward;
-                var hitCount = RayTracer.RaycastNonAlloc(ref ray, ref hit, projectileInfo.distance, projectileInfo.layerHit);
+                RaycastHit hitInfo;
+                var hitObject = RayTracer.RaycastNonAllocNearest(new Ray(fire_FirePoint.position, fire_FirePoint.forward), out hitInfo, projectileInfo.distance, projectileInfo.layerHit);
 
-                if(hitCount> 0) {
+                if(hitObject != null) {
 
                     //Always target the first hit only
-                    AttackHelper.Attack(gameObject, hit[0].transform.gameObject, projectileInfo.damageSO);
+                    AttackHelper.Attack(gameObject, hitObject, projectileInfo.damageSO);
+
+                    //Spawn the hit decal
+                    PlayHitDecal(hitInfo.collider, hitInfo.point, Quaternion.Euler(hitInfo.normal));
 
                 }
 
