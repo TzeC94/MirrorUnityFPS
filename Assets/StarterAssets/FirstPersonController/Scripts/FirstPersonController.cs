@@ -114,6 +114,7 @@ namespace StarterAssets
 
         public virtual void Update()
 		{
+#if false
 			if(isLocalPlayer){
 				Client_JumpInputCheck();
 				Client_Move();
@@ -124,10 +125,30 @@ namespace StarterAssets
 				Server_GroundedCheck();
 				Server_Move();
 			}
-		}
+#else
+
+            if (isLocalPlayer) {
+
+                Client_JumpInputCheck();
+                Client_Move();
+                JumpAndGravity();
+                Move();
+
+            }
+
+			if (isServer) {
+
+                Server_GroundedCheck();
+
+            }
+
+#endif
+        }
 
         public virtual void LateUpdate()
 		{
+#if false
+
 			if(isLocalPlayer){
 				Client_CameraRotation();
 			}
@@ -135,11 +156,22 @@ namespace StarterAssets
 			if(isServer){
 				Server_CameraRotation();
 			}
-		}
 
-        #region Ground Checking
+#else
 
-        [Server]
+            if (isLocalPlayer) {
+
+                Client_CameraRotation();
+                CameraRotation();
+
+            }
+
+#endif
+        }
+
+#region Ground Checking
+
+        //[Server]
 		private void Server_GroundedCheck()
 		{
 			// set sphere position, with offset
@@ -147,11 +179,11 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
-        #endregion
+#endregion
 
-        #region Camera and Character Rotation
+#region Camera and Character Rotation
 
-		[SyncVar]
+		//[SyncVar]
 		float s_RotationVelocity = 0f;
 
 		[Client]
@@ -172,60 +204,51 @@ namespace StarterAssets
                 // Update Cinemachine camera target pitch
                 lastCameraRot = CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
-				// rotate the player left and right
-				//transform.Rotate(Vector3.up * _rotationVelocity);
-				Client_SendRotationVelocity(_rotationVelocity, CinemachineCameraTarget.transform.localRotation);
+                // rotate the player left and right
+                //transform.Rotate(Vector3.up * _rotationVelocity);
+                SetRotationVelocity(_rotationVelocity, CinemachineCameraTarget.transform.localRotation);
 
 			}else{
 
-				Client_SendRotationVelocity(0f, lastCameraRot);
+                SetRotationVelocity(0f, lastCameraRot);
 
 			}
 			
 		}
 
-		[Command]
-		private void Client_SendRotationVelocity(float velocity, Quaternion cameraLocalRot){
+		private void SetRotationVelocity(float velocity, Quaternion cameraLocalRot){
 
 			s_RotationVelocity = velocity;
 			CinemachineCameraTarget.transform.localRotation = cameraLocalRot;
 
-
         }
 
-		[Server]
-		private void Server_CameraRotation(){
+		private void CameraRotation(){
 
 			transform.Rotate(Vector3.up * s_RotationVelocity);
 
 		}
 
-        #endregion
+#endregion
 
-        #region Movement
+#region Movement
 
-        [SyncVar]
 		bool s_IsSprint = false;
-
-		[SyncVar]
 		bool s_AnalogMovement = false;
-
-		[SyncVar]
 		Vector2 s_InputMove;
 
-		[Client]
+		//[Client]
 		private void Client_Move(){
 
 			if(s_IsSprint != PlayerInputInstance.instance.sprint || s_AnalogMovement != PlayerInputInstance.instance.analogMovement || s_InputMove != PlayerInputInstance.instance.move){
 
-				Client_SyncMovement(PlayerInputInstance.instance.sprint, PlayerInputInstance.instance.analogMovement, PlayerInputInstance.instance.move);
+				SyncMovement(PlayerInputInstance.instance.sprint, PlayerInputInstance.instance.analogMovement, PlayerInputInstance.instance.move);
 
 			}
 
 		}
 
-		[Command]
-		private void Client_SyncMovement(bool sprint, bool analogMovement, Vector2 move){
+		private void SyncMovement(bool sprint, bool analogMovement, Vector2 move){
 
 			s_IsSprint = sprint;
 			s_AnalogMovement = analogMovement;
@@ -233,8 +256,7 @@ namespace StarterAssets
 
 		}
 
-		[Server]
-		private void Server_Move()
+		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = s_IsSprint ? SprintSpeed : MoveSpeed;
@@ -282,9 +304,9 @@ namespace StarterAssets
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
-        #endregion
+#endregion
 
-        #region Jump
+#region Jump
 
         bool s_isJump = false;
 
@@ -292,14 +314,16 @@ namespace StarterAssets
 		private void Client_JumpInputCheck(){
 
 			if(PlayerInputInstance.instance.jump){
-				CmdJumpAndGravity();
+
+				ToJump();
+
 			}
 
 			PlayerInputInstance.instance.jump = false;
 
 		}
 
-		private void Server_JumpAndGravity()
+		private void JumpAndGravity()
 		{
 			if (Grounded)
 			{
@@ -349,14 +373,13 @@ namespace StarterAssets
 			s_isJump = false;
 		}
 
-		[Command]
-		private void CmdJumpAndGravity(){
+		private void ToJump(){
 
 			s_isJump = true;
 
 		}
 
-        #endregion
+#endregion
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{

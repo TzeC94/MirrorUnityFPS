@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 5446507329345585785}
   - component: {fileID: 5615721397503697782}
   - component: {fileID: 3615249164090168002}
+  - component: {fileID: 3056947326589743021}
   m_Layer: 6
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -321,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   target: {fileID: 8997996947095583982}
@@ -370,3 +371,31 @@ MonoBehaviour:
   syncInterval: 0.1
   _inventoryType: 0
   inventoryMax: 20
+--- !u!114 &3056947326589743021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 4135013735270702856}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
