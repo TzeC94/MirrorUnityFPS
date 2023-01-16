@@ -223,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2627539304423979186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pistol Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,6 +257,18 @@ PrefabInstance:
     - target: {fileID: 149444, guid: 857baec1870785b45ac133c29003b21b, type: 3}
       propertyPath: m_Name
       value: Pistol No Clip
+      objectReference: {fileID: 0}
+    - target: {fileID: 149444, guid: 857baec1870785b45ac133c29003b21b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 149698, guid: 857baec1870785b45ac133c29003b21b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 187074, guid: 857baec1870785b45ac133c29003b21b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 413006, guid: 857baec1870785b45ac133c29003b21b, type: 3}
       propertyPath: m_RootOrder
@@ -332,6 +344,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2627539304423979186}
     m_Modifications:
+    - target: {fileID: 1759638397879037699, guid: 2bf7e05ea4840354bae1d59ce107dd73, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5200948885053916566, guid: 2bf7e05ea4840354bae1d59ce107dd73, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -379,6 +395,10 @@ PrefabInstance:
     - target: {fileID: 6367743005635408468, guid: 2bf7e05ea4840354bae1d59ce107dd73, type: 3}
       propertyPath: m_Name
       value: Effect Fire Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367743005635408468, guid: 2bf7e05ea4840354bae1d59ce107dd73, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bf7e05ea4840354bae1d59ce107dd73, type: 3}
