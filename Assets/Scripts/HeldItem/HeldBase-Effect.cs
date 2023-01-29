@@ -5,8 +5,6 @@ using UnityEngine;
 
 public abstract partial class HeldBase
 {
-    public enum EffectType { Fire }
-
     [Header("Effect")]
     public EffectPlayer fireEffect;
 
@@ -21,7 +19,7 @@ public abstract partial class HeldBase
     }
 
     [ClientRpc]
-    private void PlayerEffect(EffectType effectType) {
+    public void PlayerEffect(EffectType effectType) {
 
         EffectPlayer targetEffect;
 

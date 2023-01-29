@@ -41,10 +41,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_DefaultStencilState:
-    overrideStencilState: 0
-    stencilReference: 0
-    stencilCompareFunction: 8
-    passOperation: 2
+    overrideStencilState: 1
+    stencilReference: 1
+    stencilCompareFunction: 6
+    passOperation: 0
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
@@ -80,14 +80,14 @@ MonoBehaviour:
       - 
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
-    overrideDepthState: 1
+    overrideDepthState: 0
     depthCompareFunction: 8
     enableWrite: 1
     stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
+      overrideStencilState: 1
+      stencilReference: 1
       stencilCompareFunction: 8
-      passOperation: 0
+      passOperation: 2
       failOperation: 0
       zFailOperation: 0
     cameraSettings:

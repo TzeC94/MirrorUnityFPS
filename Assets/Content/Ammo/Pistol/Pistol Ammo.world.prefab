@@ -70,6 +70,7 @@ MonoBehaviour:
   syncInterval: 0.1
   itemData:
     itemData: {fileID: 11400000, guid: f7afa5d0bd2279542887eeb44a2fb723, type: 2}
+    itemDataAddress: Assets/Content/Ammo/Pistol/Ammo Item Data.asset
     quantity: 5
   canPickUp: 1
 --- !u!54 &9222192365812862508

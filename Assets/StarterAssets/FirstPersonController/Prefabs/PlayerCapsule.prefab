@@ -228,13 +228,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8616685848737228372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3f257c14b68f54a8a4780c3dd355a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
   maxHealth: 100
+  inventory: {fileID: 3615249164090168002}
+  playerHeld: {fileID: 8186667459668633024}
+  weaponHoldingRoot: {fileID: 4333389928889098638}
+  localWeaponHoldingRoot: {fileID: 4135013735270702856}
   MoveSpeed: 4
   SprintSpeed: 6
   RotationSpeed: 1
@@ -248,15 +252,12 @@ MonoBehaviour:
   GroundedRadius: 0.5
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   prefab_Camera: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
   prefab_CinematicVirtualCamera: {fileID: 8762286023885395077, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
   CinemachineCameraTarget: {fileID: 4135013735270702863}
   TopClamp: 90
   BottomClamp: -90
-  inventory: {fileID: 3615249164090168002}
-  playerHeld: {fileID: 8186667459668633024}
-  weaponHoldingRoot: {fileID: 4333389928889098638}
 --- !u!114 &8186667459668633024
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using Mirror;
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
-	public class FirstPersonController : BaseCombatScript
+	public class FirstPersonController : PlayerBase
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -114,8 +114,10 @@ namespace StarterAssets
 			}
 		}
 
-        public virtual void Update()
+        public override void Update()
 		{
+			base.Update();
+
 			if(isLocalPlayer){
 
 				Client_JumpInputCheck();

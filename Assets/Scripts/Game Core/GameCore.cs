@@ -66,4 +66,10 @@ public static class GameCore
 
     }
 
+    public static void Destroy(GameObject target) {
+
+        Object.Destroy(target);
+
+    }
+
 }

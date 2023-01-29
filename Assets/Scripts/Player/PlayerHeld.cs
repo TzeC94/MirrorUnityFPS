@@ -8,6 +8,9 @@ public class PlayerHeld : InventoryBase
     private HeldBase _currentHeld;
     public HeldBase currentHeld { get { return _currentHeld; } }
 
+    //For Local
+    private HeldLocal _currentHeldLocal;
+
     private const int defaultWeaponIndex = 0;
 
     [Header("Default")]
@@ -18,8 +21,8 @@ public class PlayerHeld : InventoryBase
         for (int i = 0; i < inventoryMax; i++) {
 
             var item = new Item(heldDefault);
-            collectedItems.Add(new Item(heldDefault));
-            //SpawnHeldItem(item);
+            collectedItems.Add(item);
+
         }
     }
 
@@ -100,6 +103,23 @@ public class PlayerHeld : InventoryBase
 
     }
 
+    private void FireCallback() {
+
+        RPC_FireSuccess(netIdentity.connectionToClient);
+
+    }
+
+    [TargetRpc]
+    private void RPC_FireSuccess(NetworkConnection target) {
+
+        if(_currentHeldLocal != null) {
+
+            _currentHeldLocal.AnimFire();
+
+        }
+
+    }
+
     #endregion
 
     #region Reload
@@ -120,11 +140,24 @@ public class PlayerHeld : InventoryBase
 
         if(_currentHeld != null) {
 
-            if (_currentHeld is HeldRange heldRange) {
+            _currentHeld.ServerReload();
 
-                heldRange.ServerReload();
+        }
 
-            }
+    }
+
+    private void ReloadCallback() {
+
+        RPC_ReloadSuccess(netIdentity.connectionToClient);
+
+    }
+
+    [TargetRpc]
+    private void RPC_ReloadSuccess(NetworkConnection target) {
+
+        if(_currentHeldLocal != null) {
+
+            _currentHeldLocal.AnimReload();
 
         }
 
@@ -149,6 +182,13 @@ public class PlayerHeld : InventoryBase
 
             _currentHeld = null;
 
+            if (isLocalPlayer && _currentHeldLocal) {
+
+                GameCore.Destroy(_currentHeldLocal.gameObject);
+                _currentHeldLocal = null;
+
+            }
+
         } else {
 
             if (isServer) {
@@ -163,6 +203,19 @@ public class PlayerHeld : InventoryBase
 
             }
 
+            if (isLocalPlayer) {
+                Debug.Log("Local Player");
+                if(_currentHeldLocal != null) {
+
+                    GameCore.Destroy(_currentHeldLocal.gameObject);
+                    _currentHeldLocal = null;
+
+                }
+
+                SpawnLocalHeldItem(newItem);
+
+            }
+
         }
 
         if (isLocalPlayer && PlayerInventoryUIScript.instance != null && PlayerInventoryUIScript.instance.isOpen) {
@@ -173,15 +226,36 @@ public class PlayerHeld : InventoryBase
 
     }
 
+    [Server]
     private void SpawnHeldItem(Item itemToSpawn) {
 
         //Need check is weapon before spawn
-        if(itemToSpawn.itemData.itemType == ItemData.ItemType.Weapon) {
+        if(itemToSpawn.ItemData.itemType == ItemData.ItemType.Weapon) {
 
-            var spawnedObject = GameObject.Instantiate(itemToSpawn.itemData.itemHeldPrefab);
+            var spawnedObject = GameObject.Instantiate(itemToSpawn.ItemData.itemHeldPrefab);
             var heldBase = spawnedObject.GetComponent<HeldBase>();
             heldBase.parentNetID = netIdentity.netId;
-            NetworkServer.Spawn(spawnedObject);
+            heldBase.fireCallback = FireCallback;
+
+            if(heldBase is HeldRange heldRange) {
+
+                heldRange.reloadCallback = ReloadCallback;
+            }
+
+            NetworkServer.Spawn(spawnedObject, netIdentity.connectionToClient);
+
+        }
+
+    }
+
+    [Client]
+    private void SpawnLocalHeldItem(Item itemToSpawn) {
+        Debug.Log("Local Spawn");
+        //Need check is weapon before spawn
+        if (itemToSpawn.ItemData.itemType == ItemData.ItemType.Weapon) {
+
+            var spawnedObject = GameCore.Instantiate(itemToSpawn.ItemData.itemHeldPrefab_Local, GetComponent<PlayerBase>().localWeaponHoldingRoot);
+            _currentHeldLocal = spawnedObject.GetComponent<HeldLocal>();
 
         }
 

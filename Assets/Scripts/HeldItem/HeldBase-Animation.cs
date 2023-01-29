@@ -11,8 +11,10 @@ public abstract partial class HeldBase
     [Header("Animation")]
     public NetworkAnimator animator;
 
-    private static int anim_Fire = Animator.StringToHash("Fire");
-    private static int anim_Reload = Animator.StringToHash("Reload");
+    //---Animation--//
+
+    public static int anim_Fire = Animator.StringToHash("Fire");
+    public static int anim_Reload = Animator.StringToHash("Reload");
 
     public void AnimFire() {
 

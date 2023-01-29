@@ -1,9 +1,12 @@
 using UnityEngine;
 using Mirror;
 using MyBox;
+using System;
 
-public abstract partial class HeldBase : NetworkBehaviour
+public abstract partial class HeldBase : NetworkBehaviour, IHeld
 {
+    public enum EffectType { Fire }
+
     [HideInInspector] public PlayerBase ownerObject;
 
     [Header("Parent")]
@@ -17,6 +20,7 @@ public abstract partial class HeldBase : NetworkBehaviour
     [SyncVar]
     [ReadOnly]
     public bool canFire = true;
+    public Action fireCallback;
 
     public override void OnStartServer() {
 
@@ -84,5 +88,15 @@ public abstract partial class HeldBase : NetworkBehaviour
     }
 
     public abstract void FireHeld();
+
+    /// <summary>
+    /// To reload the weapon
+    /// </summary>
+    [Server]
+    public virtual void ServerReload() {
+
+        
+
+    }
 
 }

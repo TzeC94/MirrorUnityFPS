@@ -116,6 +116,8 @@ MonoBehaviour:
   syncInterval: 0.1
   itemData:
     itemData: {fileID: 11400000, guid: ad7a2016ea6c68d489c7dc1c4817b33b, type: 2}
+    itemDataAddress: Assets/Content/Weapon/Range/Assault Rifle/Data/Assault Rifle
+      Data.asset
     quantity: 1
   canPickUp: 1
 --- !u!54 &6942002523014378015

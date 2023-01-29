@@ -8,7 +8,7 @@ public class ItemSetupEditor : Editor
 {
     private const string networkManagerPath = "Assets/Prefab/Networking/Network Manager.prefab";
 
-    [MenuItem("Custom/Item Data/Setup All Item Data")]
+    [MenuItem(EditorConstant.CustomPath + "Item Data/Setup All Item Data")]
     private static void SetupItemsData() {
 
         //Need look for the network manager for the information
@@ -25,10 +25,10 @@ public class ItemSetupEditor : Editor
 
                 if (pickupBase) {
 
-                    pickupBase.itemData.itemData.itemIndex = i;
+                    pickupBase.itemData.ItemData.itemIndex = i;
 
                     //SetDirty
-                    EditorUtility.SetDirty(pickupBase.itemData.itemData);
+                    EditorUtility.SetDirty(pickupBase.itemData.ItemData);
 
                 }
 

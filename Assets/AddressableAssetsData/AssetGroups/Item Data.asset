@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Item Data
+  m_EditorClassIdentifier: 
+  m_GroupName: Item Data
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 95156d6c298c0bd489bb4ba5157fc203
+  m_SerializeEntries:
+  - m_GUID: ad7a2016ea6c68d489c7dc1c4817b33b
+    m_Address: Assets/Content/Weapon/Range/Assault Rifle/Data/Assault Rifle Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Item Data
+  - m_GUID: f7afa5d0bd2279542887eeb44a2fb723
+    m_Address: Assets/Content/Ammo/Pistol/Ammo Item Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Item Data
+  - m_GUID: dcf4290ca0254f047810f07b0ae8afca
+    m_Address: Assets/Content/Ammo/Assault Rifle/Ammo Item Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Item Data
+  - m_GUID: 1afa83e89d28a7b418719dc9bc44f967
+    m_Address: Assets/Content/Weapon/Range/Pistol/Data/Pistol Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Item Data
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 11dfbf2985608a04fb902fc1a128fa67, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 2436246838747fd44a2357e4cafeaf94, type: 2}
+    - {fileID: 11400000, guid: 79ce92108930d8b41868c846d55dc639, type: 2}
