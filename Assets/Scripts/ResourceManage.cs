@@ -1,4 +1,3 @@
-using MyBox.EditorTools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,10 +43,28 @@ public static class ResourceManage
 
             var loadHandle = Addressables.LoadAssetAsync<ScriptableObject>(location);
             loadHandle.Completed += operation => {
-                preloadedGameplayAssets.Add(location.PrimaryKey, loadHandle.Result);
+                if(loadHandle.Result != null) {
+                    //Debug.Log($"Add Asset {location.PrimaryKey}", loadHandle.Result);
+                    preloadedGameplayAssets.Add(location.PrimaryKey, loadHandle.Result);
+                } else {
+                    Debug.LogError($"Item load at {location.PrimaryKey} is null");
+                }
+                
             };
 
         }
+
+    }
+
+    public static T GetPreloadGameplayData<T>(string address) where T : ScriptableObject {
+
+        if (preloadedGameplayAssets.ContainsKey(address)) {
+            return (T)preloadedGameplayAssets[address];
+        } else {
+            Debug.LogError($"Item at {address} is null");
+            return null;
+        }
+        
 
     }
 

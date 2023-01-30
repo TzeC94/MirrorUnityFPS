@@ -58,7 +58,7 @@ public abstract class InventoryBase : NetworkBehaviour {
         //Try fill into empty slot or stack if is possible
         if (collectedItems.Count > 0) {
 
-            var newItemData = newItem.ItemData;
+            var newItemData = newItem.GetItemData();
 
             //Loop the Item in inventory first to stack first
             if (newItemData.stackable) {
@@ -69,7 +69,7 @@ public abstract class InventoryBase : NetworkBehaviour {
 
                     if (currentItem != null) {
 
-                        if (currentItem.ItemData.itemID == newItemData.itemID && currentItem.ItemData.stackable && currentItem.EnoughToStack(newItem.quantity)) {
+                        if (currentItem.GetItemData().itemID == newItemData.itemID && currentItem.GetItemData().stackable && currentItem.EnoughToStack(newItem.quantity)) {
 
                             //Add to stack
                             Item newModItem = new Item(currentItem);
@@ -246,7 +246,7 @@ public abstract class InventoryBase : NetworkBehaviour {
 
             var cItem = collectedItems[i];
 
-            if (cItem != null && cItem.ItemData.itemID == itemID) {
+            if (cItem != null && cItem.GetItemData().itemID == itemID) {
 
                 collectedItem.Add(cItem);
 
@@ -258,7 +258,7 @@ public abstract class InventoryBase : NetworkBehaviour {
         if (collectedItem.Count > 0) {
 
             //Reorder if is stackable
-            if (collectedItem[0].ItemData.stackable && reorderIfStackable) {
+            if (collectedItem[0].GetItemData().stackable && reorderIfStackable) {
 
                 collectedItem = collectedItem.OrderByDescending(x => x.quantity).ToList();
 

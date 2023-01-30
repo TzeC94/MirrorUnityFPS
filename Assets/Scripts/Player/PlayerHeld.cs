@@ -204,7 +204,7 @@ public class PlayerHeld : InventoryBase
             }
 
             if (isLocalPlayer) {
-                Debug.Log("Local Player");
+                
                 if(_currentHeldLocal != null) {
 
                     GameCore.Destroy(_currentHeldLocal.gameObject);
@@ -230,9 +230,9 @@ public class PlayerHeld : InventoryBase
     private void SpawnHeldItem(Item itemToSpawn) {
 
         //Need check is weapon before spawn
-        if(itemToSpawn.ItemData.itemType == ItemData.ItemType.Weapon) {
+        if(itemToSpawn.GetItemData().itemType == ItemData.ItemType.Weapon) {
 
-            var spawnedObject = GameObject.Instantiate(itemToSpawn.ItemData.itemHeldPrefab);
+            var spawnedObject = GameObject.Instantiate(itemToSpawn.GetItemData().itemHeldPrefab);
             var heldBase = spawnedObject.GetComponent<HeldBase>();
             heldBase.parentNetID = netIdentity.netId;
             heldBase.fireCallback = FireCallback;
@@ -250,11 +250,14 @@ public class PlayerHeld : InventoryBase
 
     [Client]
     private void SpawnLocalHeldItem(Item itemToSpawn) {
-        Debug.Log("Local Spawn");
+        
         //Need check is weapon before spawn
-        if (itemToSpawn.ItemData.itemType == ItemData.ItemType.Weapon) {
+        if (itemToSpawn.GetItemData().itemType == ItemData.ItemType.Weapon) {
 
-            var spawnedObject = GameCore.Instantiate(itemToSpawn.ItemData.itemHeldPrefab_Local, GetComponent<PlayerBase>().localWeaponHoldingRoot);
+            var localObject = itemToSpawn.GetItemData().itemHeldPrefab_Local;
+            var spawnedObject = GameCore.Instantiate(localObject, GetComponent<PlayerBase>().localWeaponHoldingRoot);
+            //Reset Local
+            spawnedObject.transform.localPosition = Vector3.zero;
             _currentHeldLocal = spawnedObject.GetComponent<HeldLocal>();
 
         }

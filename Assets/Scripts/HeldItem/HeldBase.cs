@@ -22,11 +22,27 @@ public abstract partial class HeldBase : NetworkBehaviour, IHeld
     public bool canFire = true;
     public Action fireCallback;
 
+    [Header("Art")]
+    public GameObject[] artObjects;
+
     public override void OnStartServer() {
 
         base.OnStartServer();
 
         Reparent(0, this.parentNetID);
+
+    }
+
+    public override void OnStartClient() {
+
+        base.OnStartClient();
+
+        //Need to turn off if is local player
+        if (ownerObject.isLocalPlayer) {
+
+            SetArtActive(false);
+
+        }
 
     }
 
@@ -96,6 +112,15 @@ public abstract partial class HeldBase : NetworkBehaviour, IHeld
     public virtual void ServerReload() {
 
         
+
+    }
+
+    [Client]
+    public void SetArtActive(bool active) {
+
+        foreach(var art in artObjects) {
+            art.SetActive(active);
+        }
 
     }
 

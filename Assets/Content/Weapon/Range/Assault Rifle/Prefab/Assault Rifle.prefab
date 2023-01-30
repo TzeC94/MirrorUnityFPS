@@ -75,6 +75,8 @@ MonoBehaviour:
   fireInterval: 0.1
   holdFire: 1
   canFire: 1
+  artObjects:
+  - {fileID: 8174973961345419652}
   projectileInfo: {fileID: 11400000, guid: b931711e5d0d0084791bc784c3fa275a, type: 2}
   fire_FirePoint: {fileID: 4695883728172566001}
   maxBullet: 30

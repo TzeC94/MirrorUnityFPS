@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
+using MyBox;
 
 [System.Serializable]
 public class Item : IEqualityComparer<Item>
@@ -13,24 +14,15 @@ public class Item : IEqualityComparer<Item>
 #endif
 {
     [SerializeField]
-    private ItemData itemData;
-    public ItemData ItemData { 
-        get {
-            if(itemData == null) {
-                itemData = ResourceManage.preloadedGameplayAssets[itemDataAddress] as ItemData;
-            }
-
-            return itemData;
-        } 
-    }
-    [HideInInspector]
+    private ItemData itemData = null;
+    [ReadOnly]
     public string itemDataAddress;
     public uint quantity;
 
 #if UNITY_EDITOR
     public void OnEditorInitialize() {
 
-        var myItemAddress = AssetDatabase.GetAssetPath(ItemData);
+        var myItemAddress = AssetDatabase.GetAssetPath(itemData);
         if (itemDataAddress != myItemAddress) {
 
             itemDataAddress = myItemAddress;
@@ -47,6 +39,7 @@ public class Item : IEqualityComparer<Item>
     public Item(Item oldItemData) {
 
         this.itemData = oldItemData.itemData;
+        itemDataAddress = oldItemData.itemDataAddress;
         this.quantity = oldItemData.quantity;
 
     }
@@ -54,6 +47,7 @@ public class Item : IEqualityComparer<Item>
     public Item(ItemData itemData) {
 
         this.itemData = itemData;
+        itemDataAddress = itemData.itemDataAddress;
         quantity = itemData.defaultQuantity;
 
     }
@@ -73,6 +67,18 @@ public class Item : IEqualityComparer<Item>
     public int GetHashCode(Item obj) {
 
         return obj.GetHashCode();
+
+    }
+
+    public ItemData GetItemData() {
+
+        Debug.Log(itemDataAddress);
+
+        if (itemData == null) {
+            itemData = ResourceManage.GetPreloadGameplayData<ItemData>(itemDataAddress);
+        }
+
+        return itemData;
 
     }
 

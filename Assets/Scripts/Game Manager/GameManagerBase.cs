@@ -86,7 +86,7 @@ public partial class GameManagerBase : NetworkBehaviour
     [Client]
     public void DropItemFromInventory(int inventoryIndex, Item item, uint targetNetID, InventoryBase.InventoryType inventoryType) {
 
-        CmdDropItemFromInventory(inventoryIndex, item.ItemData.itemIndex, targetNetID, inventoryType);
+        CmdDropItemFromInventory(inventoryIndex, item.GetItemData().itemIndex, targetNetID, inventoryType);
 
     }
 

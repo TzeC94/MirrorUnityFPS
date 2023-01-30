@@ -18,7 +18,9 @@ MonoBehaviour:
   itemIcon: AR Ammo
   itemIndex: 6
   itemType: 0
+  itemDataAddress: Assets/Content/Ammo/Assault Rifle/Ammo Item Data.asset
   itemHeldPrefab: {fileID: 0}
+  itemHeldPrefab_Local: {fileID: 0}
   stackable: 1
   defaultQuantity: 20
   maxStack: 60

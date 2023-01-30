@@ -25,10 +25,11 @@ public class ItemSetupEditor : Editor
 
                 if (pickupBase) {
 
-                    pickupBase.itemData.ItemData.itemIndex = i;
+                    var itemData = pickupBase.itemData.GetItemData();
+                    itemData.itemIndex = i;
 
                     //SetDirty
-                    EditorUtility.SetDirty(pickupBase.itemData.ItemData);
+                    EditorUtility.SetDirty(itemData);
 
                 }
 

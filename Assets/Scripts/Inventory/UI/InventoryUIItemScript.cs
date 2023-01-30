@@ -33,7 +33,7 @@ public partial class InventoryUIItemScript : MonoBehaviour
 
         if (this.item == item && item != null) {
 
-            if (item.ItemData.stackable) {
+            if (item.GetItemData().stackable) {
 
                 this.itemAmount.text = item.quantity.ToString();
 
@@ -57,7 +57,7 @@ public partial class InventoryUIItemScript : MonoBehaviour
         this.itemAmount.text = item.quantity.ToString();
         this.itemAmount.gameObject.SetActive(true);
 
-        ResourceManage.LoadAsset<Sprite>(item.ItemData.itemIcon, LoadComplete);
+        ResourceManage.LoadAsset<Sprite>(item.GetItemData().itemIcon, LoadComplete);
 
     }
 
