@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PoolWorker {
 
@@ -20,6 +21,11 @@ public class PoolWorker {
         item.transform.position = Vector3.zero;
         item.SetActive(false);
 
+        var iPoolable = item.GetComponents<IPoolable>();
+        foreach(var ipoolable in iPoolable) {
+            ipoolable.Push();
+        }
+
         poolList.Add(item);
 
     }   
@@ -38,6 +44,10 @@ public class PoolWorker {
             //Remove
             poolList.RemoveAt(0);
 
+            var iPoolable = pullObject.GetComponents<IPoolable>();
+            foreach (var ipoolable in iPoolable) {
+                ipoolable.Pull();
+            }
         }
 
         pullObject.SetActive(true);
