@@ -16,7 +16,9 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
     public Action OnDeathCallback;
 
     // Start is called before the first frame update
-    private void Start() {
+    public override void Start() {
+
+        base.Start();
 
         Initialize();
 

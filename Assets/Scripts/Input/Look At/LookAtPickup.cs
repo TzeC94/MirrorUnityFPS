@@ -15,7 +15,6 @@ public class LookAtPickup : MonoBehaviour
     public LayerMask layerToLook;
     private RaycastHit[] lookAtHitColliders = new RaycastHit[20];
     private GameObject currentLookAtTarget;
-    private bool actionAdded = false;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -69,16 +68,22 @@ public class LookAtPickup : MonoBehaviour
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
         var hitObject = RayTracer.RaycastNonAllocNearest(ray, range, layerToLook);
-
+        
         if(hitObject == null) {
 
             return null;
 
         } else {
+            
+            var baseScript = hitObject.GetComponent<PickupBase>();
 
-            var baseScript = hitObject.GetComponent<BaseScriptNetwork>() as PickupBase;
-            return baseScript && baseScript.canPickUp ? null : hitObject;
+            if(baseScript) {
 
+                return !baseScript.canPickUp ? null : hitObject;
+
+            }
+
+            return null;
         }
 
     }
@@ -95,26 +100,14 @@ public class LookAtPickup : MonoBehaviour
         if(lookAtTarget != null && lookAtTarget != currentLookAtTarget) {
 
             currentLookAtTarget = lookAtTarget;
-
-            if(actionAdded == false) {
-
-                var baseScript = currentLookAtTarget.GetComponentInParent<BaseScriptNetwork>();
-
-                PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
-
-                actionAdded = true;
-
-            }
+            var baseScript = currentLookAtTarget.GetComponent<PickupBase>();
+            PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
 
         } else {
 
-            if (actionAdded) {
+            PlayerInputInstance.instance.actionOne_Action = null;
+            currentLookAtTarget = null;
 
-                PlayerInputInstance.instance.actionOne_Action = null;
-                currentLookAtTarget = null;
-                actionAdded = false;
-
-            }
         }
 
     }

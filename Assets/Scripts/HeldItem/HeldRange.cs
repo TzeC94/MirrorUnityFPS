@@ -29,7 +29,9 @@ public abstract class HeldRange : HeldBase
     public float reload_Duration = 1f;
     public Action reloadCallback;
 
-    public virtual void Start() {
+    public override void Start() {
+
+        base.Start();
 
         if (isServer) {
 
