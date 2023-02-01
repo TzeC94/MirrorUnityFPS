@@ -1,5 +1,5 @@
 # Mirror Networking with Unity FPS Starter Assets
-Mirror Server Client Authority networking with Unity FPS Starter Assets
+Mirror Server Client Authority networking with Unity FPS Starter Assets with modification
 
 This is an experimental project of Server and Client Authority with Mirror Networking for Unity
 Will add more features as the time goes
@@ -9,14 +9,15 @@ https://assetstore.unity.com/packages/essentials/starter-assets-first-person-cha
 
 Features
 1. Simple movement
-2. Simple Weapon
+2. First Person Player & 3rd Person View model
+3. Simple Weapon
     - Shot
     - Reload
     - Hold to fire
     - Animation Handling
     - Effect Handling
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Shot%20Reload.gif)
-3. Simple Pickup & Inventory
+4. Simple Pickup & Inventory
     - Simple Pickup Simple 
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryPickup.gif)
     - Inventory UI 
@@ -24,7 +25,7 @@ Features
     - Drag and Drop
     - Weapon Slot
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventorySwapDrop.gif)
-4. Simple Health
+5. Simple Health
     - Simple Health
     - Simple Hit Information
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Kill.gif)
