@@ -72,11 +72,13 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     #endregion
 
+    [Server]
     public virtual void OnHit(HitInfo hitInfo) {
 
         if (isServer) {
 
             currentHealth -= hitInfo.damage;
+            RPC_ClientOnHit(hitInfo);
 
             if (DeathCheck()) {
 
@@ -85,6 +87,13 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
             }
 
         }
+
+    }
+
+    [ClientRpc]
+    public void RPC_ClientOnHit(HitInfo hitInfo) {
+
+        WorldPopup.instance.SpawnPopup(hitInfo.damage.ToString(), hitInfo.hitPoint);
 
     }
 }

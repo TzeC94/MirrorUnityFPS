@@ -7,6 +7,7 @@ public class HitInfo
 {
     public int damage;
     public Vector3 attackerPos;
+    public Vector3 hitPoint;
 
     public HitInfo() {
 
