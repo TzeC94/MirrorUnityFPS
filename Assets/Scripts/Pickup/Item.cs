@@ -72,8 +72,6 @@ public class Item : IEqualityComparer<Item>
 
     public ItemData GetItemData() {
 
-        Debug.Log(itemDataAddress);
-
         if (itemData == null) {
             itemData = ResourceManage.GetPreloadGameplayData<ItemData>(itemDataAddress);
         }
