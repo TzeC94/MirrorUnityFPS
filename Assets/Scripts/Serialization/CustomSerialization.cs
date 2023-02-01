@@ -8,6 +8,7 @@ public static class CustomSerialization
 
         writer.Write(hitInfo.damage);
         writer.Write(hitInfo.attackerPos);
+        writer.Write(hitInfo.hitPoint);
 
     }
 
@@ -16,6 +17,7 @@ public static class CustomSerialization
         HitInfo hitInfo = new HitInfo();
         hitInfo.damage = reader.ReadInt();
         hitInfo.attackerPos = reader.ReadVector3();
+        hitInfo.hitPoint = reader.ReadVector3();
 
         return hitInfo;
 

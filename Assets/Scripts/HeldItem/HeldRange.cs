@@ -58,7 +58,7 @@ public abstract class HeldRange : HeldBase
                 if(hitObject != null) {
 
                     //Always target the first hit only
-                    AttackHelper.Attack(gameObject, hitObject, projectileInfo.damageSO);
+                    AttackHelper.Attack(gameObject, hitObject, hitInfo.point, projectileInfo.damageSO);
 
                     //Spawn the hit decal
                     PlayHitDecal(hitInfo.collider, hitInfo.point, Quaternion.Euler(hitInfo.normal));

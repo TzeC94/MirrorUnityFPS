@@ -15,7 +15,7 @@ public abstract class ProjectileHitBase : NetworkBehaviour
                 DecalSpawner.instance.SpawnDecal(other, other.ClosestPoint(transform.position), Quaternion.LookRotation(direction));
             }
             
-            AttackHelper.Attack(gameObject, other.gameObject, damageSO);
+            AttackHelper.Attack(gameObject, other.gameObject, other.ClosestPoint(transform.position), damageSO);
 
             NetworkServer.Destroy(gameObject);
 

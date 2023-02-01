@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class BasicRigidBodyPush : MonoBehaviour
+public class BasicRigidBodyPush : NetworkBehaviour
 {
 	public LayerMask pushLayers;
 	public bool canPush;
@@ -9,6 +10,8 @@ public class BasicRigidBodyPush : MonoBehaviour
 	[Mirror.Server]
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
+		if (isClient) return;
+		
 		if (canPush) PushRigidBodies(hit);
 	}
 
