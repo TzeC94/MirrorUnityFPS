@@ -18,7 +18,9 @@ MonoBehaviour:
   itemIcon: Pistol Icon
   itemIndex: 8
   itemType: 1
+  itemDataAddress: Assets/Content/Weapon/Range/Pistol/Data/Pistol Data.asset
   itemHeldPrefab: {fileID: 4726437905770876371, guid: d26e9abbf6099804d8c329509bc14e2f, type: 3}
+  itemHeldPrefab_Local: {fileID: 4726437905770876371, guid: 224d2410061592340bf01715f4951695, type: 3}
   stackable: 0
   defaultQuantity: 1
   maxStack: 1

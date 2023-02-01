@@ -1,7 +1,7 @@
 using StarterAssets;
 using UnityEngine;
 
-public class PlayerBase : FirstPersonController {
+public partial class PlayerBase : BaseCombatScript {
 
     [Header("Inventory")]
     public PlayerInventory inventory;
@@ -9,15 +9,7 @@ public class PlayerBase : FirstPersonController {
 
     [Header("Weapon")]
     public Transform weaponHoldingRoot;
-
-    // Start is called before the first frame update
-    public override void OnStartLocalPlayer() {
-
-        base.OnStartLocalPlayer();
-
-        //Register yourself with Game Manager
-        GameManagerBase.LocalPlayer = this;
-    }
+    public Transform localWeaponHoldingRoot;
 
     // Update is called once per frame
     public override void Update()

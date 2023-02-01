@@ -4,7 +4,7 @@ using Mirror;
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
-	public class FirstPersonController : NetworkBehaviour
+	public class FirstPersonController : PlayerBase
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -91,8 +91,10 @@ namespace StarterAssets
 			}
 		}
 
-        public virtual void Start()
-		{
+        public override void Initialize() {
+
+            base.Initialize();
+
 			_controller = GetComponent<CharacterController>();
 
 			// reset our timeouts on start
@@ -112,28 +114,38 @@ namespace StarterAssets
 			}
 		}
 
-        public virtual void Update()
+        public override void Update()
 		{
+			base.Update();
+
 			if(isLocalPlayer){
+
 				Client_JumpInputCheck();
 				Client_Move();
-			}
+                SC_Move();
+
+            }
 
 			if(isServer){
+
 				Server_JumpAndGravity();
 				Server_GroundedCheck();
-				Server_Move();
+				SC_Move();
+
 			}
 		}
 
         public virtual void LateUpdate()
 		{
 			if(isLocalPlayer){
+
 				Client_CameraRotation();
-			}
+				SC_CameraRotation();
+
+            }
 
 			if(isServer){
-				Server_CameraRotation();
+				SC_CameraRotation();
 			}
 		}
 
@@ -151,8 +163,7 @@ namespace StarterAssets
 
         #region Camera and Character Rotation
 
-		[SyncVar]
-		float s_RotationVelocity = 0f;
+		float sc_RotationVelocity = 0f;
 
 		[Client]
 		private void Client_CameraRotation()
@@ -171,14 +182,16 @@ namespace StarterAssets
 
                 // Update Cinemachine camera target pitch
                 lastCameraRot = CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+				sc_RotationVelocity = _rotationVelocity;
 
-				// rotate the player left and right
-				//transform.Rotate(Vector3.up * _rotationVelocity);
-				Client_SendRotationVelocity(_rotationVelocity, CinemachineCameraTarget.transform.localRotation);
+                // rotate the player left and right
+                //transform.Rotate(Vector3.up * _rotationVelocity);
+                Client_SendRotationVelocity(_rotationVelocity, lastCameraRot);
 
 			}else{
 
-				Client_SendRotationVelocity(0f, lastCameraRot);
+                sc_RotationVelocity = 0f;
+                Client_SendRotationVelocity(0f, lastCameraRot);
 
 			}
 			
@@ -187,16 +200,14 @@ namespace StarterAssets
 		[Command]
 		private void Client_SendRotationVelocity(float velocity, Quaternion cameraLocalRot){
 
-			s_RotationVelocity = velocity;
+			sc_RotationVelocity = velocity;
 			CinemachineCameraTarget.transform.localRotation = cameraLocalRot;
-
 
         }
 
-		[Server]
-		private void Server_CameraRotation(){
+		private void SC_CameraRotation(){
 
-			transform.Rotate(Vector3.up * s_RotationVelocity);
+			transform.Rotate(Vector3.up * sc_RotationVelocity);
 
 		}
 
@@ -204,21 +215,20 @@ namespace StarterAssets
 
         #region Movement
 
-        [SyncVar]
-		bool s_IsSprint = false;
-
-		[SyncVar]
-		bool s_AnalogMovement = false;
-
-		[SyncVar]
-		Vector2 s_InputMove;
+		bool sc_IsSprint = false;
+		bool sc_AnalogMovement = false;
+		Vector2 sc_InputMove;
 
 		[Client]
 		private void Client_Move(){
 
-			if(s_IsSprint != PlayerInputInstance.instance.sprint || s_AnalogMovement != PlayerInputInstance.instance.analogMovement || s_InputMove != PlayerInputInstance.instance.move){
+			if(sc_IsSprint != PlayerInputInstance.instance.sprint || sc_AnalogMovement != PlayerInputInstance.instance.analogMovement || sc_InputMove != PlayerInputInstance.instance.move){
 
-				Client_SyncMovement(PlayerInputInstance.instance.sprint, PlayerInputInstance.instance.analogMovement, PlayerInputInstance.instance.move);
+                sc_IsSprint = PlayerInputInstance.instance.sprint;
+                sc_AnalogMovement = PlayerInputInstance.instance.analogMovement;
+                sc_InputMove = PlayerInputInstance.instance.move;
+
+                Client_SyncMovement(sc_IsSprint, sc_IsSprint, sc_InputMove);
 
 			}
 
@@ -227,31 +237,33 @@ namespace StarterAssets
 		[Command]
 		private void Client_SyncMovement(bool sprint, bool analogMovement, Vector2 move){
 
-			s_IsSprint = sprint;
-			s_AnalogMovement = analogMovement;
-			s_InputMove = move;
+			sc_IsSprint = sprint;
+			sc_AnalogMovement = analogMovement;
+			sc_InputMove = move;
 
 		}
 
-		[Server]
-		private void Server_Move()
+		/// <summary>
+		/// This function to call on Local Server and Server
+		/// </summary>
+		private void SC_Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = s_IsSprint ? SprintSpeed : MoveSpeed;
+			float targetSpeed = sc_IsSprint ? SprintSpeed : MoveSpeed;
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
 			//if (PlayerInputInstance.instance.move == Vector2.zero) targetSpeed = 0.0f;
-			if (s_InputMove == Vector2.zero) targetSpeed = 0.0f;
+			if (sc_InputMove == Vector2.zero) targetSpeed = 0.0f;
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
 			float speedOffset = 0.1f;
 			//float inputMagnitude = PlayerInputInstance.instance.analogMovement ? PlayerInputInstance.instance.move.magnitude : 1f;
-			float inputMagnitude = s_AnalogMovement ? s_InputMove.magnitude : 1f;
+			float inputMagnitude = sc_AnalogMovement ? sc_InputMove.magnitude : 1f;
 
 			// accelerate or decelerate to target speed
 			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset) {
@@ -267,15 +279,15 @@ namespace StarterAssets
 
 			// normalise input direction
 			//Vector3 inputDirection = new Vector3(PlayerInputInstance.instance.move.x, 0.0f, PlayerInputInstance.instance.move.y).normalized;
-			Vector3 inputDirection = new Vector3(s_InputMove.x, 0.0f, s_InputMove.y).normalized;
+			Vector3 inputDirection = new Vector3(sc_InputMove.x, 0.0f, sc_InputMove.y).normalized;
 
 			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is a move input rotate player when the player is moving
 			//if (PlayerInputInstance.instance.move != Vector2.zero) {
-			if (s_InputMove != Vector2.zero) {
+			if (sc_InputMove != Vector2.zero) {
 				// move
 				//inputDirection = transform.right * PlayerInputInstance.instance.move.x + transform.forward * PlayerInputInstance.instance.move.y;
-				inputDirection = transform.right * s_InputMove.x + transform.forward * s_InputMove.y;
+				inputDirection = transform.right * sc_InputMove.x + transform.forward * sc_InputMove.y;
 			}
 
 			// move the player

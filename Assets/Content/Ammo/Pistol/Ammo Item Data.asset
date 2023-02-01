@@ -18,7 +18,9 @@ MonoBehaviour:
   itemIcon: Pistol Ammo
   itemIndex: 5
   itemType: 0
+  itemDataAddress: Assets/Content/Ammo/Pistol/Ammo Item Data.asset
   itemHeldPrefab: {fileID: 0}
+  itemHeldPrefab_Local: {fileID: 0}
   stackable: 1
   defaultQuantity: 6
   maxStack: 26

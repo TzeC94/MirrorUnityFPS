@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerLookatHandler : MonoBehaviour
+public class LookAtPickup : MonoBehaviour
 {
-    public static PlayerLookatHandler instance;
+    public static LookAtPickup instance;
 
     private Transform playerCamera;
 
@@ -15,7 +15,6 @@ public class PlayerLookatHandler : MonoBehaviour
     public LayerMask layerToLook;
     private RaycastHit[] lookAtHitColliders = new RaycastHit[20];
     private GameObject currentLookAtTarget;
-    private bool actionAdded = false;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -69,15 +68,22 @@ public class PlayerLookatHandler : MonoBehaviour
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
         var hitObject = RayTracer.RaycastNonAllocNearest(ray, range, layerToLook);
-
+        
         if(hitObject == null) {
 
             return null;
 
         } else {
+            
+            var baseScript = hitObject.GetComponent<PickupBase>();
 
-            return hitObject.GetComponent<BaseScript>() == null ? null : hitObject;
+            if(baseScript) {
 
+                return !baseScript.canPickUp ? null : hitObject;
+
+            }
+
+            return null;
         }
 
     }
@@ -94,26 +100,14 @@ public class PlayerLookatHandler : MonoBehaviour
         if(lookAtTarget != null && lookAtTarget != currentLookAtTarget) {
 
             currentLookAtTarget = lookAtTarget;
-
-            if(actionAdded == false) {
-
-                var baseScript = currentLookAtTarget.GetComponentInParent<BaseScript>();
-
-                PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
-
-                actionAdded = true;
-
-            }
+            var baseScript = currentLookAtTarget.GetComponent<PickupBase>();
+            PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
 
         } else {
 
-            if (actionAdded) {
+            PlayerInputInstance.instance.actionOne_Action = null;
+            currentLookAtTarget = null;
 
-                PlayerInputInstance.instance.actionOne_Action = null;
-                currentLookAtTarget = null;
-                actionAdded = false;
-
-            }
         }
 
     }

@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyHealth : GeneralHealth
+public class BaseDummy : BaseCombatScript
 {
     private Rigidbody rigidBody;
 
-    public override void Start() {
+    public override void Initialize() {
 
-        base.Start();
+        base.Initialize();
 
         rigidBody = GetComponent<Rigidbody>();
 

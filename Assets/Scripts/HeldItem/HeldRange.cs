@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
-public class HeldRange : HeldBase
+public abstract class HeldRange : HeldBase
 {
     [Header("Projectile")]
     public ProjectileInfoSO projectileInfo;
@@ -26,8 +27,11 @@ public class HeldRange : HeldBase
 
     [Header("Reload")]
     public float reload_Duration = 1f;
+    public Action reloadCallback;
 
-    public virtual void Start() {
+    public override void Start() {
+
+        base.Start();
 
         if (isServer) {
 
@@ -67,6 +71,8 @@ public class HeldRange : HeldBase
             ServerPlayerEffect(EffectType.Fire);
             ReduceCurrentBullet(bulletPerShot);
 
+            fireCallback?.Invoke();
+
         }
 
     }
@@ -80,8 +86,7 @@ public class HeldRange : HeldBase
     /// <summary>
     /// To reload the weapon
     /// </summary>
-    [Server]
-    public void ServerReload() {
+    public override void ServerReload() {
 
         //Check whether inventory have this item
         var inventory = ownerObject.inventory;
@@ -96,6 +101,7 @@ public class HeldRange : HeldBase
 
             AnimReload();
 
+            reloadCallback?.Invoke();
         }
 
     }

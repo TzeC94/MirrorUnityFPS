@@ -1,9 +1,13 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class PickupBase : BaseScript
+public class PickupBase : BaseScriptNetwork
+#if UNITY_EDITOR
+    , IEditorInitialize
+#endif
 {
     public Item itemData;
     public bool canPickUp = true;
@@ -28,4 +32,14 @@ public class PickupBase : BaseScript
 
     }
 
+#if UNITY_EDITOR
+    public void OnEditorInitialize() {
+
+        if(itemData != null) {
+            itemData.OnEditorInitialize();
+            EditorUtility.SetDirty(gameObject);
+        }
+
+    }
+#endif
 }

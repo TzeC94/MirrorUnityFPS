@@ -29,6 +29,9 @@ public partial class MainMenuScript : MonoBehaviour
         }
 #endif
 
+        //Load the Require Item Data
+        ResourceManage.PreloadRequiredGameplayAsset();
+
     }
 
     public void Server_Start(){

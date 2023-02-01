@@ -18,7 +18,9 @@ MonoBehaviour:
   itemIcon: AR Icon
   itemIndex: 10
   itemType: 1
+  itemDataAddress: Assets/Content/Weapon/Range/Assault Rifle/Data/Assault Rifle Data.asset
   itemHeldPrefab: {fileID: 4726437905770876371, guid: d645c7128319ad8409e225ddd508fb5d, type: 3}
+  itemHeldPrefab_Local: {fileID: 4726437905770876371, guid: 263fa29587d2a47499b8f0c6e01548ce, type: 3}
   stackable: 0
   defaultQuantity: 1
   maxStack: 1

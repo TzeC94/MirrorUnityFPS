@@ -1,9 +1,12 @@
 using UnityEngine;
 using Mirror;
 using MyBox;
+using System;
 
-public abstract partial class HeldBase : NetworkBehaviour
+public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 {
+    public enum EffectType { Fire }
+
     [HideInInspector] public PlayerBase ownerObject;
 
     [Header("Parent")]
@@ -17,12 +20,29 @@ public abstract partial class HeldBase : NetworkBehaviour
     [SyncVar]
     [ReadOnly]
     public bool canFire = true;
+    public Action fireCallback;
+
+    [Header("Art")]
+    public GameObject[] artObjects;
 
     public override void OnStartServer() {
 
         base.OnStartServer();
 
         Reparent(0, this.parentNetID);
+
+    }
+
+    public override void OnStartClient() {
+
+        base.OnStartClient();
+
+        //Need to turn off if is local player
+        if (ownerObject.isLocalPlayer) {
+
+            SetArtActive(false);
+
+        }
 
     }
 
@@ -84,5 +104,24 @@ public abstract partial class HeldBase : NetworkBehaviour
     }
 
     public abstract void FireHeld();
+
+    /// <summary>
+    /// To reload the weapon
+    /// </summary>
+    [Server]
+    public virtual void ServerReload() {
+
+        
+
+    }
+
+    [Client]
+    public void SetArtActive(bool active) {
+
+        foreach(var art in artObjects) {
+            art.SetActive(active);
+        }
+
+    }
 
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2472277748086235793}
   - component: {fileID: 4160626118887154931}
   - component: {fileID: 1959184912532592977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
+  _assetId: 823258166
   serverOnly: 0
   visible: 0
-  m_AssetId: 1b9f12ea86828824890dc9fad7756358
   hasSpawned: 0
 --- !u!114 &4160626118887154931
 MonoBehaviour:
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
   target: {fileID: 1959184912532592977}

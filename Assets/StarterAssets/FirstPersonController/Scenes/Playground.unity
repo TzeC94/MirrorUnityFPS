@@ -820,7 +820,7 @@ MonoBehaviour:
   range: 20
   layerToLook:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
 --- !u!1001 &233259757
 PrefabInstance:
   m_ObjectHideFlags: 0

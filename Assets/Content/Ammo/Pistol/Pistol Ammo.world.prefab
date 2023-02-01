@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6932280897210366857}
   - component: {fileID: 9222192365812862508}
   - component: {fileID: -4725275452941908710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol Ammo.world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
   syncInterval: 0.1
   itemData:
     itemData: {fileID: 11400000, guid: f7afa5d0bd2279542887eeb44a2fb723, type: 2}
+    itemDataAddress: Assets/Content/Ammo/Pistol/Ammo Item Data.asset
     quantity: 5
   canPickUp: 1
 --- !u!54 &9222192365812862508
@@ -120,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 904139191300126886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 2199479021023640957, guid: b04d743cdda2edf40829e7379e9346ce, type: 3}
       propertyPath: m_Name
       value: Pistol Clip
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199479021023640957, guid: b04d743cdda2edf40829e7379e9346ce, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2199479021023928669, guid: b04d743cdda2edf40829e7379e9346ce, type: 3}
       propertyPath: m_RootOrder

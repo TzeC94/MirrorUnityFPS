@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 64750076789668318}
   - component: {fileID: 5292382049715907977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 1529177823242374389}
   - component: {fileID: 6942002523014378015}
   - component: {fileID: 7426631437194344164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Assault Rifle.World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +116,8 @@ MonoBehaviour:
   syncInterval: 0.1
   itemData:
     itemData: {fileID: 11400000, guid: ad7a2016ea6c68d489c7dc1c4817b33b, type: 2}
+    itemDataAddress: Assets/Content/Weapon/Range/Assault Rifle/Data/Assault Rifle
+      Data.asset
     quantity: 1
   canPickUp: 1
 --- !u!54 &6942002523014378015
@@ -166,7 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4982379671898706844}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,9 +199,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4982379671898706844}
     m_Modifications:
+    - target: {fileID: 137500, guid: 18ea9c7316b4aba44ab093010d1b034d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872, guid: 18ea9c7316b4aba44ab093010d1b034d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 186316, guid: 18ea9c7316b4aba44ab093010d1b034d, type: 3}
       propertyPath: m_Name
       value: Italian machine guns
+      objectReference: {fileID: 0}
+    - target: {fileID: 186316, guid: 18ea9c7316b4aba44ab093010d1b034d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 187692, guid: 18ea9c7316b4aba44ab093010d1b034d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 466178, guid: 18ea9c7316b4aba44ab093010d1b034d, type: 3}
       propertyPath: m_RootOrder
