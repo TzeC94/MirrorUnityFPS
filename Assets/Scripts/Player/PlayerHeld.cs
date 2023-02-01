@@ -117,6 +117,7 @@ public class PlayerHeld : InventoryBase
         if(_currentHeldLocal != null) {
 
             _currentHeldLocal.AnimFire();
+            _currentHeldLocal.PlayerEffect(HeldBase.EffectType.Fire);
 
         }
 
