@@ -1,3 +1,5 @@
+Warning: Screenshot below is outdated, haven't got time to update it
+
 # Mirror Networking with Unity FPS Starter Assets
 Mirror Server Client Authority networking with Unity FPS Starter Assets with modification
 
