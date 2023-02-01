@@ -29,6 +29,8 @@ Features
     - Simple Health
     - Simple Hit Information
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Kill.gif)
+6. Popup
+    - Currently only use at damage
 
 I'm using Unity 2021.3
 
