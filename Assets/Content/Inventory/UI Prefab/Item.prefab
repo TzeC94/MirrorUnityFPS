@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 8346639555927076316}
   - component: {fileID: 8346639555927076315}
   - component: {fileID: -675387939375093778}
+  - component: {fileID: -2196555506011769539}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -304,9 +305,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemData: {fileID: 0}
+    itemDataAddress: 
     quantity: 1
   ui_Icon: {fileID: 3862123099377074663}
   itemIndex: 0
   ownerID: 0
   itemAmount: {fileID: 7824330158942025771}
   inventoryContainer: {fileID: 0}
+--- !u!114 &-2196555506011769539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346639555927076313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6918cae7d0e68942a4d773fd08ba770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolWorkerID: 0

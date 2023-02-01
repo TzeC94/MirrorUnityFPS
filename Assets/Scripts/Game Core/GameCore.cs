@@ -4,19 +4,31 @@ using UnityEngine.UIElements;
 
 public static class GameCore
 {
-    public static T Instantiate<T>(T objectToSpawn, Vector3 position, Quaternion quaternion, Transform parent) where T : Object {
+    public static GameObject Instantiate(GameObject objectToSpawn, Vector3 position, Quaternion quaternion, Transform parent) {
 
-        return (T)Object.Instantiate(objectToSpawn, position, quaternion, parent);
+        if(objectToSpawn is GameObject gameObject) {
 
+            var poolable = gameObject.GetComponent<Poolable>();
+
+            if (poolable) {
+
+                var item = PoolManager.Pull(gameObject);
+                return item;
+
+            }
+
+        } 
+
+        return GameObject.Instantiate(objectToSpawn, position, quaternion, parent);
     }
 
-    public static T Instantiate<T>(T objectToSpawn, Transform parent) where T : Object {
+    public static GameObject Instantiate(GameObject objectToSpawn, Transform parent) {
 
         return Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity, parent);
 
     }
 
-    public static T Instantiate<T>(T objectTospawn, Vector3 position) where T : Object {
+    public static GameObject Instantiate(GameObject objectTospawn, Vector3 position) {
 
         return Instantiate(objectTospawn, position, Quaternion.identity, null);
 
