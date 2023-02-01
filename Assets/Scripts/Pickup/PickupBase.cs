@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PickupBase : BaseScript
+public class PickupBase : BaseScriptNetwork
 #if UNITY_EDITOR
     , IEditorInitialize
 #endif

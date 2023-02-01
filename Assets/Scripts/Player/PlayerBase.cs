@@ -12,9 +12,9 @@ public partial class PlayerBase : BaseCombatScript {
     public Transform localWeaponHoldingRoot;
 
     // Update is called once per frame
-    public virtual void Update()
+    public override void Update()
     {
-        
+        base.Update();
     }
 
 }

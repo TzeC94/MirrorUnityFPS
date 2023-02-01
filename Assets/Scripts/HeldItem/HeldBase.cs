@@ -3,7 +3,7 @@ using Mirror;
 using MyBox;
 using System;
 
-public abstract partial class HeldBase : NetworkBehaviour, IHeld
+public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 {
     public enum EffectType { Fire }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public abstract class BaseScript : NetworkBehaviour
+public abstract class BaseScriptNetwork : NetworkBehaviour
 {
     // Start is called before the first frame update
     public virtual void Start()

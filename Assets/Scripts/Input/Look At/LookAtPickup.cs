@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerLookatHandler : MonoBehaviour
+public class LookAtPickup : MonoBehaviour
 {
-    public static PlayerLookatHandler instance;
+    public static LookAtPickup instance;
 
     private Transform playerCamera;
 
@@ -76,7 +76,8 @@ public class PlayerLookatHandler : MonoBehaviour
 
         } else {
 
-            return hitObject.GetComponent<BaseScript>() == null ? null : hitObject;
+            var baseScript = hitObject.GetComponent<BaseScriptNetwork>() as PickupBase;
+            return baseScript && baseScript.canPickUp ? null : hitObject;
 
         }
 
@@ -97,7 +98,7 @@ public class PlayerLookatHandler : MonoBehaviour
 
             if(actionAdded == false) {
 
-                var baseScript = currentLookAtTarget.GetComponentInParent<BaseScript>();
+                var baseScript = currentLookAtTarget.GetComponentInParent<BaseScriptNetwork>();
 
                 PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
 

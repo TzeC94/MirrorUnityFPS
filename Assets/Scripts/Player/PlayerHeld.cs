@@ -39,8 +39,10 @@ public class PlayerHeld : InventoryBase
     }
 
     // Update is called once per frame
-    public void Update()
+    public override void Update()
     {
+        base.Update();
+
         if(isClient){
 
             Client_FirePressed();

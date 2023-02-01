@@ -2,7 +2,7 @@ using Mirror;
 using UnityEngine;
 using System;
 
-public class BaseCombatScript : NetworkBehaviour, IHitable {
+public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     [Header("Health")]
     [SerializeField]

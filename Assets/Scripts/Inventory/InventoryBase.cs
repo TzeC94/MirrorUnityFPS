@@ -5,7 +5,7 @@ using Mirror;
 using System;
 using System.Linq;
 
-public abstract class InventoryBase : NetworkBehaviour {
+public abstract class InventoryBase : BaseScriptNetwork {
 
     public enum InventoryType { main = 0, held = 1 };
 
@@ -19,7 +19,9 @@ public abstract class InventoryBase : NetworkBehaviour {
     public readonly SyncList<Item> collectedItems = new SyncList<Item>(new Item());
 
     // Start is called before the first frame update
-    public virtual void Start() {
+    public override void Start() {
+
+        base.Start();
 
         collectedItems.Callback += OnInventoryChanged;
 
