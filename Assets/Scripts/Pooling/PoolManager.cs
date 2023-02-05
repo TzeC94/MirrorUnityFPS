@@ -40,12 +40,23 @@ public static class PoolManager
 
     }
 
-    public static void Push(GameObject targetObject) {
+    public static bool Push(GameObject targetObject) {
 
         var poolable = targetObject.GetComponent<Poolable>();
-        var myPoolWorker = poolWorkers[poolable.poolWorkerID - 1];
-        myPoolWorker.Push(targetObject);
 
+        if(poolable != null) {
+
+            var myPoolWorker = poolWorkers[poolable.poolWorkerID - 1];
+            myPoolWorker.Push(targetObject);
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+        
     }
 
 }

@@ -44,10 +44,11 @@ public class PoolWorker {
             //Remove
             poolList.RemoveAt(0);
 
-            var iPoolable = pullObject.GetComponents<IPoolable>();
-            foreach (var ipoolable in iPoolable) {
-                ipoolable.Pull();
-            }
+        }
+
+        var iPoolable = pullObject.GetComponents<IPoolable>();
+        foreach (var ipoolable in iPoolable) {
+            ipoolable.Pull();
         }
 
         pullObject.SetActive(true);

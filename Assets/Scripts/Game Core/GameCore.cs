@@ -13,6 +13,9 @@ public static class GameCore
             if (poolable) {
 
                 var item = PoolManager.Pull(gameObject);
+                item.transform.position = position;
+                item.transform.rotation = quaternion;
+                item.transform.SetParent(parent, true);
                 return item;
 
             }
@@ -80,7 +83,11 @@ public static class GameCore
 
     public static void Destroy(GameObject target) {
 
-        Object.Destroy(target);
+        if (!PoolManager.Push(target)) {
+
+            Object.Destroy(target);
+
+        }
 
     }
 
