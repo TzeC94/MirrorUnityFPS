@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3832318467501770932}
   - component: {fileID: 4068114495421844899}
+  - component: {fileID: -3921791021773970534}
   m_Layer: 0
   m_Name: Effect Template
   m_TagString: Untagged
@@ -44,6 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7faa3e644a6df428c74e478b6649f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useDuration: 0
+  duration: 5
   effectEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3921791021773970534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2692201110426812278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6918cae7d0e68942a4d773fd08ba770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolWorkerID: 0
