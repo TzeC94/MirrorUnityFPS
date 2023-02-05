@@ -8,35 +8,47 @@ public static class PoolManager
 
     public static GameObject Pull(GameObject prefab) {
 
-        //Loop through the list to find
-        for(int i = 0; i < poolWorkers.Count; i++) {
+        if (poolWorkers.Count == 0) {
 
-            PoolWorker currentWorker;
+            //Create a new list for this
+            return CreateNewList(prefab);
 
-            //Match Prefab Type
-            if (poolWorkers[i].poolObject == prefab) {
+        } else {
 
-                currentWorker = poolWorkers[i];
+            //Loop through the list to find
+            for (int i = 0; i < poolWorkers.Count; i++) {
 
-                var pulledObject = currentWorker.Pull();
+                PoolWorker currentWorker;
 
-                return pulledObject;
+                //Match Prefab Type
+                if (poolWorkers[i].poolObject == prefab) {
 
-            } else {
+                    currentWorker = poolWorkers[i];
 
-                //Create a new list for this
-                var newWorker = new PoolWorker(prefab);
-                newWorker.workerID = poolWorkers.Count+1;
-                poolWorkers.Add(newWorker);
-                var pulledObject = newWorker.Pull();
+                    var pulledObject = currentWorker.Pull();
 
-                return pulledObject;
+                    return pulledObject;
+
+                }
 
             }
 
+            //Create a new list for this
+            return CreateNewList(prefab);
+
         }
 
-        return null;
+    }
+
+    private static GameObject CreateNewList(GameObject targetPrefab) {
+
+        //Create a new list for this
+        var newWorker = new PoolWorker(targetPrefab);
+        newWorker.workerID = poolWorkers.Count + 1;
+        poolWorkers.Add(newWorker);
+        var pulledObject = newWorker.Pull();
+
+        return pulledObject;
 
     }
 
