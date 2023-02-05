@@ -10,7 +10,7 @@ public static class GameCore
 
             var poolable = gameObject.GetComponent<Poolable>();
 
-            if (poolable) {
+            if (poolable != null) {
 
                 var item = PoolManager.Pull(gameObject);
                 item.transform.position = position;
