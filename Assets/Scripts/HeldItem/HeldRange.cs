@@ -11,6 +11,7 @@ public abstract class HeldRange : HeldBase
 
     [Header("Fire")]
     public Transform fire_FirePoint;
+    private HeldFirePointOverride fire_OverridePoint;
 
     [Header("Bullet")]
     public uint maxBullet = 30;
@@ -38,6 +39,8 @@ public abstract class HeldRange : HeldBase
             _currentBullet = maxBullet;
 
         }
+
+        fire_OverridePoint = GetComponentInParent<HeldFirePointOverride>();
         
     }
 
@@ -53,7 +56,10 @@ public abstract class HeldRange : HeldBase
             } else {
 
                 RaycastHit hitInfo;
-                var hitObject = RayTracer.RaycastNonAllocNearest(new Ray(fire_FirePoint.position, fire_FirePoint.forward), out hitInfo, projectileInfo.distance, projectileInfo.layerHit);
+
+                var fireTransform = fire_OverridePoint ? fire_OverridePoint.fireOverridePoint : fire_FirePoint;
+
+                var hitObject = RayTracer.RaycastNonAllocNearest(new Ray(fireTransform.position, fireTransform.forward), out hitInfo, projectileInfo.distance, projectileInfo.layerHit);
 
                 if(hitObject != null) {
 
@@ -105,6 +111,7 @@ public abstract class HeldRange : HeldBase
         }
 
     }
+
 
     [Server]
     private IEnumerator ReloadGun(PlayerInventory inventory, uint maxReloadBullet, Item bulletItem) {
