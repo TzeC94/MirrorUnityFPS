@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Master UI.unity
     guid: a7495f8cfac174d49a7a3fae3f62119c
+  - enabled: 1
+    path: Assets/Scenes/HUD UI.unity
+    guid: be45187615a1b83419bb2d512306968e
   - enabled: 0
     path: Assets/Mirror/Examples/Room/Scenes/OfflineScene.unity
     guid: 9e6f14982412b2545a0911ebaaa46a23

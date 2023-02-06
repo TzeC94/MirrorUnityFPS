@@ -1,4 +1,5 @@
 using Mirror;
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,11 +100,25 @@ public class LookAtPickup : MonoBehaviour
 
         if(lookAtTarget != null && lookAtTarget != currentLookAtTarget) {
 
+            //Need last item back to interactable if not null
+            if(currentLookAtTarget != null) {
+
+                //Change layer to interactive
+                currentLookAtTarget.SetLayerRecursively(LayerMask.NameToLayer("Interactable"));
+
+            }
+
             currentLookAtTarget = lookAtTarget;
             var baseScript = currentLookAtTarget.GetComponent<PickupBase>();
             PlayerInputInstance.instance.actionOne_Action = baseScript.GetActions(NetworkClient.localPlayer.netId)[0].action;
 
+            //Change layer to Outline
+            currentLookAtTarget.SetLayerRecursively(LayerMask.NameToLayer("Outline"));
+
         } else {
+
+            //Change layer to interactive
+            currentLookAtTarget.SetLayerRecursively(LayerMask.NameToLayer("Interactable"));
 
             PlayerInputInstance.instance.actionOne_Action = null;
             currentLookAtTarget = null;

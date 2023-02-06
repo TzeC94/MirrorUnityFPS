@@ -32,5 +32,26 @@ public partial class GameManagerBase
 
         //Unload this scene
         SceneManager.UnloadSceneAsync("Inventory UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+
+        //Load HUD
+        LoadHUDUI();
+    }
+
+    void LoadHUDUI() {
+
+        var hudUIAsync = SceneManager.LoadSceneAsync("HUD UI", LoadSceneMode.Additive);
+        hudUIAsync.allowSceneActivation = true;
+        hudUIAsync.completed += LoadHUDUICompleted;
+
+    }
+
+    void LoadHUDUICompleted(AsyncOperation asyncOperation) {
+
+        var uiObject = GameObject.Find("HUD");
+        uiObject.transform.SetParent(MasterUIScript.instance.transform);
+
+        //Unload this scene
+        SceneManager.UnloadSceneAsync("HUD UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+
     }
 }
