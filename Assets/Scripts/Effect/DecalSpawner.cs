@@ -57,7 +57,7 @@ public class DecalSpawner : NetworkBehaviour
     private void RPC_SpawnDecal(MaterialType materialType, Vector3 position, Quaternion rotation) {
 
         //Spawn
-        var decal = Instantiate(decalEffectPrefab, position, rotation);
+        var decal = GameCore.Instantiate(decalEffectPrefab, position, rotation, null);
         var decalEffect = decal.GetComponent<DecalEffectPlayer>();
         decalEffect.PlayDecal(materialType);
         decalEffect.PlayerEffect();

@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemData: {fileID: 0}
+    itemDataAddress: 
     quantity: 1
   ui_Icon: {fileID: 3862123099377074663}
   itemIndex: 0

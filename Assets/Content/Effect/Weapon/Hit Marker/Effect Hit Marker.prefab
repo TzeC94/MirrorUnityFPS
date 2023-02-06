@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1719b55673e591c43832529dab03a447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useDuration: 0
+  useDuration: 1
   duration: 5
   effectEvent:
     m_PersistentCalls:
