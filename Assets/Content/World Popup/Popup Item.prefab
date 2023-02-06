@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1754257421279122358}
   - component: {fileID: 8521075900167551410}
   - component: {fileID: 265560260893850220}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Popup Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 2587610775219997420}
   - component: {fileID: 1950598747169578346}
   - component: {fileID: 4291269025738881670}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
