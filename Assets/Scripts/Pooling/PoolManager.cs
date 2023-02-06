@@ -2,41 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PoolManager
-{
+public static class PoolManager {
     private static List<PoolWorker> poolWorkers = new List<PoolWorker>();
 
     public static GameObject Pull(GameObject prefab) {
 
-        if (poolWorkers.Count == 0) {
+        //Loop through the list to find
+        for (int i = 0; i < poolWorkers.Count; i++) {
 
-            //Create a new list for this
-            return CreateNewList(prefab);
+            PoolWorker currentWorker = poolWorkers[i];
 
-        } else {
+            //Match Prefab Type
+            if (currentWorker.poolObject == prefab) {
 
-            //Loop through the list to find
-            for (int i = 0; i < poolWorkers.Count; i++) {
+                var pulledObject = currentWorker.Pull();
 
-                PoolWorker currentWorker;
-
-                //Match Prefab Type
-                if (poolWorkers[i].poolObject == prefab) {
-
-                    currentWorker = poolWorkers[i];
-
-                    var pulledObject = currentWorker.Pull();
-
-                    return pulledObject;
-
-                }
+                return pulledObject;
 
             }
 
-            //Create a new list for this
-            return CreateNewList(prefab);
-
         }
+
+        //Create a new list for this
+        return CreateNewList(prefab);
 
     }
 
@@ -56,7 +44,7 @@ public static class PoolManager
 
         var poolable = targetObject.GetComponent<Poolable>();
 
-        if(poolable != null) {
+        if (poolable != null) {
 
             var myPoolWorker = poolWorkers[poolable.poolWorkerID - 1];
             myPoolWorker.Push(targetObject);
@@ -68,7 +56,7 @@ public static class PoolManager
             return false;
 
         }
-        
+
     }
 
 }
