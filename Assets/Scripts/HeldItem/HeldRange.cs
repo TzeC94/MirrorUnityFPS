@@ -67,7 +67,7 @@ public abstract class HeldRange : HeldBase
                     AttackHelper.Attack(gameObject, hitObject, hitInfo.point, projectileInfo.damageSO);
 
                     //Spawn the hit decal
-                    PlayHitDecal(hitInfo.collider, hitInfo.point, Quaternion.Euler(hitInfo.normal));
+                    PlayHitDecal(hitInfo.collider, hitInfo.point, Quaternion.LookRotation(-hitInfo.normal, Vector3.up));
 
                 }
 
