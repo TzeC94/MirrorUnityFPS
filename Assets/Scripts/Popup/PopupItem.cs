@@ -34,7 +34,7 @@ public class PopupItem : MonoBehaviour
             randPos.z = 0.0f;
 
             //Apply
-            transform.position += randPos;
+            transform.localPosition += randPos;
 
         }
 
