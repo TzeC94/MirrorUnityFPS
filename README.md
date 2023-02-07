@@ -21,6 +21,7 @@ Features
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Shot%20Reload.gif)
 4. Simple Pickup & Inventory
     - Simple Pickup Simple 
+    - Outline when looking at Pickup Item
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryPickup.gif)
     - Inventory UI 
 ![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryOpenClose.gif)
