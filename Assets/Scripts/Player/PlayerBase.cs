@@ -1,6 +1,7 @@
-using StarterAssets;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInventory))]
+[RequireComponent(typeof(PlayerHeld))]
 public partial class PlayerBase : BaseCombatScript {
 
     [Header("Inventory")]
