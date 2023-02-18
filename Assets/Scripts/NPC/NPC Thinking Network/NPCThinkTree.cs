@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NPC Think Tree", menuName = "AI/NPC Think Tree")]
 public class NPCThinkTree : ScriptableObject
 {
-    [Header("Root")]
-    public NPCThinkNode rootNode;
-
     [Header("Node List")]
     public NPCThinkNode[] nodeList;
     private int nodeCount;
@@ -17,11 +15,28 @@ public class NPCThinkTree : ScriptableObject
     private int alwaysNodeCount;
 
     private NPCThinkNode currentNode;
+    private BaseNPC _currentNPC;
+    public BaseNPC currentNPC { get { return _currentNPC; } }
 
-    public void Initialize() {
+    //Shared Data Store
+    public Dictionary<string, System.Object> systemTypeSharedData = new Dictionary<string, System.Object>();
+    public Dictionary<string, UnityEngine.Object> unityTypeSharedData = new Dictionary<string, UnityEngine.Object>();
 
-        currentNode = rootNode;
+    public void Initialize(BaseNPC thisNPC) {
+
+        _currentNPC = thisNPC;
+
+        currentNode = nodeList[0];
         currentNode.OnStart();
+
+        //SETTTTT
+        foreach(var thinkNode in nodeList) {
+            thinkNode.Initialize(this);
+        }
+
+        foreach(var thinkNode in alwaysRunNode) {
+            thinkNode.Initialize(this);
+        }
 
     }
 
@@ -40,6 +55,18 @@ public class NPCThinkTree : ScriptableObject
             currentNode.OnUpdate();
 
         }
+
+    }
+
+    public void CurrentNodeEnded(int nextNodeIndex) {
+
+        currentNode = null;
+
+        //Find the next node
+        var nextNode = nodeList[nextNodeIndex];
+        nextNode.OnStart();
+
+        currentNode = nextNode;
 
     }
 

@@ -13,11 +13,11 @@ public class NPCIDLENode : NPCThinkNode {
     }
 #endif
 
-    public override void OnEnd() {
+    protected override void OnEnd() {
         throw new System.NotImplementedException();
     }
 
-    public override void OnFailed() {
+    protected override void OnFailed() {
         throw new System.NotImplementedException();
     }
 

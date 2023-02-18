@@ -96,4 +96,58 @@ public static class RayTracer
 
     }
 
+    public static GameObject ObjectInFOV(Transform myTransform, float distance, float withinAngle, Collider[] colliderArray, int layerMask = Physics.DefaultRaycastLayers) {
+
+        GameObject targetObject = null;
+
+        var myPos = myTransform.position;
+        var myForward = myTransform.forward;
+        int inSphereCount = Physics.OverlapSphereNonAlloc(myPos, distance, colliderArray, layerMask);
+
+        if(inSphereCount > 0) {
+
+            float cachedDistance = 0f;
+
+            for(int i = 0; i < inSphereCount; i++) {
+
+                var sphereTarget = colliderArray[i];
+
+                var targetPos = sphereTarget.transform.position;
+                var targetDir = (targetPos - myPos).normalized;
+                var angleValue = Vector3.Angle(targetDir, myForward);
+
+                Debug.Log(angleValue);
+
+                if(angleValue < withinAngle) {
+
+                    if(targetObject == null) {
+
+                        targetObject = sphereTarget.gameObject;
+                        cachedDistance = Vector3.Distance(targetPos, myPos);
+
+                    } else {
+
+                        //Check distance
+                        var betweenDistance = Vector3.Distance(targetPos, myPos);
+                        if(betweenDistance < cachedDistance) {
+
+                            cachedDistance = betweenDistance;
+                            targetObject = sphereTarget.gameObject;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            return targetObject;
+
+        }
+
+        return null;
+
+    }
+
 }

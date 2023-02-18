@@ -15,10 +15,18 @@ public abstract class NPCThinkNode : ScriptableObject
     [NonSerialized]
     public State _state = State.None;
 
+    protected NPCThinkTree myThinkTree;
+
+    public void Initialize(NPCThinkTree parentThinkTree) {
+
+        myThinkTree = parentThinkTree;
+
+    }
+
     public abstract void OnStart();
-    public abstract void OnEnd();
+    protected abstract void OnEnd();
     public abstract void OnUpdate();
-    public abstract void OnFailed();
+    protected abstract void OnFailed();
 
     /// <summary>
     /// Need to override this
@@ -26,9 +34,15 @@ public abstract class NPCThinkNode : ScriptableObject
     public NextNode[] outputNode;
 
 #if UNITY_EDITOR
+
+    bool initialized = false;
+
     public virtual void OnValidate() {
 
-        InitializeOutput();
+        if(initialized == false)
+            InitializeOutput();
+
+        initialized = true;
 
     }
 
@@ -36,6 +50,7 @@ public abstract class NPCThinkNode : ScriptableObject
     /// Use this to initialize the number of node
     /// </summary>
     public abstract void InitializeOutput();
+
 #endif
 
 }

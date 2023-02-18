@@ -9,13 +9,15 @@ public partial class BaseNPC
 
     private void InitializeThinkTree() {
 
-        npcThinkTree.Initialize();
+        npcThinkTree.Initialize(this);
 
     }
 
     private void ThinkTreeUpdate() {
 
-        npcThinkTree.Update();
-
+        if(npcThinkTree != null) {
+            npcThinkTree.Update();
+        }
+        
     }
 }
