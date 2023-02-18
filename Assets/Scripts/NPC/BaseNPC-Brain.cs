@@ -12,4 +12,10 @@ public partial class BaseNPC
         npcThinkTree.Initialize();
 
     }
+
+    private void ThinkTreeUpdate() {
+
+        npcThinkTree.Update();
+
+    }
 }

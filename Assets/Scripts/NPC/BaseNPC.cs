@@ -22,4 +22,16 @@ public abstract partial class BaseNPC : PlayerBase
 
     }
 
+    public override void FixedUpdate() {
+
+        base.FixedUpdate();
+
+        if (isServer) {
+
+            ThinkTreeUpdate();
+
+        }
+
+    }
+
 }

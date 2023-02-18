@@ -17,6 +17,10 @@ public abstract class BaseScriptNetwork : NetworkBehaviour
         
     }
 
+    public virtual void FixedUpdate() {
+
+    }
+
     public virtual ActionCollection[] GetActions(uint callerPlayerID) {
 
         return null;
