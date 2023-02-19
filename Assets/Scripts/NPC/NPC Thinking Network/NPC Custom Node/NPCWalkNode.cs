@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Walk Node", menuName = "AI/Walk Node")]
 public class NPCWalkNode : NPCThinkNode {
 
+    private GameObject target;
+
 #if UNITY_EDITOR
     public override void InitializeOutput() {
 
@@ -22,10 +24,18 @@ public class NPCWalkNode : NPCThinkNode {
     }
 
     public override void OnStart() {
-        throw new System.NotImplementedException();
+
+        //Grab my target
+        target = myThinkTree.unityTypeSharedData[NPCHelper.targetString] as GameObject;
+
+        //Set my target to this destination
+        myThinkTree.currentNPC.MoveTo(target.transform.position);
+
     }
 
     public override void OnUpdate() {
-        throw new System.NotImplementedException();
+        
+        
+
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public abstract partial class BaseNPC
 {
     [Header("AI")]
-    public NavMeshAgent navAgent;
+    [SerializeField]
+    private NavMeshAgent navAgent;
 
     public void MoveTo(Vector3 targetPos) {
 
