@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outputNode:
   - title: Chase
-    nextNodeIndex: 0
+    nextNodeIndex: 1
+  initialized: 1
   scoutLayerMask:
     serializedVersion: 2
     m_Bits: 64

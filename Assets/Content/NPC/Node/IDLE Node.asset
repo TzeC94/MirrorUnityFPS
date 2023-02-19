@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: IDLE Node
   m_EditorClassIdentifier: 
   outputNode: []
+  initialized: 1

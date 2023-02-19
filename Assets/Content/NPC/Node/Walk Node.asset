@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6090c15099c470848ba52afee13b9f65, type: 3}
   m_Name: Walk Node
   m_EditorClassIdentifier: 
-  _state: 0
+  outputNode:
+  - title: 
+    nextNodeIndex: 0
+  - title: 
+    nextNodeIndex: 0
+  initialized: 1

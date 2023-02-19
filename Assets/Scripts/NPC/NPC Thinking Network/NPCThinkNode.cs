@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class NPCThinkNode : ScriptableObject
@@ -35,14 +34,19 @@ public abstract class NPCThinkNode : ScriptableObject
 
 #if UNITY_EDITOR
 
-    bool initialized = false;
+    [HideInInspector]
+    public bool initialized = false;
 
     public virtual void OnValidate() {
 
-        if(initialized == false)
-            InitializeOutput();
+        if(initialized == false) {
 
-        initialized = true;
+            InitializeOutput();
+            initialized = true;
+
+            EditorUtility.SetDirty(this);
+
+        }
 
     }
 
