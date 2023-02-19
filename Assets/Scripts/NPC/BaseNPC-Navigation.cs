@@ -18,4 +18,11 @@ public abstract partial class BaseNPC
         }
 
     }
+
+    public bool CloseToTarget() {
+
+        return navAgent.remainingDistance <= navAgent.stoppingDistance;
+
+    }
+
 }

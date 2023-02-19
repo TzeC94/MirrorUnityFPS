@@ -20,14 +20,6 @@ public class NPCIDLEScoutNode : NPCIDLENode
     }
 #endif
 
-    protected override void OnEnd() {
-
-        base.OnEnd();
-
-        myThinkTree.CurrentNodeEnded(outputNode[0].nextNodeIndex);
-
-    }
-
     protected override void OnFailed() {
 
         base.OnFailed();
@@ -58,7 +50,7 @@ public class NPCIDLEScoutNode : NPCIDLENode
 
             myThinkTree.unityTypeSharedData[NPCHelper.targetString] = target;
 
-            OnEnd();
+            OnEnd(outputNode[0].nextNodeIndex);
 
         }
 

@@ -15,10 +15,6 @@ public class NPCWalkNode : NPCThinkNode {
     }
 #endif
 
-    protected override void OnEnd() {
-        throw new System.NotImplementedException();
-    }
-
     protected override void OnFailed() {
         throw new System.NotImplementedException();
     }
@@ -34,8 +30,12 @@ public class NPCWalkNode : NPCThinkNode {
     }
 
     public override void OnUpdate() {
-        
-        
+
+        if (myThinkTree.currentNPC.CloseToTarget()) {
+
+            OnEnd(0);
+
+        }
 
     }
 }

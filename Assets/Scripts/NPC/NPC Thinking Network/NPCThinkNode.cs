@@ -23,7 +23,13 @@ public abstract class NPCThinkNode : ScriptableObject
     }
 
     public abstract void OnStart();
-    protected abstract void OnEnd();
+
+    protected virtual void OnEnd(int nextNodeIndex) {
+
+        myThinkTree.CurrentNodeEnded(nextNodeIndex);
+
+    }
+
     public abstract void OnUpdate();
     protected abstract void OnFailed();
 

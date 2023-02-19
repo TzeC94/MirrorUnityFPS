@@ -13,19 +13,15 @@ public class NPCIDLENode : NPCThinkNode {
     }
 #endif
 
-    protected override void OnEnd() {
-        throw new System.NotImplementedException();
-    }
-
     protected override void OnFailed() {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnStart() {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnUpdate() {
-        throw new System.NotImplementedException();
+        
     }
 }
