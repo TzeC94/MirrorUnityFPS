@@ -7,13 +7,7 @@ public class NPCWalkNode : NPCThinkNode {
 
     private GameObject target;
 
-#if UNITY_EDITOR
-    public override void InitializeOutput() {
-
-        outputNode = new NextNode[2];
-
-    }
-#endif
+    public override int outputNodeCount => 2;
 
     protected override void OnFailed() {
         throw new System.NotImplementedException();

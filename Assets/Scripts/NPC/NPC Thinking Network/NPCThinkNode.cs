@@ -16,6 +16,11 @@ public abstract class NPCThinkNode : ScriptableObject
 
     protected NPCThinkTree myThinkTree;
 
+    /// <summary>
+    /// Need to override this
+    /// </summary>
+    public virtual int outputNodeCount { get; internal set; }
+
     public void Initialize(NPCThinkTree parentThinkTree) {
 
         myThinkTree = parentThinkTree;
@@ -33,39 +38,9 @@ public abstract class NPCThinkNode : ScriptableObject
     public abstract void OnUpdate();
     protected abstract void OnFailed();
 
-    /// <summary>
-    /// Need to override this
-    /// </summary>
-    public NextNode[] outputNode;
-
-#if UNITY_EDITOR
-
-    [HideInInspector]
-    public bool initialized = false;
-
-    public virtual void OnValidate() {
-
-        if(initialized == false) {
-
-            InitializeOutput();
-            initialized = true;
-
-            EditorUtility.SetDirty(this);
-
-        }
-
-    }
-
-    /// <summary>
-    /// Use this to initialize the number of node
-    /// </summary>
-    public abstract void InitializeOutput();
-
-#endif
-
 }
 
-[System.Serializable]
+[Serializable]
 public class NextNode {
 
 #if UNITY_EDITOR

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Army Think Tree
   m_EditorClassIdentifier: 
   nodeList:
-  - {fileID: 11400000, guid: 5b57fad225643c64cba8a0b5caee544e, type: 2}
+  - thinkNode: {fileID: 0}
+    nextNode: []
+  nodeCount: 1
   alwaysRunNode: []
+  alwaysNodeCount: 0

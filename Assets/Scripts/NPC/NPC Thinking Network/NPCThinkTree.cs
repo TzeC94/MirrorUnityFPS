@@ -7,14 +7,14 @@ using UnityEngine;
 public class NPCThinkTree : ScriptableObject
 {
     [Header("Node List")]
-    public NPCThinkNode[] nodeList;
-    private int nodeCount;
+    public NPCThinkTreeNodeDetail[] nodeList;
+    public int nodeCount;
 
     [Header("Always")]
-    public NPCThinkNode[] alwaysRunNode;
-    private int alwaysNodeCount;
+    public NPCThinkTreeNodeDetail[] alwaysRunNode;
+    public int alwaysNodeCount;
 
-    private NPCThinkNode currentNode;
+    private NPCThinkTreeNodeDetail currentNode;
     private BaseNPC _currentNPC;
     public BaseNPC currentNPC { get { return _currentNPC; } }
 
@@ -27,15 +27,15 @@ public class NPCThinkTree : ScriptableObject
         _currentNPC = thisNPC;
 
         currentNode = nodeList[0];
-        currentNode.OnStart();
+        currentNode.thinkNode.OnStart();
 
         //SETTTTT
         foreach(var thinkNode in nodeList) {
-            thinkNode.Initialize(this);
+            thinkNode.thinkNode.Initialize(this);
         }
 
         foreach(var thinkNode in alwaysRunNode) {
-            thinkNode.Initialize(this);
+            thinkNode.thinkNode.Initialize(this);
         }
 
     }
@@ -52,7 +52,7 @@ public class NPCThinkTree : ScriptableObject
 
         if (currentNode != null) {
 
-            currentNode.OnUpdate();
+            currentNode.thinkNode.OnUpdate();
 
         }
 
@@ -60,13 +60,10 @@ public class NPCThinkTree : ScriptableObject
 
     public void CurrentNodeEnded(int nextNodeIndex) {
 
-        currentNode = null;
-
         //Find the next node
-        var nextNode = nodeList[nextNodeIndex];
-        nextNode.OnStart();
-
-        currentNode = nextNode;
+        var nextNodeData = currentNode.nextNode[nextNodeIndex];
+        currentNode = nodeList[nextNodeData.nextNodeIndex];
+        currentNode.thinkNode.OnStart();
 
     }
 
@@ -75,7 +72,7 @@ public class NPCThinkTree : ScriptableObject
         for (int i = 0; i < alwaysNodeCount; i++) {
 
             var currentAlwaysNode = alwaysRunNode[i];
-            currentAlwaysNode.OnUpdate();
+            currentAlwaysNode.thinkNode.OnUpdate();
 
         }
 
@@ -87,6 +84,31 @@ public class NPCThinkTree : ScriptableObject
 
         nodeCount = nodeList.Length;
         alwaysNodeCount = alwaysRunNode.Length;
+
+        //Match the node list
+        InitializeOutputNodeArray(nodeList);
+        InitializeOutputNodeArray(alwaysRunNode);
+
+    }
+
+    private void InitializeOutputNodeArray(NPCThinkTreeNodeDetail[] thinkTreeArray) {
+
+        for (int i = 0; i < thinkTreeArray.Length; i++) {
+
+            var currentNodeDetail = thinkTreeArray[i];
+            if (currentNodeDetail.thinkNode) {
+
+                var currentNodeData = currentNodeDetail.thinkNode;
+
+                if (currentNodeData.outputNodeCount != currentNodeDetail.nextNode.Length) {
+
+                    currentNodeDetail.nextNode = new NextNode[currentNodeData.outputNodeCount];
+
+                }
+
+            }
+
+        }
 
     }
 

@@ -12,13 +12,7 @@ public class NPCIDLEScoutNode : NPCIDLENode
     public float fov = 60f;
     public float distance = 20f;
 
-#if UNITY_EDITOR
-    public override void InitializeOutput() {
-
-        outputNode = new NextNode[1];
-        
-    }
-#endif
+    public override int outputNodeCount => 1;
 
     protected override void OnFailed() {
 
@@ -50,7 +44,7 @@ public class NPCIDLEScoutNode : NPCIDLENode
 
             myThinkTree.unityTypeSharedData[NPCHelper.targetString] = target;
 
-            OnEnd(outputNode[0].nextNodeIndex);
+            OnEnd(0);
 
         }
 
