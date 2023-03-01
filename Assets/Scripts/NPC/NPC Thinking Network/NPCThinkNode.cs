@@ -21,6 +21,22 @@ public abstract class NPCThinkNode : ScriptableObject
     /// </summary>
     public virtual int outputNodeCount { get; internal set; }
 
+#if UNITY_EDITOR
+
+    public string[] titleNameList = new string[0];
+
+    protected virtual void OnValidate() {
+        
+        if(titleNameList.Length != outputNodeCount) {
+
+            titleNameList = new string[outputNodeCount];
+
+        }
+
+    }
+
+#endif
+
     public void Initialize(NPCThinkTree parentThinkTree) {
 
         myThinkTree = parentThinkTree;
@@ -42,6 +58,10 @@ public abstract class NPCThinkNode : ScriptableObject
 
 [Serializable]
 public class NextNode {
+
+    public NextNode() {
+
+    }
 
 #if UNITY_EDITOR
     public string title;

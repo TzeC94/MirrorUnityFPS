@@ -9,6 +9,19 @@ public class NPCWalkNode : NPCThinkNode {
 
     public override int outputNodeCount => 2;
 
+#if UNITY_EDITOR
+
+    protected override void OnValidate() {
+
+        base.OnValidate();
+
+        titleNameList[0] = "Reach Target";
+        titleNameList[1] = "Reach Failed";
+
+    }
+
+#endif
+
     protected override void OnFailed() {
         throw new System.NotImplementedException();
     }

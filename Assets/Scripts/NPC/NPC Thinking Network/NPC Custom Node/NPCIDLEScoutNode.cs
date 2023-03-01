@@ -14,6 +14,18 @@ public class NPCIDLEScoutNode : NPCIDLENode
 
     public override int outputNodeCount => 1;
 
+#if UNITY_EDITOR
+
+    protected override void OnValidate() {
+
+        base.OnValidate();
+
+        titleNameList[0] = "Scout Success";
+
+    }
+
+#endif
+
     protected override void OnFailed() {
 
         base.OnFailed();

@@ -8,11 +8,11 @@ public class NPCThinkTree : ScriptableObject
 {
     [Header("Node List")]
     public NPCThinkTreeNodeDetail[] nodeList;
-    public int nodeCount;
+    private int nodeCount;
 
     [Header("Always")]
     public NPCThinkTreeNodeDetail[] alwaysRunNode;
-    public int alwaysNodeCount;
+    private int alwaysNodeCount;
 
     private NPCThinkTreeNodeDetail currentNode;
     private BaseNPC _currentNPC;
@@ -104,7 +104,19 @@ public class NPCThinkTree : ScriptableObject
 
                     currentNodeDetail.nextNode = new NextNode[currentNodeData.outputNodeCount];
 
+                    for(int j = 0; j < currentNodeData.titleNameList.Length; j++) {
+
+                        var newNextNode = new NextNode();
+                        newNextNode.title = currentNodeData.titleNameList[j];
+                        currentNodeDetail.nextNode[j] = newNextNode;
+
+                    }
+
                 }
+
+            } else {
+
+                currentNodeDetail.nextNode = new NextNode[0];
 
             }
 
