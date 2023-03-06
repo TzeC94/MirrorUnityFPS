@@ -8,6 +8,9 @@ public abstract partial class BaseNPC
     [Header("AI")]
     [SerializeField]
     private NavMeshAgent navAgent;
+    public NavMeshAgent NavAgent { get { return navAgent; } }
+    public float RemainingDistance { get { return navAgent.remainingDistance; } }
+    public bool CloseToTarget { get { return navAgent.remainingDistance <= navAgent.stoppingDistance; } }
 
     public void MoveTo(Vector3 targetPos) {
 
@@ -16,12 +19,6 @@ public abstract partial class BaseNPC
             navAgent.SetDestination(targetPos);
 
         }
-
-    }
-
-    public bool CloseToTarget() {
-
-        return navAgent.remainingDistance <= navAgent.stoppingDistance;
 
     }
 

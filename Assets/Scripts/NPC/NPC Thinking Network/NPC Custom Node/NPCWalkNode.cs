@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "Walk Node", menuName = "AI/Walk Node")]
 public class NPCWalkNode : NPCThinkNode {
 
     private GameObject target;
+
+    public float stoppingDistance = 3f;
+
+    //Navigation
+    private NavMeshAgent navAgent;
+    private const int updateFrequency = 5;  //Update to target every x count
+    private int currentUpdateCount = 0;
 
     public override int outputNodeCount => 2;
 
@@ -23,26 +29,62 @@ public class NPCWalkNode : NPCThinkNode {
 #endif
 
     protected override void OnFailed() {
-        throw new System.NotImplementedException();
+
+        OnEnd(1);
+
     }
 
     public override void OnStart() {
 
+        navAgent = myThinkTree.currentNPC.NavAgent;
+
         //Grab my target
         target = myThinkTree.unityTypeSharedData[NPCHelper.targetString] as GameObject;
 
-        //Set my target to this destination
-        myThinkTree.currentNPC.MoveTo(target.transform.position);
+        //Generate the path
+        UpdatePath();
 
     }
 
     public override void OnUpdate() {
 
-        if (myThinkTree.currentNPC.CloseToTarget()) {
+        //Update to target
+        if(currentUpdateCount >= updateFrequency) {
+
+            currentUpdateCount = 0;
+
+            //Generate the path
+            if (!UpdatePath())
+                return;
+
+        } else {
+
+            currentUpdateCount++;
+
+        }
+
+        if (myThinkTree.currentNPC.RemainingDistance <= stoppingDistance) {
 
             OnEnd(0);
 
         }
 
+    }
+
+    private bool UpdatePath() {
+
+        //Generate the path
+        NavMeshPath navMeshPath = null;
+        navAgent.CalculatePath(target.transform.position, navMeshPath);
+
+        if (navMeshPath.status == NavMeshPathStatus.PathComplete) {
+
+            navAgent.SetPath(navMeshPath);
+            return true;
+
+        }
+
+        OnFailed();
+        return false;
     }
 }
