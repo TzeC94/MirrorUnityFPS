@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerHeld : InventoryBase
+public class BaseHeld : InventoryBase
 {
     private HeldBase _currentHeld;
     public HeldBase currentHeld { get { return _currentHeld; } }

@@ -23,8 +23,10 @@ MonoBehaviour:
       nextNodeIndex: 2
     - title: Reach Failed
       nextNodeIndex: 2
-  - thinkNode: {fileID: 11400000, guid: 49aba8d13c5e06b4898787f746ac9517, type: 2}
+  - thinkNode: {fileID: 11400000, guid: ebc04b6d8e2e1da4f89be8aa8359cf3b, type: 2}
     nextNode:
-    - title: IDLE Success
+    - title: Kill Target
       nextNodeIndex: 0
+    - title: Fail To Kill
+      nextNodeIndex: 1
   alwaysRunNode: []

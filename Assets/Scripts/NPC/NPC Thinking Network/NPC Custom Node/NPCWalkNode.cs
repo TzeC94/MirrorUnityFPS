@@ -8,6 +8,7 @@ public class NPCWalkNode : NPCThinkNode {
 
     public float stoppingDistance = 3f;
 
+
     //Navigation
     private NavMeshAgent navAgent;
     private const int updateFrequency = 5;  //Update to target every x count

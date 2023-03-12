@@ -92,7 +92,7 @@ public abstract class HeldRange : HeldBase
     /// <summary>
     /// To reload the weapon
     /// </summary>
-    public override void ServerReload() {
+    public override bool ServerReload() {
 
         //Check whether inventory have this item
         var inventory = ownerObject.inventory;
@@ -108,10 +108,14 @@ public abstract class HeldRange : HeldBase
             AnimReload();
 
             reloadCallback?.Invoke();
+
+            return true;
+
         }
 
-    }
+        return false;
 
+    }
 
     [Server]
     private IEnumerator ReloadGun(PlayerInventory inventory, uint maxReloadBullet, Item bulletItem) {
