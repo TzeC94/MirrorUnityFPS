@@ -15,7 +15,7 @@ public partial class BaseNPC
 
             if (heldRange.enoughBullet) {
 
-                heldRange.FireHeld();
+                heldRange.Fire();
 
             } else {    //Try to reload
 
@@ -26,6 +26,11 @@ public partial class BaseNPC
         }
 
         //No melee yet
+        if(myHeld is HeldMelee heldMelee) {
+
+            heldMelee.Fire();
+
+        }
 
     }
 }

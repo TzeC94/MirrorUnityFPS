@@ -103,6 +103,9 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 
     }
 
+    /// <summary>
+    /// To handle the attack action
+    /// </summary>
     public abstract void FireHeld();
 
     /// <summary>
