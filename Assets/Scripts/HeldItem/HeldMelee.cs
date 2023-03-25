@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeldMelee : HeldBase {
+public abstract class HeldMelee : HeldBase {
 
     [Header("Melee Attack")]
     [Tooltip("Transform point where we use to check the attack")]
@@ -41,5 +41,16 @@ public class HeldMelee : HeldBase {
         }
 
     }
+
+#if UNITY_EDITOR
+
+    protected void OnDrawGizmosSelected() {
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(attackCheckPoint.position, attackSize);
+
+    }
+
+#endif
 
 }

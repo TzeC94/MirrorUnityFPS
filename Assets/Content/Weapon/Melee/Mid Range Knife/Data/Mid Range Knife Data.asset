@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
+  m_Name: Mid Range Knife Data
+  m_EditorClassIdentifier: 
+  itemID: weapon.midrangeknife
+  itemName: Mid Range Knife
+  itemDescription: Melee Attack Knife
+  itemIcon: Mid Range Knife Icon
+  itemIndex: 12
+  itemType: 1
+  itemDataAddress: Assets/Content/Weapon/Melee/Mid Range Knife/Data/Mid Range Knife
+    Data.asset
+  itemHeldPrefab: {fileID: 3377064176178791969, guid: 0e9e7da358e77884c98bffb93c0bb965, type: 3}
+  itemHeldPrefab_Local: {fileID: 504726685551251907, guid: 850490f49eb680241875a7767ad6274e, type: 3}
+  stackable: 0
+  defaultQuantity: 1
+  maxStack: 26
