@@ -24,4 +24,4 @@ MonoBehaviour:
   itemHeldPrefab_Local: {fileID: 504726685551251907, guid: 850490f49eb680241875a7767ad6274e, type: 3}
   stackable: 0
   defaultQuantity: 1
-  maxStack: 26
+  maxStack: 1

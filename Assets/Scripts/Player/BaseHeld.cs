@@ -43,7 +43,7 @@ public class BaseHeld : InventoryBase
     {
         base.Update();
 
-        if(isClient){
+        if(isClient && isLocalPlayer){
 
             Client_FirePressed();
             Client_ReloadPressed();

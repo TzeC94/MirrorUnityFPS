@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,11 @@ public abstract class HeldMelee : HeldBase {
     public float waitDurationToCheck = 1f;
     public int damage = 10;
 
+    [Server]
     public override void FireHeld() {
+
+        AnimFire();
+        fireCallback?.Invoke();
 
         Invoke(nameof(CheckHit), waitDurationToCheck);
 
@@ -23,6 +28,9 @@ public abstract class HeldMelee : HeldBase {
 
         //Hit box check
         var target = RayTracer.OverlapBox(attackCheckPoint, attackSize, attackMask);
+
+        if (target == null)
+            return;
 
         //Do Something
         var baseCombatScript = target.gameObject.GetComponent<BaseCombatScript>();
