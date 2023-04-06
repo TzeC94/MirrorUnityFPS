@@ -11,6 +11,7 @@ public class NPCWalkNode : NPCThinkNode {
 
     //Navigation
     private NavMeshAgent navAgent;
+    private NavMeshPath navMeshPath;
     private const int updateFrequency = 5;  //Update to target every x count
     private int currentUpdateCount = 0;
 
@@ -38,6 +39,8 @@ public class NPCWalkNode : NPCThinkNode {
     public override void OnStart() {
 
         navAgent = myThinkTree.currentNPC.NavAgent;
+
+        navMeshPath = new NavMeshPath();
 
         //Grab my target
         target = myThinkTree.unityTypeSharedData[NPCHelper.targetString] as GameObject;
@@ -74,14 +77,17 @@ public class NPCWalkNode : NPCThinkNode {
 
     private bool UpdatePath() {
 
-        //Generate the path
-        NavMeshPath navMeshPath = null;
-        navAgent.CalculatePath(target.transform.position, navMeshPath);
+        if(target != null) {
 
-        if (navMeshPath.status == NavMeshPathStatus.PathComplete) {
+            //Generate the path
+            navAgent.CalculatePath(target.transform.position, navMeshPath);
 
-            navAgent.SetPath(navMeshPath);
-            return true;
+            if (navMeshPath.status == NavMeshPathStatus.PathComplete) {
+
+                navAgent.SetPath(navMeshPath);
+                return true;
+
+            }
 
         }
 

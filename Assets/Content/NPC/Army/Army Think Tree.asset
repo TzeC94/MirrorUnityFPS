@@ -22,7 +22,7 @@ MonoBehaviour:
     - title: Reach Target
       nextNodeIndex: 2
     - title: Reach Failed
-      nextNodeIndex: 2
+      nextNodeIndex: 0
   - thinkNode: {fileID: 11400000, guid: ebc04b6d8e2e1da4f89be8aa8359cf3b, type: 2}
     nextNode:
     - title: Kill Target

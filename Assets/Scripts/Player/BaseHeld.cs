@@ -238,11 +238,16 @@ public class BaseHeld : InventoryBase
             var spawnedObject = GameObject.Instantiate(itemToSpawn.GetItemData().itemHeldPrefab);
             var heldBase = spawnedObject.GetComponent<HeldBase>();
             heldBase.parentNetID = netIdentity.netId;
-            heldBase.fireCallback = FireCallback;
 
-            if(heldBase is HeldRange heldRange) {
+            if(netIdentity.connectionToClient != null) {
 
-                heldRange.reloadCallback = ReloadCallback;
+                heldBase.fireCallback = FireCallback;
+
+                if (heldBase is HeldRange heldRange) {
+
+                    heldRange.reloadCallback = ReloadCallback;
+                }
+
             }
 
             NetworkServer.Spawn(spawnedObject, netIdentity.connectionToClient);

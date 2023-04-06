@@ -10,6 +10,7 @@ public class NPCAttackNode : NPCThinkNode
     private GameObject target;
 
     public float mininumDistanceAttack = 2f;
+    public float maxDistanceToAbordAttack = 3f; //Something when target moved too far
 
 #if UNITY_EDITOR
 
@@ -32,27 +33,43 @@ public class NPCAttackNode : NPCThinkNode
     }
 
     public override void OnUpdate() {
-        throw new System.NotImplementedException();
+
+        AttackUpdate();
+
     }
 
     protected override void OnFailed() {
-        throw new System.NotImplementedException();
+
+        OnEnd(1);
+
     }
 
-    protected virtual bool MeetAttackCondition() {
-
-        //Distance to player
-        var distance = Vector3.Distance(myThinkTree.currentNPC.transform.position, target.transform.position);
+    protected virtual bool MeetAttackCondition(float distance) {
 
         return distance < mininumDistanceAttack;
 
     }
 
+    public virtual bool TooFarFromAttack(float distance) {
+
+        return distance > maxDistanceToAbordAttack;
+
+    }
+
     protected virtual void AttackUpdate() {
 
-        if (MeetAttackCondition()) {
+        var distance = Vector3.Distance(myThinkTree.currentNPC.transform.position, target.transform.position);
 
+        if (MeetAttackCondition(distance)) {
 
+            myThinkTree.currentNPC.NPC_AttackUpdate();
+
+        }
+
+        //IF target too far
+        if(TooFarFromAttack(distance)) {
+
+            OnFailed();
 
         }
 
