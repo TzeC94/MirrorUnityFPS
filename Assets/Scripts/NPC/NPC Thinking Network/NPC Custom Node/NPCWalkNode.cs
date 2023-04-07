@@ -7,6 +7,7 @@ public class NPCWalkNode : NPCThinkNode {
     private GameObject target;
 
     public float stoppingDistance = 3f;
+    public float stopChaseDistance = 3f;
 
 
     //Navigation
@@ -32,6 +33,9 @@ public class NPCWalkNode : NPCThinkNode {
 
     protected override void OnFailed() {
 
+        //Stop the agent
+        navAgent.isStopped = true;
+
         OnEnd(1);
 
     }
@@ -40,7 +44,8 @@ public class NPCWalkNode : NPCThinkNode {
 
         navAgent = myThinkTree.currentNPC.NavAgent;
 
-        navMeshPath = new NavMeshPath();
+        if (navMeshPath == null)
+            navMeshPath = new NavMeshPath();
 
         //Grab my target
         target = myThinkTree.unityTypeSharedData[NPCHelper.targetString] as GameObject;
@@ -53,7 +58,7 @@ public class NPCWalkNode : NPCThinkNode {
     public override void OnUpdate() {
 
         //Update to target
-        if(currentUpdateCount >= updateFrequency) {
+        if (currentUpdateCount >= updateFrequency) {
 
             currentUpdateCount = 0;
 
@@ -77,16 +82,24 @@ public class NPCWalkNode : NPCThinkNode {
 
     private bool UpdatePath() {
 
-        if(target != null) {
+        if (target != null) {
 
             //Generate the path
             navAgent.CalculatePath(target.transform.position, navMeshPath);
 
             if (navMeshPath.status == NavMeshPathStatus.PathComplete) {
 
-                navAgent.SetPath(navMeshPath);
-                return true;
+                bool successApplied = navAgent.SetPath(navMeshPath);
 
+                //Check is too far to chase
+                if (successApplied && navAgent.remainingDistance < stopChaseDistance) {
+
+                    if (navAgent.isStopped)
+                        navAgent.isStopped = false;
+
+                    return true;
+
+                }
             }
 
         }

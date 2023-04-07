@@ -15,4 +15,5 @@ MonoBehaviour:
   titleNameList:
   - Reach Target
   - Reach Failed
-  stoppingDistance: 1
+  stoppingDistance: 2
+  stopChaseDistance: 4

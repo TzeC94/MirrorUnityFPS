@@ -14,7 +14,7 @@ public class NPCThinkTree : ScriptableObject
     public NPCThinkTreeNodeDetail[] alwaysRunNode;
     private int alwaysNodeCount;
 
-    private NPCThinkTreeNodeDetail currentNode;
+    public NPCThinkTreeNodeDetail currentNode { get; private set; }
     private BaseNPC _currentNPC;
     public BaseNPC currentNPC { get { return _currentNPC; } }
 
