@@ -263,11 +263,17 @@ public class BaseHeld : InventoryBase
         if (itemToSpawn.GetItemData().itemType == ItemData.ItemType.Weapon) {
 
             var localObject = itemToSpawn.GetItemData().itemHeldPrefab_Local;
-            var spawnedObject = GameCore.Instantiate(localObject, GetComponent<PlayerBase>().localWeaponHoldingRoot);
-            //Reset Local
-            spawnedObject.transform.localPosition = Vector3.zero;
-            _currentHeldLocal = spawnedObject.GetComponent<HeldLocal>();
 
+            //Null check, just incase this weapon don't have local prefab
+            if(localObject!= null) {
+
+                var spawnedObject = GameCore.Instantiate(localObject, GetComponent<PlayerBase>().localWeaponHoldingRoot);
+                //Reset Local & Rotation
+                spawnedObject.transform.localPosition = Vector3.zero;
+                spawnedObject.transform.localRotation = Quaternion.identity;
+                _currentHeldLocal = spawnedObject.GetComponent<HeldLocal>();
+
+            }
         }
 
     }
