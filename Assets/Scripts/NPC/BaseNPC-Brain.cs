@@ -28,9 +28,13 @@ public partial class BaseNPC
 
     public void OnDrawGizmosSelected() {
 
-        Handles.color = Color.red;
-        var textToDraw = "Current Think Node: " +  npcThinkTree.currentNode.thinkNode.GetType().ToString();
-        Handles.Label(transform.position + Vector3.up * 2f, textToDraw);
+        if(Application.isPlaying) {
+
+            Handles.color = Color.red;
+            var textToDraw = "Current Think Node: " + npcThinkTree.currentNode.thinkNode.GetType().ToString();
+            Handles.Label(transform.position + Vector3.up * 2f, textToDraw);
+
+        }
 
     }
 

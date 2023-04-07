@@ -12,10 +12,30 @@ public partial class PlayerBase : BaseCombatScript {
     public Transform weaponHoldingRoot;
     public Transform localWeaponHoldingRoot;
 
+    public override void OnStartClient() {
+
+        base.OnStartClient();
+
+        InitializeModel();
+
+    }
+
     // Update is called once per frame
     public override void Update()
     {
         base.Update();
+    }
+
+    public override void FixedUpdate() {
+
+        base.FixedUpdate();
+
+        if(isServer) {
+
+            TPS_AnimatorUpdate();
+
+        }
+
     }
 
 #if UNITY_EDITOR
