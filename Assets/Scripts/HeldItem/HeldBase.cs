@@ -65,7 +65,7 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 
                     gameObject.transform.SetParent(ownerObject.weaponHoldingRoot, false);
 
-                    var playerHeld = clientObject.GetComponent<PlayerHeld>();
+                    var playerHeld = clientObject.GetComponent<BaseHeld>();
 
                     if (playerHeld != null) {
 
@@ -103,15 +103,18 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 
     }
 
+    /// <summary>
+    /// To handle the attack action
+    /// </summary>
     public abstract void FireHeld();
 
     /// <summary>
     /// To reload the weapon
     /// </summary>
     [Server]
-    public virtual void ServerReload() {
+    public virtual bool ServerReload() {
 
-        
+        return false;
 
     }
 

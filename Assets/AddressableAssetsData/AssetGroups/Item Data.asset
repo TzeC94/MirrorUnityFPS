@@ -37,6 +37,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item Data
+  - m_GUID: 7a108464923bec74bb776a371d125c3c
+    m_Address: Assets/Content/Weapon/Melee/Mid Range Knife/Data/Mid Range Knife Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Item Data
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 11dfbf2985608a04fb902fc1a128fa67, type: 2}
   m_SchemaSet:

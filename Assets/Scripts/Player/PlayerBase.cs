@@ -1,11 +1,12 @@
-using StarterAssets;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInventory))]
+[RequireComponent(typeof(BaseHeld))]
 public partial class PlayerBase : BaseCombatScript {
 
     [Header("Inventory")]
     public PlayerInventory inventory;
-    public PlayerHeld playerHeld;
+    public BaseHeld playerHeld;
 
     [Header("Weapon")]
     public Transform weaponHoldingRoot;
@@ -16,5 +17,25 @@ public partial class PlayerBase : BaseCombatScript {
     {
         base.Update();
     }
+
+#if UNITY_EDITOR
+
+    public virtual void OnValidate() {
+
+        if (inventory == null) {
+
+            inventory = GetComponent<PlayerInventory>();
+
+        }
+
+        if (playerHeld == null) {
+
+            playerHeld = GetComponent<BaseHeld>();
+
+        }
+
+    }
+
+#endif
 
 }

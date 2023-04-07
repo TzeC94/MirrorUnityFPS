@@ -15,6 +15,7 @@ public static class RayTracer
     }
 
     private static RaycastHit[] hit = new RaycastHit[50];
+    private static Collider[] collision = new Collider[50];
 
     public static GameObject RaycastNonAllocNearest(Ray ray, float maxDistance = Mathf.Infinity, int layerMask = Physics.DefaultRaycastLayers) {
 
@@ -93,6 +94,95 @@ public static class RayTracer
 
         hitInfo = new RaycastHit();
         return null;
+
+    }
+
+    public static GameObject ObjectInFOV(Transform myTransform, float distance, float withinAngle, Collider[] colliderArray, int layerMask = Physics.DefaultRaycastLayers) {
+
+        GameObject targetObject = null;
+
+        var myPos = myTransform.position;
+        var myForward = myTransform.forward;
+        int inSphereCount = Physics.OverlapSphereNonAlloc(myPos, distance, colliderArray, layerMask);
+
+        if(inSphereCount > 0) {
+
+            float cachedDistance = 0f;
+
+            for(int i = 0; i < inSphereCount; i++) {
+
+                var sphereTarget = colliderArray[i];
+
+                var targetPos = sphereTarget.transform.position;
+                var targetDir = (targetPos - myPos).normalized;
+                var angleValue = Vector3.Angle(targetDir, myForward);
+
+                if(angleValue < withinAngle) {
+
+                    if(targetObject == null) {
+
+                        targetObject = sphereTarget.gameObject;
+                        cachedDistance = Vector3.Distance(targetPos, myPos);
+
+                    } else {
+
+                        //Check distance
+                        var betweenDistance = Vector3.Distance(targetPos, myPos);
+                        if(betweenDistance < cachedDistance) {
+
+                            cachedDistance = betweenDistance;
+                            targetObject = sphereTarget.gameObject;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            return targetObject;
+
+        }
+
+        return null;
+
+    }
+
+    /// <summary>
+    /// Check overlap and return the nearest
+    /// </summary>
+    /// <param name="myTransform"></param>
+    /// <param name="size"></param>
+    /// <param name="layerMask"></param>
+    /// <returns></returns>
+    public static Collider OverlapBox(Transform myTransform, Vector3 size, int layerMask = Physics.DefaultRaycastLayers) {
+
+        var myPos = myTransform.position;
+        var detectedSize = Physics.OverlapBoxNonAlloc(myPos, size, collision, myTransform.rotation, layerMask);
+
+        if(detectedSize <= 0)
+            return null;
+
+        //Cache the first
+        Collider targetObject = collision[0];
+        float distance = Vector3.Distance(myPos, targetObject.transform.position);
+
+        for(int i = 1; i < detectedSize; i++) {
+
+            var currentObject = collision[i];
+            var currentDistance = Vector3.Distance(myPos, currentObject.transform.position);
+
+            if(distance > currentDistance) {
+
+                distance = currentDistance;
+                targetObject = currentObject;
+
+            }
+
+        }
+
+        return targetObject;
 
     }
 

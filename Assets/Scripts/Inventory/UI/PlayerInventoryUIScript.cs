@@ -77,7 +77,7 @@ public class PlayerInventoryUIScript : InventoryUIScript
         if (localPlayer != null) {
 
             //The held slot
-            var playerHeld = localPlayer.gameObject.GetComponent<PlayerHeld>();
+            var playerHeld = localPlayer.gameObject.GetComponent<BaseHeld>();
             if (playerHeld != null) {
 
                 //Get Item Data
