@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1733709268487869584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1008362907192138142}
@@ -54,6 +54,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2012864124887310773
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,13 +189,14 @@ MonoBehaviour:
   fireEffect: {fileID: 0}
   ownerObject: {fileID: 0}
   parentNetID: 0
+  heldAttachPoint: grab point
   fireInterval: 1
   holdFire: 0
   canFire: 1
   artObjects:
   - {fileID: 955825361750076999}
   attackCheckPoint: {fileID: 8956063871304058918}
-  attackSize: {x: 0.2, y: 1.18, z: 0.2}
+  attackSize: {x: 0.1, y: 0.59, z: 0.1}
   attackMask:
     serializedVersion: 2
     m_Bits: 1
