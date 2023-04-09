@@ -29,12 +29,16 @@ public partial class PlayerBase
 
     }
 
-    public virtual void TPS_AnimatorUpdate() {
+    protected virtual void TPS_AnimatorUpdate() {
 
-        networkAnimator.animator.SetFloat(verticalKey, vertical);
-        networkAnimator.animator.SetFloat(horizontalKey, horizontal);
+        if(networkAnimator != null) {
 
-        networkAnimator.animator.SetBool(onGround, onGrounded);
+            networkAnimator.animator.SetFloat(verticalKey, vertical);
+            networkAnimator.animator.SetFloat(horizontalKey, horizontal);
+
+            networkAnimator.animator.SetBool(onGround, onGrounded);
+
+        }
 
     }
 
@@ -44,7 +48,7 @@ public partial class PlayerBase
     /// <param name="vertical"></param>
     /// <param name="horizontal"></param>
     /// <param name="onGrounded"></param>
-    public void UpdateValue(float vertical, float horizontal, bool onGrounded) {
+    protected void UpdateAnimatorValue(float vertical, float horizontal, bool onGrounded) {
 
         this.vertical = vertical;
         this.horizontal = horizontal;

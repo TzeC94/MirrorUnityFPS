@@ -4,7 +4,7 @@ using Mirror;
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
-	public class FirstPersonController : PlayerBase
+	public partial class FirstPersonController : PlayerBase
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
