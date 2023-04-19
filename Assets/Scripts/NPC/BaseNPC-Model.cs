@@ -4,12 +4,19 @@ using UnityEngine;
 
 public partial class BaseNPC
 {
-    protected override void TPS_AnimatorUpdate() {
+    Vector3 velocity;
 
-        //Set the value here
-        UpdateAnimatorValue(navAgent.velocity.magnitude, 0f, true);
+    public override Vector3 Velocity() {
 
-        base.TPS_AnimatorUpdate();
+        velocity.z = navAgent.velocity.magnitude;
+
+        return velocity;
+
+    }
+
+    public override bool OnGround() {
+
+        return true;
 
     }
 }

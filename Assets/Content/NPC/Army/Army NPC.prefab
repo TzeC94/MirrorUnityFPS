@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 345525696024091345}
   - component: {fileID: 7226780706560391231}
   - component: {fileID: 9075071490493379367}
+  - component: {fileID: 3805863498190045849}
   m_Layer: 0
   m_Name: Army NPC
   m_TagString: Untagged
@@ -105,8 +106,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   maxHealth: 100
-  characterModel: {fileID: 7044935401207634917}
-  networkAnimator: {fileID: 9075071490493379367}
   inventory: {fileID: 7045603706834802028}
   playerHeld: {fileID: 2125286096439811495}
   weaponHoldingRoot: {fileID: 7007115068140414559}
@@ -229,6 +228,21 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 4354803903813098277}
+--- !u!114 &3805863498190045849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608126706693915994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442d87e548a3564d8c100c8ce5f6320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  networkAnimator: {fileID: 9075071490493379367}
+  characterModel: {fileID: 5964149423449216519}
 --- !u!1 &5964149423449216519
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,11 +359,6 @@ PrefabInstance:
 --- !u!95 &4354803903813098277 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3704242055777558425, guid: 156d19f5e1b4b53469340ce62b82f203, type: 3}
-  m_PrefabInstance: {fileID: 1082908546693891260}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7044935401207634917 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7981470346280869721, guid: 156d19f5e1b4b53469340ce62b82f203, type: 3}
   m_PrefabInstance: {fileID: 1082908546693891260}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7678483190041690463 stripped

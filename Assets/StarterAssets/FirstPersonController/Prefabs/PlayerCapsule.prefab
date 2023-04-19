@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 2273508236059289130}
   - component: {fileID: 1614319160050083734}
   - component: {fileID: 6602013803093468408}
+  - component: {fileID: -3641375219377841747}
   m_Layer: 6
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -404,3 +405,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireOverridePoint: {fileID: 789494088352466546}
+--- !u!114 &-3641375219377841747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442d87e548a3564d8c100c8ce5f6320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  networkAnimator: {fileID: 0}
+  characterModel: {fileID: 5393215578589016642}

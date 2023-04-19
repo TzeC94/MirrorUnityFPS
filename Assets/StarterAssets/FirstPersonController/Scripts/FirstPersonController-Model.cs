@@ -6,11 +6,15 @@ namespace StarterAssets {
 
     public partial class FirstPersonController {
 
-        protected override void TPS_AnimatorUpdate() {
+        public override Vector3 Velocity() {
 
-            UpdateAnimatorValue(sc_InputMove.y, sc_InputMove.x, Grounded);
+            return sc_InputMove;
 
-            base.TPS_AnimatorUpdate();
+        }
+
+        public override bool OnGround() {
+
+            return Grounded;
 
         }
 

@@ -1,8 +1,9 @@
+using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(BaseHeld))]
-public partial class PlayerBase : BaseCombatScript {
+public partial class PlayerBase : BaseCombatScript, IAnimator {
 
     [Header("Inventory")]
     public PlayerInventory inventory;
@@ -15,8 +16,6 @@ public partial class PlayerBase : BaseCombatScript {
     public override void OnStartClient() {
 
         base.OnStartClient();
-
-        InitializeModel();
 
     }
 
@@ -32,11 +31,33 @@ public partial class PlayerBase : BaseCombatScript {
 
         if(isServer) {
 
-            TPS_AnimatorUpdate();
+            
 
         }
 
     }
+
+    #region IAnimator Interface
+
+    public NetworkBehaviour MyNetworkBehaviour() {
+
+        return this;
+
+    }
+
+    public virtual Vector3 Velocity() {
+
+        return Vector3.zero;
+
+    }
+
+    public virtual bool OnGround() {
+
+        return true;
+
+    }
+
+    #endregion
 
 #if UNITY_EDITOR
 
