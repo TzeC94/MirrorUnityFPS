@@ -8,7 +8,7 @@ public partial class BaseNPC
 
     public override Vector3 Velocity() {
 
-        velocity.z = navAgent.velocity.magnitude;
+        velocity.y = navAgent.velocity.magnitude;
 
         return velocity;
 
