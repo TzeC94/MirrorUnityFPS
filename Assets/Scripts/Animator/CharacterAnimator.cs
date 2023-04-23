@@ -1,37 +1,50 @@
+using System.Collections;
 using UnityEngine;
+using Mirror;
 
 public class CharacterAnimator : BaseAnimator
 {
     [Header("3rd Person Model")]
     [SerializeField]
-    private GameObject characterModel;
+    private GameObject playerModel;
 
     //Key
     private static int verticalKey = Animator.StringToHash("Vertical");
     private static int horizontalKey = Animator.StringToHash("Horizontal");
     private static int onGround = Animator.StringToHash("OnGround");
 
+    NetworkBehaviour networkBehaviour;
+
     // Start is called before the first frame update
-    protected override void Start() {
+    protected new IEnumerator Start() {
 
         base.Start();
 
-        InitializeModel(animatorInterface.MyNetworkBehaviour().isLocalPlayer);
+        networkBehaviour = animatorInterface.MyNetworkBehaviour();
 
+        if (networkBehaviour.isClient && playerModel != null) {
+
+            while (!NetworkClient.isConnected) {
+                yield return null;
+            }
+
+            InitializeModel(networkBehaviour.isLocalPlayer);
+
+        }
     }
 
     private void InitializeModel(bool isLocalPlayer) {
 
-        if (characterModel != null) {
+        if (playerModel != null) {
             //We dont want this to be enable if is local player
-            characterModel.SetActive(isLocalPlayer);
+            playerModel.SetActive(isLocalPlayer);
         }
 
     }
 
     protected override void FixedUpdate() {
 
-        if (animatorInterface.MyNetworkBehaviour().isServer) {
+        if (networkBehaviour.isServer) {
 
             if (networkAnimator != null) {
 

@@ -61,6 +61,9 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 
             if (clientObject != null) {
 
+                //Cache this
+                ownerObject = clientObject.GetComponent<PlayerBase>();
+
                 //Get!!!
                 HeldAttachmentPoint[] attachmentPoints = clientObject.GetComponentsInChildren<HeldAttachmentPoint>();
 

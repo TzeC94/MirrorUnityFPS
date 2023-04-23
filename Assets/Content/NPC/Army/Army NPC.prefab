@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   networkAnimator: {fileID: 9075071490493379367}
-  characterModel: {fileID: 5964149423449216519}
+  characterModel: {fileID: 0}
 --- !u!1 &5964149423449216519
 GameObject:
   m_ObjectHideFlags: 0
