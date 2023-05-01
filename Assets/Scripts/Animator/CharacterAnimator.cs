@@ -37,7 +37,7 @@ public class CharacterAnimator : BaseAnimator
 
         if (playerModel != null) {
             //We dont want this to be enable if is local player
-            playerModel.SetActive(isLocalPlayer);
+            playerModel.SetActive(!isLocalPlayer);
         }
 
     }
