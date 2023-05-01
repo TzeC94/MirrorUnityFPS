@@ -21,7 +21,7 @@ MonoBehaviour:
   itemDataAddress: Assets/Content/Weapon/Melee/Mid Range Knife/Data/Mid Range Knife
     Data.asset
   itemHeldPrefab: {fileID: 3377064176178791969, guid: 0e9e7da358e77884c98bffb93c0bb965, type: 3}
-  itemHeldPrefab_Local: {fileID: 504726685551251907, guid: 850490f49eb680241875a7767ad6274e, type: 3}
+  itemHeldPrefab_Local: {fileID: 6294001000978569977, guid: b24658db8801bb34bad5e60d15bfe69d, type: 3}
   stackable: 0
   defaultQuantity: 1
   maxStack: 1

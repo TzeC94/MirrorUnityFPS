@@ -13,6 +13,8 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
     [SyncVar(hook = nameof(Reparent))]
     [ReadOnly]
     public uint parentNetID;
+    [Tooltip("Name of the attach point")]
+    public string heldAttachPoint = "grab point";
 
     [Header("Fire Rate")]
     public float fireInterval = 1;
@@ -59,22 +61,29 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 
             if (clientObject != null) {
 
+                //Cache this
                 ownerObject = clientObject.GetComponent<PlayerBase>();
 
-                if (ownerObject != null) {
+                //Get!!!
+                HeldAttachmentPoint[] attachmentPoints = clientObject.GetComponentsInChildren<HeldAttachmentPoint>();
 
-                    gameObject.transform.SetParent(ownerObject.weaponHoldingRoot, false);
+                foreach(var attachmentPoint in attachmentPoints) {
 
-                    var playerHeld = clientObject.GetComponent<BaseHeld>();
+                    if(attachmentPoint.pointName == heldAttachPoint) {
 
-                    if (playerHeld != null) {
+                        gameObject.transform.SetParent(attachmentPoint.transform, false);
 
-                        playerHeld.SetCurrentHeld(this);
+                        var playerHeld = clientObject.GetComponent<BaseHeld>();
+
+                        if (playerHeld != null) {
+
+                            playerHeld.SetCurrentHeld(this);
+
+                        }
 
                     }
 
                 }
-
             }
 
         }
