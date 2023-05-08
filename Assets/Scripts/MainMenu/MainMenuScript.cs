@@ -12,6 +12,9 @@ public partial class MainMenuScript : MonoBehaviour
 
     private IEnumerator Start() {
 
+        //Load the Require Item Data
+        LoadInitialResources();
+
         yield return new WaitForSeconds(1f);
 
         //Start Server IF is server
@@ -28,10 +31,6 @@ public partial class MainMenuScript : MonoBehaviour
 
         }
 #endif
-
-        //Load the Require Item Data
-        ResourceManage.PreloadRequiredGameplayAsset();
-
     }
 
     public void Server_Start(){

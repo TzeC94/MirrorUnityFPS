@@ -30,10 +30,11 @@ public static class ResourceManage
 
     }
 
-    public static void PreloadRequiredGameplayAsset() {
+    public static void PreloadRequiredGameplayAsset(Action<AsyncOperationHandle<IList<IResourceLocation>>> OnComplete) {
 
         var locationHandle = Addressables.LoadResourceLocationsAsync(gameplayPreloadScriptableAssetPath, typeof(ScriptableObject));
         locationHandle.Completed += PreloadRequireGameplayAssetComplete;
+        locationHandle.Completed += OnComplete;
 
     }
 
