@@ -9,6 +9,9 @@ using Unity.Mathematics;
 
 public class MapGeneration : MonoBehaviour {
 
+    [Header("Seed")]
+    [SerializeField] private uint seed = 5;
+
     [Header("Map Size")]
     [SerializeField] private int width = 512;
     [SerializeField] private int lengthPerSector = 256;
@@ -47,18 +50,7 @@ public class MapGeneration : MonoBehaviour {
 
         yield return new WaitForEndOfFrame();
 
-        GenerateHeightMap();
-
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-
-        heightMapJob.Complete();
-
-        FillHeightMap();
-
-        yield return new WaitForEndOfFrame();
-
-        ApplyHeight();
+        yield return HeightGeneration();
     }
 
     #region Terrain
@@ -87,13 +79,12 @@ public class MapGeneration : MonoBehaviour {
 
     #region Height Map
 
-    private bool GenerateHeightMap() {
-
-        var finalSectorLength = GetFinalSectorLength();
+    private void GenerateHeightMap() {
 
         nativeHeightMapData = new NativeArray<float>(heightMapResolution * heightMapResolution, Allocator.TempJob);
 
         HeightGenerateJob heightFillJob = new HeightGenerateJob() {
+            seed = seed,
             width = heightMapResolution,
             height = heightMapResolution,
             fillData = nativeHeightMapData
@@ -101,24 +92,26 @@ public class MapGeneration : MonoBehaviour {
 
         heightMapJob = heightFillJob.Schedule();
 
-        return true;
-
     }
 
     private struct HeightGenerateJob : IJob {
 
+        public uint seed;
         public int width;
         public int height;
         public NativeArray<float> fillData;
 
         public void Execute() {
 
+            var random = new Unity.Mathematics.Random(seed);
+            var offset = random.NextFloat(math.floor(random.NextFloat(0f, 10000f)));
+
             for(int x = 0; x < width; x++) {
 
                 for(int y = 0; y < height; y++) {
 
                     var index = x * width + y;
-                    var noiseValue = noise.cnoise(new float2 { x = x / 100f, y = y / 100f });
+                    var noiseValue = noise.cnoise(new float2 { x = (x + offset) / 100f, y = (y + offset) / 100f });
                     var clampedValue = math.unlerp(-1f, 1f, noiseValue);
 
                     fillData[index] = clampedValue;
@@ -158,6 +151,23 @@ public class MapGeneration : MonoBehaviour {
 
     }
 
+    IEnumerator HeightGeneration() {
+
+        GenerateHeightMap();
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        heightMapJob.Complete();
+
+        FillHeightMap();
+
+        yield return new WaitForEndOfFrame();
+
+        ApplyHeight();
+
+    }
+
     #endregion
 
     private int GetFinalSectorLength() {
@@ -172,6 +182,13 @@ public class MapGeneration : MonoBehaviour {
     public void CreateDefaultTerrain() {
 
         GenerateTerrain();
+
+    }
+
+    [ContextMenu("Regenerate Height")]
+    public void RegenerateHeight() {
+
+        StartCoroutine(HeightGeneration());
 
     }
 
