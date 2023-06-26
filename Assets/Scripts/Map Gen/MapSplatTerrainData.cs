@@ -13,132 +13,18 @@ public class MapSplatTerrainData : MapTerrainData<Color> {
 
     protected override void Apply() {
 
-        //MapGeneration.Instance.terrainData.SetAlphamaps(0, 0, dataArray);
-
         ApplySplat();
 
     }
 
     public override IEnumerator Generation() {
 
-        //GenerateSplat();
-
-        //yield return new WaitForEndOfFrame();
-        //yield return new WaitForEndOfFrame();
-
-        //jobHandle.Complete();
-
-        //yield return new WaitForEndOfFrame();
-
-        //ConvertToArray();
-
         yield return new WaitForEndOfFrame();
 
         Apply();
     }
 
-    private void GenerateSplat() {
-
-        if (nativeData.IsCreated) {
-
-            nativeData.Dispose();
-
-        } else {
-
-            nativeData = new NativeArray<Color>(resolution * resolution, Allocator.Persistent);
-
-        }
-
-        var heightData = MapGeneration.Instance.mapHeightGeneration.nativeData;
-        
-        SplatGenerateJob job = new SplatGenerateJob() {
-            mapResolution = resolution,
-            heightData = heightData,
-            splatData = nativeData
-        };
-
-        jobHandle = job.Schedule();
-
-    }
-
-    private struct SplatGenerateJob : IJob {
-
-        public int mapResolution;
-        public NativeArray<float> heightData;
-        public NativeArray<Color> splatData;
-
-        public void Execute() {
-            
-            for(int x = 0; x < mapResolution; x++) {
-
-                for(int y = 0; y < mapResolution; y++) {
-
-                    //var currentIndex = (x * mapResolution) + y;
-                    var currentIndex = y * mapResolution + x;
-
-                    var xIndex1 = currentIndex;
-                    var xIndex2 = (y + 1) * mapResolution + x;
-
-                    var yIndex1 = y * mapResolution + x + 1;
-                    var yIndex2 = (y + 1) * mapResolution + x + 1;
-
-                    var heightValue = (heightData[xIndex1] + heightData[xIndex2] + heightData[yIndex1] + heightData[yIndex2]) / 4;
-                    //var heightValue = (heightData[xIndex1] + heightData[yIndex2]) / 2;
-
-                    //var r = math.unlerp(1f, 0f, heightValue);
-                    var b = heightValue > 0.4f ? 0 : math.unlerp(0f, 0.4f, heightValue);
-                    var g = heightValue >= 0.4f && heightValue <= 0.8f ? math.unlerp(0.8f, 4f, heightValue) : 0f;
-                    var r = heightValue > 0.8f ? math.unlerp(1f, 0.8f, heightValue) : 0f;
-
-                    var sum = r + g + b;
-                    r /= sum;
-                    g /= sum;
-                    b /= sum;
-
-                    //var r = 1f - heightValue;
-                    //var g = heightValue;
-                    //var b = 0.0f;
-
-                    //var r = (float)currentIndex / (mapResolution * mapResolution);
-                    //var g = 1 - (float)currentIndex / (mapResolution * mapResolution);
-                    //var b = 0.0f;
-
-                    //var r = x < mapResolution / 2? 1f:0f;
-                    //var g = y < mapResolution /2? 0f:1f;
-                    //var g = 0f;
-                    //var b = 0.0f;
-
-                    //currentIndex = ((mapResolution - x) * mapResolution ) - mapResolution + y;
-                    currentIndex = (x * mapResolution) + y;
-                    splatData[currentIndex] = new Color(r, g, b);
-
-                }
-
-            }
-
-        }
-    }
-
     protected override void ConvertToArray() {
-
-        dataArray = new float[resolution, resolution, 3];
-
-        for (int x = 0; x < resolution; x++) {
-
-            for (int y = 0; y < resolution; y++) {
-
-                var index = (x * resolution) + y;
-                var valueAtIndex = nativeData[index];
-
-                dataArray[x, y, 0] = valueAtIndex.r;
-                dataArray[x, y, 1] = valueAtIndex.g;
-                dataArray[x, y, 2] = valueAtIndex.b;
-
-                //Debug.Log(valueAtIndex.r);
-
-            }
-
-        }
 
     }
 
@@ -181,10 +67,10 @@ public class MapSplatTerrainData : MapTerrainData<Color> {
                 splatWeights[2] = 1.0f - Mathf.Clamp01(steepness * steepness / (terrainData.heightmapResolution / 5.0f));
 
                 // Texture[3] increases with height but only on surfaces facing positive Z axis 
-                //splatWeights[3] = height * Mathf.Clamp01(normal.z);
+                splatWeights[3] = Mathf.Clamp01(height * Mathf.Clamp01(normal.z));
 
                 // Sum of all textures weights must add to 1, so calculate normalization factor from sum of weights
-                float z = splatWeights[0] + splatWeights[1] + splatWeights[2];
+                float z = splatWeights[0] + splatWeights[1] + splatWeights[2] + splatWeights[3];
 
                 // Loop through each terrain texture
                 for (int i = 0; i < terrainData.alphamapLayers; i++) {

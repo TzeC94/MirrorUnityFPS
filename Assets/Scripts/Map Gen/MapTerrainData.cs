@@ -10,6 +10,9 @@ public abstract class MapTerrainData<T> where T : struct
     public NativeArray<T> nativeData;
     protected JobHandle jobHandle;
     protected virtual int resolution => 512;
+    public int Resolution {
+        get { return resolution; }
+    }
 
     public abstract IEnumerator Generation();
 

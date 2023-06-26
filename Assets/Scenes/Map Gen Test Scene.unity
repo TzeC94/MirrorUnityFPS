@@ -290,10 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 235
-  width: 128
-  lengthPerSector: 64
+  width: 64
+  lengthPerSector: 32
   sectorCount: 2
-  maxHeight: 20
+  maxHeight: 5
   defaultTerrain: {fileID: 3907561322974359107, guid: 49d8932ebe93d034891c4eaa41635eb7, type: 3}
 --- !u!4 &1811090503
 Transform:
