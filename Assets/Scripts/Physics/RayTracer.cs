@@ -186,4 +186,53 @@ public static class RayTracer
 
     }
 
+    /// <summary>
+    /// Check overlap and return the nearest
+    /// </summary>
+    /// <param name="myTransform"></param>
+    /// <param name="size"></param>
+    /// <param name="layerMask"></param>
+    /// <returns></returns>
+    public static Collider OverlapSphere(Transform myTransform, float radius, int layerMask = Physics.DefaultRaycastLayers) {
+
+        var myPos = myTransform.position;
+        return OverlapSphere(myPos, radius, layerMask);
+
+    }
+
+    /// <summary>
+    /// Check overlap and return the nearest
+    /// </summary>
+    /// <param name="myTransform"></param>
+    /// <param name="size"></param>
+    /// <param name="layerMask"></param>
+    /// <returns></returns>
+    public static Collider OverlapSphere(Vector3 myPos, float radius, int layerMask = Physics.DefaultRaycastLayers) {
+
+        var detectedSize = Physics.OverlapSphereNonAlloc(myPos, radius, collision, layerMask);
+
+        if (detectedSize <= 0)
+            return null;
+
+        //Cache the first
+        Collider targetObject = collision[0];
+        float distance = Vector3.Distance(myPos, targetObject.transform.position);
+
+        for (int i = 1; i < detectedSize; i++) {
+
+            var currentObject = collision[i];
+            var currentDistance = Vector3.Distance(myPos, currentObject.transform.position);
+
+            if (distance > currentDistance) {
+
+                distance = currentDistance;
+                targetObject = currentObject;
+
+            }
+
+        }
+
+        return targetObject;
+
+    }
 }

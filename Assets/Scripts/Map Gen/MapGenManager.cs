@@ -8,11 +8,17 @@ using UnityEngine;
 
 public class MapGenManager : MonoBehaviour
 {
+    public int seed = 5;
+
     private MapGenComponent[] mapGenComponents;
 
     // Start is called before the first frame update
     void Start()
     {
+        MapGenData.seed = seed;
+
+        Random.InitState(seed);
+
         InitializeGeneration();
 
         StartGeneration();

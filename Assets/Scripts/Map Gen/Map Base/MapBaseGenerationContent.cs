@@ -7,17 +7,13 @@ public class MapBaseGenerationContent : ScriptableObject
 {
     [System.Serializable]
     public struct BasePrefabs {
-        public GameObject[] buldingPrefab;
+        public MapGenData.MapBaseType type;
+        public GameObject[] buildingPrefab;
+        public int buildingGenerationCount;
         public GameObject[] treePrefab;
+        public int treeGenerationCount;
     }
 
-    [Header("City")]
-    public BasePrefabs cityPrefabData;
-
-    [Header("Forest")]
-    public BasePrefabs forestPrefabData;
-
-    [Header("Future")]
-    public BasePrefabs futurePrefabData;
+    public BasePrefabs[] baseData;
 
 }
