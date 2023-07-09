@@ -6,7 +6,9 @@ public class MapBaseGeneration : MapBaseData
 {
     [Header("Map Content")]
     public MapBaseGenerationContent generationContent;
-    private MapGenData.MapBaseType baseType; 
+    private MapGenData.MapBaseType baseType;
+    private const float ovarlapCheckRange = 2f;
+    private const float overlapCheckYOffset = 2.5f;
 
     public IEnumerator StartGeneration() { 
 
@@ -35,7 +37,7 @@ public class MapBaseGeneration : MapBaseData
             var posZ = height / 2f * Random.Range(-1f, 1f);
 
             //Do an overlap check make sure it wont stack
-            if (RayTracer.OverlapSphere(transform.position + new Vector3(posX, 2.5f, posZ), 2f) != null)
+            if (RayTracer.OverlapSphere(transform.position + new Vector3(posX, overlapCheckYOffset, posZ), ovarlapCheckRange) != null)
                 continue;
 
             //SPAWN

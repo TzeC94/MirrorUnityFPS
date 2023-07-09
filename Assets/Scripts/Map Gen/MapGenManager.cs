@@ -10,7 +10,7 @@ public class MapGenManager : MonoBehaviour
 {
     public int seed = 5;
 
-    private MapGenComponent[] mapGenComponents;
+    private IMapGen[] mapGenComponents;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class MapGenManager : MonoBehaviour
     private void InitializeGeneration() {
 
         //Find all
-        mapGenComponents = GetComponents<MapGenComponent>();
+        mapGenComponents = GetComponents<IMapGen>();
 
     }
 

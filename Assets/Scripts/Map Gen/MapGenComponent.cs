@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MapGenComponent : MonoBehaviour
+public abstract class MapGenComponent : MonoBehaviour, IMapGen
 {
     public virtual void Initialize() {
 
