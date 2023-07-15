@@ -21,7 +21,7 @@ public class MapGenManager : MonoBehaviour
 
         InitializeGeneration();
 
-        StartGeneration();
+        //StartGeneration();
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class MapGenManager : MonoBehaviour
 
     }
 
-    private void StartGeneration() {
+    public void StartGeneration() {
 
         if (mapGenComponents.Length == 0)
             return;
@@ -46,7 +46,7 @@ public class MapGenManager : MonoBehaviour
 
     }
 
-    IEnumerator GenerationProcess() {
+    public IEnumerator GenerationProcess() {
 
         for (int i = 0; i < mapGenComponents.Length; i++) {
 

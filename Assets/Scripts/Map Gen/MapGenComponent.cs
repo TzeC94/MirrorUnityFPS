@@ -14,4 +14,7 @@ public abstract class MapGenComponent : MonoBehaviour, IMapGen
 
     public abstract IEnumerator Process();
 
+    public abstract void Save();
+
+    public abstract void Load();
 }

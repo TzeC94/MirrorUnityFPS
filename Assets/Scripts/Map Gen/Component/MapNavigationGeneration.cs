@@ -18,6 +18,13 @@ namespace Unity.AI.Navigation {
 
         }
 
+        public void Load() {
+            return;
+        }
+
+        public void Save() {
+            return;
+        }
     }
 
 }

@@ -6,4 +6,6 @@ public interface IMapGen
 {
     public void Initialize();
     public IEnumerator Process();
+    public void Save();
+    public void Load();
 }

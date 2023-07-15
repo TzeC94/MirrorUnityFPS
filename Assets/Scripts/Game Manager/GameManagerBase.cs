@@ -13,7 +13,7 @@ public partial class GameManagerBase : NetworkBehaviour
     PlayerInventoryUIScript playerInventoryUI;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         if(instance == null) {
             instance = this;
@@ -26,14 +26,14 @@ public partial class GameManagerBase : NetworkBehaviour
         }
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
 
         instance = null;
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
