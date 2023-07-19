@@ -31,6 +31,6 @@ Features
     - Map generated on server base on seed
     - Server will sync the map to client when join
 
-I'm using Unity 2021.3
+I'm using Unity 2022.3.5f1
 
 Everything start in Bootstrap Scene
