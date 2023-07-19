@@ -76,27 +76,42 @@ namespace StarterAssets
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
+			if (!GameManagerBase.ClientReady)
+				return;
+
 			move = newMoveDirection;
 		} 
 
 		public void LookInput(Vector2 newLookDirection)
 		{
-			look = newLookDirection;
+            if (!GameManagerBase.ClientReady)
+                return;
+
+            look = newLookDirection;
 		}
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+            if (!GameManagerBase.ClientReady)
+                return;
+
+            jump = newJumpState;
 		}
 
 		public void SprintInput(bool newSprintState)
 		{
-			sprint = newSprintState;
+            if (!GameManagerBase.ClientReady)
+                return;
+
+            sprint = newSprintState;
 		}
 
 		public void FireInput(bool newFireState)
 		{
-			if(!newFireState)
+            if (!GameManagerBase.ClientReady)
+                return;
+
+            if (!newFireState)
 				fired = false;
 
             fire = newFireState;

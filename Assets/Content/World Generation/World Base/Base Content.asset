@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0414d6c91d9454787d39d9530eadc4, type: 3}
+  m_Name: Base Content
+  m_EditorClassIdentifier: 
+  baseData:
+  - type: 0
+    buildingPrefab:
+    - {fileID: 2748428039248040271, guid: 39bfe454301caa546a2f9bccc92a508f, type: 3}
+    - {fileID: 7850420734557246111, guid: 92c0d20217a36364cacf52c47a30887a, type: 3}
+    - {fileID: 8083762584400989110, guid: 83fb72940a34c784694e97c87c2c3687, type: 3}
+    buildingGenerationCount: 5
+    treePrefab:
+    - {fileID: 2748428039248040271, guid: 333d79d401c07244e8247f7b9ceeb24f, type: 3}
+    - {fileID: 7850420734557246111, guid: 898d68985520f6a4d951ac02ed20dfe5, type: 3}
+    - {fileID: 8083762584400989110, guid: 321fb07cbfb81ff4aae0164f05b827e9, type: 3}
+    treeGenerationCount: 5
+  - type: 1
+    buildingPrefab:
+    - {fileID: 2748428039248040271, guid: d9c9383380e8e8d4fb9a89a342b8fc04, type: 3}
+    - {fileID: 7850420734557246111, guid: da1df1311d98aa942b506ec363179a15, type: 3}
+    - {fileID: 8083762584400989110, guid: 5750de8e183ac7d44aaa0d61c50605ad, type: 3}
+    buildingGenerationCount: 5
+    treePrefab:
+    - {fileID: 2748428039248040271, guid: 8a03ddb617d666f42bac694f22ed7e85, type: 3}
+    - {fileID: 7850420734557246111, guid: a87b9b1c453f9a245b8e16b351a131c3, type: 3}
+    - {fileID: 8083762584400989110, guid: aea28242c00b4374f8ccd6340c766b0d, type: 3}
+    treeGenerationCount: 5
+  - type: 2
+    buildingPrefab:
+    - {fileID: 2748428039248040271, guid: de71480be3f10e5449b1f72ff49392a1, type: 3}
+    - {fileID: 7850420734557246111, guid: 4ded2a762cdba8c44ba2406cfd2f675c, type: 3}
+    - {fileID: 8083762584400989110, guid: e2a7e05620697354eb80b38049514558, type: 3}
+    buildingGenerationCount: 5
+    treePrefab:
+    - {fileID: 2748428039248040271, guid: 10ea474d37aaf4f48824c636dbde69db, type: 3}
+    - {fileID: 7850420734557246111, guid: 387e4c1e349bc4f4a89678f4ad14cbce, type: 3}
+    - {fileID: 8083762584400989110, guid: 5d4e33d095993dc428d729bed03bf0a7, type: 3}
+    treeGenerationCount: 5

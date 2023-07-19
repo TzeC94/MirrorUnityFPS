@@ -13,6 +13,7 @@ public partial class MainMenuScript
 
         //Active the load
         initialLoadingPanel.alpha = 1f;
+        initialLoadingPanel.blocksRaycasts = true;
 
         //Load the Require Item Data
         ResourceManage.PreloadRequiredGameplayAsset(InitialLoadComplete);
@@ -23,6 +24,7 @@ public partial class MainMenuScript
 
         //Diable
         initialLoadingPanel.alpha = 0;
+        initialLoadingPanel.blocksRaycasts = false;
 
     }
 

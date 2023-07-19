@@ -10,13 +10,22 @@ public partial class GameManagerBase : NetworkBehaviour
 
     public static PlayerBase LocalPlayer;
 
+    //Make sure we set this at the end of it when we're really ready
+    public static bool ClientReady = false;
+
     PlayerInventoryUIScript playerInventoryUI;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         if(instance == null) {
+
             instance = this;
+
+        } else {
+
+            return;
+
         }
 
         if (isClient){
@@ -26,14 +35,14 @@ public partial class GameManagerBase : NetworkBehaviour
         }
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
 
         instance = null;
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
