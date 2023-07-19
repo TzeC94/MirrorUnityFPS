@@ -16,7 +16,13 @@ public partial class GameManagerBase : NetworkBehaviour
     protected virtual void Start()
     {
         if(instance == null) {
+
             instance = this;
+
+        } else {
+
+            return;
+
         }
 
         if (isClient){

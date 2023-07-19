@@ -18,6 +18,7 @@ public class MapBaseGeneration : MapBaseData
     private const float ovarlapCheckRange = 2f;
     private const float overlapCheckYOffset = 2.5f;
 
+    private const int contentGenerationCount = 2;
     public List<StructureData> buildingData = new List<StructureData>();
     public List<StructureData> treeData = new List<StructureData>();
 
@@ -33,8 +34,24 @@ public class MapBaseGeneration : MapBaseData
             baseType = randomBaseType.type;
             MapGenData.mapBasesType.Add((int)baseType);
 
-            var baseContent = MapGenData.baseContents[baseNo];
-            baseContent = new List<List<StructureData>>(2);
+            List<List<StructureData>> baseContent = null;
+
+            if(!MapGenData.baseContents.ContainsKey(baseNo)) {
+
+                MapGenData.baseContents.Add(baseNo, new List<List<StructureData>>(contentGenerationCount));
+                baseContent = MapGenData.baseContents[baseNo];
+
+                for(int i = 0; i < contentGenerationCount; i++) {
+
+                    baseContent.Add(new List<StructureData>());
+
+                }
+
+            } else {
+
+                baseContent = MapGenData.baseContents[baseNo];
+
+            }
 
             //building
             RandomSpawn(randomBaseType.buildingGenerationCount, randomBaseType.buildingPrefab, baseContent[0]);

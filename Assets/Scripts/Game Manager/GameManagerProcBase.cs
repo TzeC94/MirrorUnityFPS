@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GameManagerProcBase : GameManagerBase
@@ -11,20 +12,21 @@ public class GameManagerProcBase : GameManagerBase
     //Cached map data
     byte[] cachedMapData;
 
-    public override void OnStartServer() {
+    protected override void Start() {
 
-        base.OnStartServer();
+        base.Start();
 
-        StartCoroutine(ServerStartProcess());
+        if (isServer) {
 
-    }
+            StartCoroutine(ServerStartProcess());
 
-    public override void OnStartClient() {
+        }
 
-        base.OnStartClient();
+        if (isClient) {
 
-        //Client to ask Server to send related file
-        CmdClientJoinRequest();
+            CmdClientJoinRequest();
+
+        }
 
     }
 
@@ -69,5 +71,20 @@ public class GameManagerProcBase : GameManagerBase
 
         yield return null;
 
+        //Tell the server I'm ready
+        CmdClientReady();
     }
+
+    [Command]
+    protected void CmdClientReady(NetworkConnectionToClient sender = null) {
+
+        /*
+         * Server receive this when client finish all the map generation
+         */
+
+        //Spawn player for this
+        MyNetworkManager.singleton.OnServerAddPlayer(sender);
+
+    }
+
 }
