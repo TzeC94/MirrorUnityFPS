@@ -8,34 +8,29 @@ public class GameManagerProcBase : GameManagerBase
     [Header("Map Generation")]
     public MapGenManager mapGenManager;
 
-    public static GameManagerProcBaseData procBaseData;
+    //Cached map data
+    byte[] cachedMapData;
 
     protected override void Start() {
 
         base.Start();
 
-        if(procBaseData == null) {
-
-            procBaseData = new GameManagerProcBaseData();
-
-        }
-
         if(isServer) {
 
-            StartCoroutine(StartLoopServer());
+            StartCoroutine(ServerStartLoopServer());
 
         }
 
         if(isClient) {
 
             //Client to ask Server to send related file
-            CmdStartRequest();
+            CmdClientJoinRequest();
 
         }
 
     }
 
-    private IEnumerator StartLoopServer() {
+    private IEnumerator ServerStartLoopServer() {
 
         yield return mapGenManager.GenerationProcess();
 
@@ -44,9 +39,26 @@ public class GameManagerProcBase : GameManagerBase
     }
 
     [Command]
-    protected void CmdStartRequest() {
+    protected void CmdClientJoinRequest(NetworkConnectionToClient sender = null) {
 
-        //Send whatever needed from server to client
+        //Gather the byte data that need to be send to client about our map
+        if(cachedMapData == null) {
+
+            MapGenData.Pack(out cachedMapData);
+
+        }
+        
+        //Send over back to requested client
+        RPCServerJoinReply(sender, cachedMapData);
+    }
+
+    [TargetRpc]
+    protected void RPCServerJoinReply(NetworkConnectionToClient target, byte[] mapData) {
+
+        //Receive the map from server, unpack here
+        MapGenData.Unpack(ref mapData);
+
+        //TODO: Then we should start the map generation on client side base on received data
 
 
     }

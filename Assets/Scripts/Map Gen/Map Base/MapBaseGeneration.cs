@@ -21,7 +21,7 @@ public class MapBaseGeneration : MapBaseData
     public List<StructureData> buildingData = new List<StructureData>();
     public List<StructureData> treeData = new List<StructureData>();
 
-    public IEnumerator StartGeneration() { 
+    public IEnumerator StartGeneration(int baseNo) { 
 
         var length = generationContent.baseData.Length;
         var randomBaseType = generationContent.baseData[Random.Range(0, length)];
@@ -29,11 +29,14 @@ public class MapBaseGeneration : MapBaseData
         //Lets random a base type
         baseType = randomBaseType.type;
 
+        var baseContent = MapGenData.baseContents[baseNo];
+        baseContent = new List<List<StructureData>>(2);
+
         //building
-        RandomSpawn(randomBaseType.buildingGenerationCount, randomBaseType.buildingPrefab, buildingData);
+        RandomSpawn(randomBaseType.buildingGenerationCount, randomBaseType.buildingPrefab, baseContent[0]);
 
         //Tree
-        RandomSpawn(randomBaseType.treeGenerationCount, randomBaseType.treePrefab, treeData);
+        RandomSpawn(randomBaseType.treeGenerationCount, randomBaseType.treePrefab, baseContent[1]);
 
         yield return null;
     
