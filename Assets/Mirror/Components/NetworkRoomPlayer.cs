@@ -41,7 +41,7 @@ namespace Mirror
         /// <summary>
         /// Do not use Start - Override OnStartHost / OnStartClient instead!
         /// </summary>
-        public void Start()
+        public virtual void Start()
         {
             if (NetworkManager.singleton is NetworkRoomManager room)
             {
@@ -139,7 +139,7 @@ namespace Mirror
                 if (!room.showRoomGUI)
                     return;
 
-                if (!NetworkManager.IsSceneActive(room.RoomScene))
+                if (!Utils.IsSceneActive(room.RoomScene))
                     return;
 
                 DrawPlayerReadyState();
