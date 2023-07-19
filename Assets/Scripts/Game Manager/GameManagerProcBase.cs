@@ -12,6 +12,9 @@ public class GameManagerProcBase : GameManagerBase
     //Cached map data
     byte[] cachedMapData;
 
+    //Client
+    bool clientReceivedMapData = false;
+
     protected override void Start() {
 
         base.Start();
@@ -24,12 +27,14 @@ public class GameManagerProcBase : GameManagerBase
 
         if (isClient) {
 
-            CmdClientJoinRequest();
+            Debug.Log("Call");
+            StartCoroutine(ClientStartProcess());
 
         }
 
     }
 
+    [Server]
     private IEnumerator ServerStartProcess() {
 
         yield return mapGenManager.GenerationProcess();
@@ -38,7 +43,7 @@ public class GameManagerProcBase : GameManagerBase
 
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     protected void CmdClientJoinRequest(NetworkConnectionToClient sender = null) {
 
         //Gather the byte data that need to be send to client about our map
@@ -47,25 +52,38 @@ public class GameManagerProcBase : GameManagerBase
             MapGenData.Pack(out cachedMapData);
 
         }
-        
+
+        Debug.Log($"Server Receive Client Join Request {cachedMapData.Length}");
+
         //Send over back to requested client
-        RPCServerJoinReply(sender, cachedMapData);
+        TargetServerJoinReply(sender, cachedMapData);
     }
 
     [TargetRpc]
-    protected void RPCServerJoinReply(NetworkConnectionToClient target, byte[] mapData) {
+    protected void TargetServerJoinReply(NetworkConnectionToClient target, byte[] mapData) {
+
+        Debug.Log($"Client Receive Client Join Request {mapData.Length}");
 
         //Receive the map from server, unpack here
-        MapGenData.Unpack(ref mapData);
+        MapGenData.Unpack(mapData);
 
-        //TODO: Then we should start the map generation on client side base on received data
-        StartCoroutine(ClientStartProcess());
-
+        clientReceivedMapData = true;
     }
 
+    [Client]
     private IEnumerator ClientStartProcess() {
 
+        clientReceivedMapData = false;
+
         yield return null;
+
+        CmdClientJoinRequest();
+
+        while (!clientReceivedMapData) {
+
+            yield return null;
+
+        }
 
         yield return mapGenManager.GenerationProcess();
 

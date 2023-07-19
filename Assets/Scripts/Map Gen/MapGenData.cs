@@ -20,8 +20,6 @@ public static class MapGenData
 
     public static void Pack(out byte[] data) {
 
-        data = null;    //Temporary set null
-
         //Prepare binary profile
         NetworkWriter writer = new NetworkWriter();
         writer.Write(seed);
@@ -30,7 +28,7 @@ public static class MapGenData
         var baseCount = bases.Count;
         writer.Write(baseCount);
 
-        writer.Write(mapBasesType);
+        writer.WriteList(mapBasesType);
 
         //Base Data
         for (int i = 0; i < baseCount; i++) {   //Base count
@@ -47,6 +45,8 @@ public static class MapGenData
             }
 
         }
+
+        data = writer.ToArray();
 
     }
 
@@ -72,7 +72,7 @@ public static class MapGenData
 
     #region Unpack
 
-    public static void Unpack(ref byte[] data) {
+    public static void Unpack(byte[] data) {
 
         NetworkReader reader = new NetworkReader(data);
 
@@ -88,11 +88,12 @@ public static class MapGenData
             //How many list in this base
             var baseContentListCount = reader.ReadInt();
 
-            baseContents.Add(i, new List<List<StructureData>>(baseContentListCount));
+            baseContents.Add(i, new List<List<StructureData>>());
 
             //Load the spawned contest list
             for(int j = 0; j < baseContentListCount; j++) {
 
+                baseContents[i].Add(new List<StructureData>());
                 ReadSpawnedObjectInBase(reader, baseContents[i][j]);
 
             }
@@ -105,8 +106,6 @@ public static class MapGenData
 
         var buildingCount = networkReader.ReadInt();
 
-        targetList.Capacity = buildingCount;
-
         for (int i = 0; i < buildingCount; i++) {
 
             StructureData structureData;
@@ -115,7 +114,7 @@ public static class MapGenData
             structureData.position = networkReader.ReadVector3();
             structureData.rotation = networkReader.ReadQuaternion();
 
-            targetList[i] = structureData;
+            targetList.Add(structureData);
         }
 
     }
