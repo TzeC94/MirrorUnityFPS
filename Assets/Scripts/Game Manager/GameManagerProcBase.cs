@@ -11,26 +11,24 @@ public class GameManagerProcBase : GameManagerBase
     //Cached map data
     byte[] cachedMapData;
 
-    protected override void Start() {
+    public override void OnStartServer() {
 
-        base.Start();
+        base.OnStartServer();
 
-        if(isServer) {
-
-            StartCoroutine(ServerStartLoopServer());
-
-        }
-
-        if(isClient) {
-
-            //Client to ask Server to send related file
-            CmdClientJoinRequest();
-
-        }
+        StartCoroutine(ServerStartProcess());
 
     }
 
-    private IEnumerator ServerStartLoopServer() {
+    public override void OnStartClient() {
+
+        base.OnStartClient();
+
+        //Client to ask Server to send related file
+        CmdClientJoinRequest();
+
+    }
+
+    private IEnumerator ServerStartProcess() {
 
         yield return mapGenManager.GenerationProcess();
 
@@ -59,7 +57,17 @@ public class GameManagerProcBase : GameManagerBase
         MapGenData.Unpack(ref mapData);
 
         //TODO: Then we should start the map generation on client side base on received data
+        StartCoroutine(ClientStartProcess());
 
+    }
+
+    private IEnumerator ClientStartProcess() {
+
+        yield return null;
+
+        yield return mapGenManager.GenerationProcess();
+
+        yield return null;
 
     }
 }

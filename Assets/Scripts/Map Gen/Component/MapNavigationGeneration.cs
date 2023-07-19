@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -14,7 +15,11 @@ namespace Unity.AI.Navigation {
 
             yield return null;
 
-            BuildNavMesh();
+            if (GameManagerBase.instance.isServer) {
+
+                BuildNavMesh();
+
+            }
 
         }
 

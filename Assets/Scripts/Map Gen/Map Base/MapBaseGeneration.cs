@@ -21,22 +21,49 @@ public class MapBaseGeneration : MapBaseData
     public List<StructureData> buildingData = new List<StructureData>();
     public List<StructureData> treeData = new List<StructureData>();
 
-    public IEnumerator StartGeneration(int baseNo) { 
+    public IEnumerator StartGeneration(int baseNo) {
 
-        var length = generationContent.baseData.Length;
-        var randomBaseType = generationContent.baseData[Random.Range(0, length)];
+        //Generate content
+        if (GameManagerBase.instance.isServer) {
 
-        //Lets random a base type
-        baseType = randomBaseType.type;
+            var length = generationContent.baseData.Length;
+            var randomBaseType = generationContent.baseData[Random.Range(0, length)];
 
-        var baseContent = MapGenData.baseContents[baseNo];
-        baseContent = new List<List<StructureData>>(2);
+            //Lets random a base type
+            baseType = randomBaseType.type;
+            MapGenData.mapBasesType.Add((int)baseType);
 
-        //building
-        RandomSpawn(randomBaseType.buildingGenerationCount, randomBaseType.buildingPrefab, baseContent[0]);
+            var baseContent = MapGenData.baseContents[baseNo];
+            baseContent = new List<List<StructureData>>(2);
 
-        //Tree
-        RandomSpawn(randomBaseType.treeGenerationCount, randomBaseType.treePrefab, baseContent[1]);
+            //building
+            RandomSpawn(randomBaseType.buildingGenerationCount, randomBaseType.buildingPrefab, baseContent[0]);
+
+            //Tree
+            RandomSpawn(randomBaseType.treeGenerationCount, randomBaseType.treePrefab, baseContent[1]);
+
+        }
+
+        //Restore the spawned content
+        if (GameManagerBase.instance.isClient) {
+
+            baseType = (MapGenData.MapBaseType)MapGenData.mapBasesType[baseNo];
+
+            //Get my base data
+            var spawnList = MapGenData.baseContents[baseNo];
+
+            //Base related prefab list
+            var mapGenBaseContents = generationContent.baseData[(int)baseType];
+
+            //Building
+            var buildingList = spawnList[0];
+            ClientSpawn(buildingList, mapGenBaseContents.buildingPrefab);
+
+            //Tree
+            var treeList = spawnList[1];
+            ClientSpawn(buildingList, mapGenBaseContents.treePrefab);
+
+        }
 
         yield return null;
     
@@ -66,6 +93,25 @@ public class MapBaseGeneration : MapBaseData
 
             dataList.Add(new StructureData { prefabIndex = index, 
                 position = position, rotation = rotation });
+        }
+
+    }
+
+    private void ClientSpawn(List<StructureData> spawningList, GameObject[] prefabList) {
+
+        var count = spawningList.Count;
+
+        if (count == 0) return;
+
+        for(int i = 0; i < count; i++) {
+
+            var spawningData = spawningList[i];
+            var prefab = prefabList[spawningData.prefabIndex];
+            var pos = spawningData.position;
+            var rotation = spawningData.rotation;
+
+            GameCore.Instantiate(prefab, pos, rotation, transform);
+
         }
 
     }

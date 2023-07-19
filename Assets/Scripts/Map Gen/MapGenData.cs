@@ -13,6 +13,7 @@ public static class MapGenData
     public static int seed;
     public static int baseCount;
 
+    public static List<int> mapBasesType = new List<int>();
     public static SortedDictionary<int, List<List<StructureData>>> baseContents = new SortedDictionary<int, List<List<StructureData>>>();
 
     #region Pack
@@ -28,6 +29,8 @@ public static class MapGenData
         //Base count
         var baseCount = bases.Count;
         writer.Write(baseCount);
+
+        writer.Write(mapBasesType);
 
         //Base Data
         for (int i = 0; i < baseCount; i++) {   //Base count
@@ -77,7 +80,8 @@ public static class MapGenData
 
         //Bases
         baseCount = reader.ReadInt();
-        bases.Capacity = baseCount;
+
+        mapBasesType = reader.ReadList<int>();
 
         for(int i = 0; i < baseCount; i++) {
 

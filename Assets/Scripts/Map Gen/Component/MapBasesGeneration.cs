@@ -11,13 +11,17 @@ public class MapBasesGeneration : MapGenComponent
 
         Vector3 startPos = Vector3.zero;
 
-        for(int i = 0; i < baseCountToGenerate; i++) {
+        for (int i = 0; i < baseCountToGenerate; i++) {
 
             var spawnedBase = GameCore.Instantiate(basePrefab, null);
             spawnedBase.transform.position = startPos;
 
-            //Add it
-            MapGenData.bases.Add(spawnedBase);
+            if (GameManagerBase.instance.isServer) {
+
+                //Add it
+                MapGenData.bases.Add(spawnedBase);
+
+            }
 
             //Increase it
             startPos += Vector3.forward * baseGap;
