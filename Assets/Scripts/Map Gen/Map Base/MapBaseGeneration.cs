@@ -78,7 +78,7 @@ public class MapBaseGeneration : MapBaseData
 
             //Tree
             var treeList = spawnList[1];
-            ClientSpawn(buildingList, mapGenBaseContents.treePrefab);
+            ClientSpawn(treeList, mapGenBaseContents.treePrefab);
 
         }
 

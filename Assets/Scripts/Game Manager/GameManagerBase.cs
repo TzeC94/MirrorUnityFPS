@@ -10,6 +10,9 @@ public partial class GameManagerBase : NetworkBehaviour
 
     public static PlayerBase LocalPlayer;
 
+    //Make sure we set this at the end of it when we're really ready
+    public static bool ClientReady = false;
+
     PlayerInventoryUIScript playerInventoryUI;
 
     // Start is called before the first frame update

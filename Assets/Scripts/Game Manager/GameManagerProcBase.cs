@@ -27,7 +27,6 @@ public class GameManagerProcBase : GameManagerBase
 
         if (isClient) {
 
-            Debug.Log("Call");
             StartCoroutine(ClientStartProcess());
 
         }
@@ -53,16 +52,12 @@ public class GameManagerProcBase : GameManagerBase
 
         }
 
-        Debug.Log($"Server Receive Client Join Request {cachedMapData.Length}");
-
         //Send over back to requested client
         TargetServerJoinReply(sender, cachedMapData);
     }
 
     [TargetRpc]
     protected void TargetServerJoinReply(NetworkConnectionToClient target, byte[] mapData) {
-
-        Debug.Log($"Client Receive Client Join Request {mapData.Length}");
 
         //Receive the map from server, unpack here
         MapGenData.Unpack(mapData);
@@ -77,6 +72,16 @@ public class GameManagerProcBase : GameManagerBase
 
         yield return null;
 
+        //We need the UI to blockkkk
+        while(UIHUD.Instance == null) {
+
+            yield return null;
+
+        }
+
+        //Show the loading
+        UIHUD.Instance.ShowLoading(true);
+
         CmdClientJoinRequest();
 
         while (!clientReceivedMapData) {
@@ -85,23 +90,17 @@ public class GameManagerProcBase : GameManagerBase
 
         }
 
+        UIHUD.Instance.SetLoadingProgress(0.1f);
+
         yield return mapGenManager.GenerationProcess();
+
+        UIHUD.Instance.SetLoadingProgress(1f);
 
         yield return null;
 
-        //Tell the server I'm ready
-        CmdClientReady();
-    }
+        UIHUD.Instance.ShowLoading(false);
 
-    [Command]
-    protected void CmdClientReady(NetworkConnectionToClient sender = null) {
-
-        /*
-         * Server receive this when client finish all the map generation
-         */
-
-        //Spawn player for this
-        MyNetworkManager.singleton.OnServerAddPlayer(sender);
+        ClientReady = true;
 
     }
 

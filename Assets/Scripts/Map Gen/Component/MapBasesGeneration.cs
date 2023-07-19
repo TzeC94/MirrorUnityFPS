@@ -16,12 +16,8 @@ public class MapBasesGeneration : MapGenComponent
             var spawnedBase = GameCore.Instantiate(basePrefab, null);
             spawnedBase.transform.position = startPos;
 
-            if (GameManagerBase.instance.isServer) {
-
-                //Add it
-                MapGenData.bases.Add(spawnedBase);
-
-            }
+            //Add it
+            MapGenData.bases.Add(spawnedBase);
 
             //Increase it
             startPos += Vector3.forward * baseGap;
