@@ -1,5 +1,3 @@
-Warning: Screenshot below is outdated, haven't got time to update it
-
 # Mirror Networking with Unity FPS Starter Assets
 Mirror Server Client Authority networking with Unity FPS Starter Assets with modification
 
@@ -18,22 +16,20 @@ Features
     - Hold to fire
     - Animation Handling
     - Effect Handling
-![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Shot%20Reload.gif)
 4. Simple Pickup & Inventory
     - Simple Pickup Simple 
     - Outline when looking at Pickup Item
-![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryPickup.gif)
     - Inventory UI 
-![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventoryOpenClose.gif)
     - Drag and Drop
     - Weapon Slot
-![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/InventorySwapDrop.gif)
 5. Simple Health
     - Simple Health
     - Simple Hit Information
-![](https://github.com/walaoRIKI/MirrorUnityFPS/blob/main/Readme/Kill.gif)
 6. Popup
     - Currently only use at damage
+7. Procedural Level
+    - Map generated on server base on seed
+    - Server will sync the map to client when join
 
 I'm using Unity 2021.3
 
