@@ -104,8 +104,8 @@ public static class MapGenData
     private static void ReadSpawnedObjectInBase(NetworkReader networkReader, List<StructureData> targetList) {
 
         var buildingCount = networkReader.ReadInt();
-        targetList.Capacity = buildingCount;
 
+        targetList.Capacity = buildingCount;
 
         for (int i = 0; i < buildingCount; i++) {
 
