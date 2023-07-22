@@ -27,12 +27,4 @@ public class MapBasesGeneration : MapGenComponent
         }
 
     }
-
-    public override void Save() {
-        
-    }
-
-    public override void Load() {
-        
-    }
 }

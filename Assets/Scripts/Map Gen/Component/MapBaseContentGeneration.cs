@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class MapBaseContentGeneration : MapGenComponent
 {
@@ -21,13 +19,5 @@ public class MapBaseContentGeneration : MapGenComponent
 
         }
 
-    }
-
-    public override void Load() {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Save() {
-        throw new System.NotImplementedException();
     }
 }
