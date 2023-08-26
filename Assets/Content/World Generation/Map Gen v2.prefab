@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5555808054515932843}
   - component: {fileID: 322873549957504897}
   - component: {fileID: 7806289462324206887}
+  - component: {fileID: 4980847586570892577}
   m_Layer: 0
   m_Name: Map Gen v2
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4337782832629804989}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8394001198233043335
 MonoBehaviour:
@@ -106,3 +107,26 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+--- !u!114 &4980847586570892577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4337782832629804989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87270585de723c468bbfd5daaa6f1fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generationTryCount: 10
+  maxConnectLegth: 50
+  pointType: -1
+  blockMask:
+    serializedVersion: 2
+    m_Bits: 1
+  bridgeMesh: {fileID: 674340280032488212, guid: ea943acab09a2994fb64d125ce5a8644, type: 3}
+  bridgeSize: 6
+  bridgeStart: {fileID: 674340280032488212, guid: 3356740e37ee58e4f8f2a45dc6d72cc8, type: 3}
+  bridgeEnd: {fileID: 1433018532845168359, guid: bf6ac4fa871758847871289eb4cceb61, type: 3}
+  bridgeMaterial: {fileID: 2100000, guid: 3e258e3fe12a17048b1788df1add9c60, type: 2}

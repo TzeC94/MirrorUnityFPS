@@ -209,7 +209,7 @@ public static class RayTracer
     /// <returns></returns>
     public static Collider OverlapSphere(Vector3 myPos, float radius, int layerMask = Physics.DefaultRaycastLayers) {
 
-        var detectedSize = Physics.OverlapSphereNonAlloc(myPos, radius, collision, layerMask);
+        var detectedSize = OverlapSphere(myPos, radius, collision, layerMask);
 
         if (detectedSize <= 0)
             return null;
@@ -233,6 +233,22 @@ public static class RayTracer
         }
 
         return targetObject;
+
+    }
+
+    /// <summary>
+    /// Overlap sphere and return count of detected
+    /// </summary>
+    /// <param name="myPos"></param>
+    /// <param name="radius"></param>
+    /// <param name="collisionDetected"></param>
+    /// <param name="layerMask"></param>
+    /// <returns></returns>
+    public static int OverlapSphere(Vector3 myPos, float radius, Collider[] collisionDetected, int layerMask = Physics.DefaultRaycastLayers) {
+
+        var detectedSize = Physics.OverlapSphereNonAlloc(myPos, radius, collisionDetected, layerMask);
+
+        return detectedSize;
 
     }
 }
