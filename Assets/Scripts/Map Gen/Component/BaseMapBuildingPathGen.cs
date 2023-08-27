@@ -17,6 +17,8 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
         base.Initialize();
 
+        Random.InitState(MapGenData.seed);
+
         //Look for the point
         mapPoints = GameObject.FindObjectsOfType<MapPoint>(true).
             Where(t => ((int)t.pointType & 1 << (int)pointType) == (int)t.pointType).
@@ -29,7 +31,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
         if (mapPoints.Length == 0)
             yield break;
 
-        List<MapPoint> detectedMapPoint = new List<MapPoint>();
+        ArrayList detectedMapPoint = new ArrayList();
 
         //Loop to try to spawn
         for (int i = 0; i < generationTryCount; i++) {
@@ -41,7 +43,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
             //Look for nearby point
             detectedMapPoint.Clear();   //Make sure we clear first
-            int detectedCount = DetectedNearby(startPoint.gameObject, detectedMapPoint);
+            int detectedCount = DetectedNearby(startPoint.gameObject, ref detectedMapPoint);
 
             if (detectedCount <= 0)
                 continue;
@@ -50,7 +52,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
             for(int id = 0; id < detectedCount; id++) {
 
                 //Find a random point to connect
-                var randomEndPoint = detectedMapPoint[Random.Range(0, detectedCount)];
+                var randomEndPoint = detectedMapPoint[Random.Range(0, detectedCount)] as MapPoint;
 
                 //Make sure nothing block
                 var direction = randomEndPoint.transform.position - startPoint.transform.position;
@@ -74,7 +76,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
     }
 
-    private int DetectedNearby(GameObject startPos, List<MapPoint> nearbyPoints) {
+    private int DetectedNearby(GameObject startPos, ref ArrayList nearbyPoints) {
 
         for (int i = 0; i < mapPoints.Length; i++) {
 
