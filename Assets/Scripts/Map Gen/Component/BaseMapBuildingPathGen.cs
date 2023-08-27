@@ -94,4 +94,12 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
     public abstract void GenerateMesh(Vector3 start, Vector3 end, float length);
 
+    protected void CreateMeshInstance(Matrix4x4 transformMatrix, Mesh targetMesh, out CombineInstance combineInstance) {
+
+        //Start of the bridge
+        combineInstance = new CombineInstance();
+        combineInstance.mesh = targetMesh;
+        combineInstance.transform = transformMatrix;
+
+    }
 }
