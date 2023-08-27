@@ -6,6 +6,10 @@ using UnityEngine;
 
 public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
+    [Header("ID")]
+    public int uniqueComponentID = 0;   //Please make sure this is unique
+
+    [Header("Generate")]
     public int generationTryCount = 10;
     public int maxConnectLegth = 10;
     public MapPoint.PointType pointType;
@@ -13,62 +17,100 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
     private MapPoint[] mapPoints;
 
+    public struct PathPoint {
+        public Vector3 startPos;
+        public Vector3 endPos;
+    }
+
     public override void Initialize() {
 
         base.Initialize();
 
-        Random.InitState(MapGenData.seed);
+        if (GameManagerBase.instance.isServer) {
 
-        //Look for the point
-        mapPoints = GameObject.FindObjectsOfType<MapPoint>(true).
-            Where(t => ((int)t.pointType & 1 << (int)pointType) == (int)t.pointType).
-            ToArray();
+            Random.InitState(MapGenData.seed);
+
+            //Look for the point
+            mapPoints = GameObject.FindObjectsOfType<MapPoint>(true).
+                Where(t => ((int)t.pointType & 1 << (int)pointType) == (int)t.pointType).
+                ToArray();
+
+        }
 
     }
 
     public override IEnumerator Process() {
 
-        if (mapPoints.Length == 0)
-            yield break;
+        if (GameManagerBase.instance.isServer) {
 
-        ArrayList detectedMapPoint = new ArrayList();
+            if (mapPoints.Length == 0)
+                yield break;
 
-        //Loop to try to spawn
-        for (int i = 0; i < generationTryCount; i++) {
+            ArrayList detectedMapPoint = new ArrayList();
 
-            //Look for random point
-            var index = Random.Range(0, mapPoints.Length);
+            //Loop to try to spawn
+            for (int i = 0; i < generationTryCount; i++) {
 
-            var startPoint = mapPoints[index];
+                //Look for random point
+                var index = Random.Range(0, mapPoints.Length);
 
-            //Look for nearby point
-            detectedMapPoint.Clear();   //Make sure we clear first
-            int detectedCount = DetectedNearby(startPoint.gameObject, ref detectedMapPoint);
+                var startPoint = mapPoints[index];
 
-            if (detectedCount <= 0)
-                continue;
+                //Look for nearby point
+                detectedMapPoint.Clear();   //Make sure we clear first
+                int detectedCount = DetectedNearby(startPoint.gameObject, ref detectedMapPoint);
 
-            //Try connect within this range of point
-            for(int id = 0; id < detectedCount; id++) {
-
-                //Find a random point to connect
-                var randomEndPoint = detectedMapPoint[Random.Range(0, detectedCount)] as MapPoint;
-
-                //Make sure nothing block
-                var direction = randomEndPoint.transform.position - startPoint.transform.position;
-                Ray ray = new Ray(startPoint.transform.position, direction.normalized);
-
-                //TODO add the layermask check here
-                if (Physics.Raycast(ray, direction.magnitude, blockMask))
+                if (detectedCount <= 0)
                     continue;
 
-                //CONNECT the point by generating the mesh
-                GenerateMesh(startPoint.transform.position, randomEndPoint.transform.position, direction.magnitude);
+                //Try connect within this range of point
+                for (int id = 0; id < detectedCount; id++) {
 
-                break;
+                    //Find a random point to connect
+                    var randomEndPoint = detectedMapPoint[Random.Range(0, detectedCount)] as MapPoint;
+
+                    //Make sure nothing block
+                    var direction = randomEndPoint.transform.position - startPoint.transform.position;
+                    Ray ray = new Ray(startPoint.transform.position, direction.normalized);
+
+                    //TODO add the layermask check here
+                    if (Physics.Raycast(ray, direction.magnitude, blockMask))
+                        continue;
+
+                    //CONNECT the point by generating the mesh
+                    GenerateMesh(startPoint.transform.position, randomEndPoint.transform.position, direction.magnitude);
+
+                    //Store it
+                    if (!MapGenData.buildingPath.ContainsKey(uniqueComponentID)) {
+
+                        MapGenData.buildingPath.Add(uniqueComponentID, new List<PathPoint>());
+
+                    }
+
+                    MapGenData.buildingPath[uniqueComponentID].Add(new PathPoint 
+                    { 
+                        startPos = startPoint.transform.position, 
+                        endPos = randomEndPoint.transform.position 
+                    });
+
+                    break;
+                }
+
+                yield return null;
+
             }
 
-            yield return null;
+        }
+
+        if (GameManagerBase.instance.isClient) {
+
+            for(int i = 0; i < MapGenData.buildingPath[uniqueComponentID].Count; i++) {
+
+                var pathData = MapGenData.buildingPath[uniqueComponentID][i];
+                var direction = pathData.endPos - pathData.startPos;
+                GenerateMesh(pathData.startPos, pathData.endPos, direction.magnitude);
+
+            }
 
         }
 

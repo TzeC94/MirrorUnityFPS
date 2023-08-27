@@ -16,6 +16,8 @@ public static class MapGenData
     public static List<int> mapBasesType = new List<int>();
     public static SortedDictionary<int, List<List<StructureData>>> baseContents = new SortedDictionary<int, List<List<StructureData>>>();
 
+    public static Dictionary<int, List<BaseMapBuildingPathGen.PathPoint>> buildingPath = new Dictionary<int, List<BaseMapBuildingPathGen.PathPoint>>();
+
     #region Pack
 
     public static void Pack(out byte[] data) {
@@ -44,6 +46,22 @@ public static class MapGenData
 
             }
 
+        }
+
+        //Path
+        writer.WriteInt(buildingPath.Count);
+
+        foreach(var pathData in buildingPath) {
+
+            writer.WriteInt(pathData.Key);
+            writer.WriteInt(pathData.Value.Count);
+
+            for(int i = 0; i < pathData.Value.Count; i++) {
+
+                writer.WriteVector3(pathData.Value[i].startPos);
+                writer.WriteVector3(pathData.Value[i].endPos);
+
+            }
         }
 
         data = writer.ToArray();
@@ -100,6 +118,27 @@ public static class MapGenData
 
         }
 
+        //Path
+        var pathDicCount = reader.ReadInt();
+
+        for(int i = 0; i < pathDicCount; i++) {
+
+            var dicKey = reader.ReadInt();
+            buildingPath.Add(dicKey, new List<BaseMapBuildingPathGen.PathPoint>());
+
+            var pathCount = reader.ReadInt();
+
+            for(int i2 = 0; i2 < pathCount; i2++) {
+
+                BaseMapBuildingPathGen.PathPoint newPathPoint;
+                newPathPoint.startPos = reader.ReadVector3();
+                newPathPoint.endPos = reader.ReadVector3();
+
+                buildingPath[dicKey].Add(newPathPoint);
+
+            }
+
+        }
     }
 
     private static void ReadSpawnedObjectInBase(NetworkReader networkReader, List<StructureData> targetList) {
