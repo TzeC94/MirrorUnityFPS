@@ -63,6 +63,8 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
                 if (detectedCount <= 0)
                     continue;
 
+                yield return null;
+
                 //Try connect within this range of point
                 for (int id = 0; id < detectedCount; id++) {
 
@@ -71,10 +73,8 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
                     //Make sure nothing block
                     var direction = randomEndPoint.transform.position - startPoint.transform.position;
-                    Ray ray = new Ray(startPoint.transform.position, direction.normalized);
 
-                    //TODO add the layermask check here
-                    if (Physics.Raycast(ray, direction.magnitude, blockMask))
+                    if (IsBlocked(startPoint.transform.position, randomEndPoint.transform.position))
                         continue;
 
                     //CONNECT the point by generating the mesh
@@ -95,8 +95,6 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
                     break;
                 }
-
-                yield return null;
 
             }
 
@@ -137,6 +135,15 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
     }
 
     public abstract void GenerateMesh(Vector3 start, Vector3 end, float length);
+
+    protected virtual bool IsBlocked(Vector3 startPos, Vector3 endPos) {
+
+        var direction = endPos - startPos;
+        Ray ray = new Ray(startPos, direction.normalized);
+
+        return Physics.Raycast(ray, direction.magnitude, blockMask);
+
+    }
 
     protected void CreateMeshInstance(Matrix4x4 transformMatrix, Mesh targetMesh, out CombineInstance combineInstance) {
 

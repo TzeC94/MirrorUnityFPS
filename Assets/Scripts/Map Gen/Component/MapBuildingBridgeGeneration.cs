@@ -30,7 +30,7 @@ public class MapBuildingBridgeGeneration : BaseMapBuildingPathGen
         var startDistance = bridgeSize;
         Matrix4x4 movedPoint;
 
-        while (startDistance <= length - bridgeSize) {
+        while (startDistance <= length - bridgeSize / 2f) {
 
             movedPoint = Matrix4x4.Translate(startDistance * bridgeObject.transform.forward) * bridgeObject.transform.localToWorldMatrix;
             CreateMeshInstance(movedPoint, bridgeMesh, out combineMesh);
@@ -58,10 +58,35 @@ public class MapBuildingBridgeGeneration : BaseMapBuildingPathGen
         //Generate the collider
         var meshCollider = bridgeObject.AddComponent<MeshCollider>();
         meshCollider.sharedMesh = finalMesh;
+        //meshCollider.convex = true;
 
         //Look at that
         bridgeObject.transform.position = start;
         bridgeObject.transform.LookAt(end);
 
+        //Force a physics sync, so then the blocking will work correctly
+        Physics.SyncTransforms();
     }
+
+    protected override bool IsBlocked(Vector3 startPos, Vector3 endPos) {
+
+        //Block Check
+        var hitCollider = RayTracer.OverlapSphere(startPos, 0.1f, blockMask);
+        if (hitCollider != null) {
+            return true;
+        }
+
+        hitCollider = RayTracer.OverlapSphere(endPos, 0.1f, blockMask);
+        if (hitCollider != null) {
+            return true;
+        }
+
+        var direction = endPos - startPos;
+        Ray ray = new Ray(startPos, direction.normalized);
+        if (Physics.CapsuleCast(startPos, startPos + Vector3.up, 0.1f, direction, direction.magnitude, blockMask))
+            return true;
+
+        return false;
+    }
+
 }
