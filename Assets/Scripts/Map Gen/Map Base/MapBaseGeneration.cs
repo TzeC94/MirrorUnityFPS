@@ -15,8 +15,8 @@ public class MapBaseGeneration : MapBaseData
     [Header("Map Content")]
     public MapBaseGenerationContent generationContent;
     public MapGenData.MapBaseType baseType { get; private set; }
-    private const float ovarlapCheckRange = 2f;
-    private const float overlapCheckYOffset = 2.5f;
+    private const float ovarlapCheckRange = 12f;
+    private const float overlapCheckYOffset = 13f;
 
     private const int contentGenerationCount = 2;
     public List<StructureData> buildingData = new List<StructureData>();

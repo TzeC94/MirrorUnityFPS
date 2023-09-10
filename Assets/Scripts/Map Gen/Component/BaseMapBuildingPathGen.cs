@@ -32,7 +32,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
             //Look for the point
             mapPoints = GameObject.FindObjectsOfType<MapPoint>(true).
-                Where(t => ((int)t.pointType & 1 << (int)pointType) == (int)t.pointType).
+                Where(t => ((int)t.pointType & (int)pointType) == 1).
                 ToArray();
 
         }

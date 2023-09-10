@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePrefab: {fileID: 2777432331154830471, guid: 7f0a49059aad4824888dcd85d419c406, type: 3}
   baseCountToGenerate: 4
-  baseGap: 20
+  baseGap: 60
 --- !u!114 &322873549957504897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,9 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87270585de723c468bbfd5daaa6f1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueComponentID: 0
   generationTryCount: 10
-  maxConnectLegth: 50
-  pointType: -1
+  maxConnectLegth: 100
+  pointType: 1
   blockMask:
     serializedVersion: 2
     m_Bits: 1

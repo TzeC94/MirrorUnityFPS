@@ -9,5 +9,5 @@ public class MapPoint : MonoBehaviour
     [Flags]
     public enum PointType:short { None = 0, Bridge = 1 }
     
-    public PointerType pointType;
+    public PointType pointType;
 }
