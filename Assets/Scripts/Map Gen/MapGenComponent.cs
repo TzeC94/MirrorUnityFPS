@@ -3,7 +3,6 @@
  */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MapGenComponent : MonoBehaviour, IMapGen
@@ -13,8 +12,4 @@ public abstract class MapGenComponent : MonoBehaviour, IMapGen
     }
 
     public abstract IEnumerator Process();
-
-    public abstract void Save();
-
-    public abstract void Load();
 }
