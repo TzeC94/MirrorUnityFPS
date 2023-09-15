@@ -15,7 +15,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
     public MapPoint.PointType pointType;
     public LayerMask blockMask;
 
-    private MapPoint[] mapPoints;
+    private MapPointCollection[] mapPointsCollection;
 
     public struct PathPoint {
         public Vector3 startPos;
@@ -31,9 +31,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
             Random.InitState(MapGenData.seed);
 
             //Look for the point
-            mapPoints = GameObject.FindObjectsOfType<MapPoint>(true).
-                Where(t => ((int)t.pointType & (int)pointType) == 1).
-                ToArray();
+            mapPointsCollection = GameObject.FindObjectsOfType<MapPointCollection>(true).Where(t => t.ContainType(pointType) == true).ToArray();
 
         }
 
@@ -43,7 +41,7 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
         if (GameManagerBase.instance.isServer) {
 
-            if (mapPoints.Length == 0)
+            if (mapPointsCollection.Length == 0)
                 yield break;
 
             ArrayList detectedMapPoint = new ArrayList();
@@ -52,9 +50,9 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
             for (int i = 0; i < generationTryCount; i++) {
 
                 //Look for random point
-                var index = Random.Range(0, mapPoints.Length);
+                var index = Random.Range(0, mapPointsCollection.Length);
 
-                var startPoint = mapPoints[index];
+                var startPoint = mapPointsCollection[index];
 
                 //Look for nearby point
                 detectedMapPoint.Clear();   //Make sure we clear first
@@ -69,16 +67,21 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
                 for (int id = 0; id < detectedCount; id++) {
 
                     //Find a random point to connect
-                    var randomEndPoint = detectedMapPoint[Random.Range(0, detectedCount)] as MapPoint;
+                    var randomEndPoint = detectedMapPoint[Random.Range(0, detectedCount)] as MapPointCollection;
+
+                    var nearestPoint = GetNearestPoint(startPoint, randomEndPoint);
+
+                    if (nearestPoint == default)
+                        continue;
 
                     //Make sure nothing block
-                    var direction = randomEndPoint.transform.position - startPoint.transform.position;
+                    var direction = nearestPoint.Item2.transform.position - nearestPoint.Item1.transform.position;
 
-                    if (IsBlocked(startPoint.transform.position, randomEndPoint.transform.position))
+                    if (IsBlocked(nearestPoint.Item1.transform.position, nearestPoint.Item2.transform.position))
                         continue;
 
                     //CONNECT the point by generating the mesh
-                    GenerateMesh(startPoint.transform.position, randomEndPoint.transform.position, direction.magnitude);
+                    GenerateMesh(nearestPoint.Item1.transform.position, nearestPoint.Item2.transform.position, direction.magnitude);
 
                     //Store it
                     if (!MapGenData.buildingPath.ContainsKey(uniqueComponentID)) {
@@ -89,8 +92,8 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
                     MapGenData.buildingPath[uniqueComponentID].Add(new PathPoint 
                     { 
-                        startPos = startPoint.transform.position, 
-                        endPos = randomEndPoint.transform.position 
+                        startPos = nearestPoint.Item1.transform.position, 
+                        endPos = nearestPoint.Item2.transform.position 
                     });
 
                     break;
@@ -118,20 +121,57 @@ public abstract class BaseMapBuildingPathGen : MapGenComponent {
 
     private int DetectedNearby(GameObject startPos, ref ArrayList nearbyPoints) {
 
-        for (int i = 0; i < mapPoints.Length; i++) {
+        for (int i = 0; i < mapPointsCollection.Length; i++) {
 
-            if (startPos.gameObject == mapPoints[i].gameObject)
+            if (startPos.gameObject == mapPointsCollection[i].gameObject)
                 continue;
 
-            if(Vector3.Distance(startPos.transform.position, mapPoints[i].transform.position) < maxConnectLegth) {
+            if(Vector3.Distance(startPos.transform.position, mapPointsCollection[i].transform.position) < maxConnectLegth) {
 
-                nearbyPoints.Add(mapPoints[i]);
+                //Find nearest point
+                nearbyPoints.Add(mapPointsCollection[i]);
 
             }
 
         }
 
         return nearbyPoints.Count;
+    }
+
+    private (MapPoint, MapPoint) GetNearestPoint(MapPointCollection point1, MapPointCollection point2) {
+
+        (MapPoint, MapPoint) nearestPoint = default;
+
+        float distance = float.MaxValue;
+
+        foreach(var pointA in point1.mapPoints) {
+
+            if(pointA.ContainType(pointType)) {
+
+                foreach(var pointB in point2.mapPoints) {
+
+                    if(pointB.ContainType(pointType)) {
+
+                        var cDistance = Vector3.Distance(pointA.transform.position, pointB.transform.position);
+
+                        if(distance > cDistance) {
+
+                            distance = cDistance;
+                            nearestPoint.Item1 = pointA;
+                            nearestPoint.Item2 = pointB;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return nearestPoint;
+
     }
 
     public abstract void GenerateMesh(Vector3 start, Vector3 end, float length);

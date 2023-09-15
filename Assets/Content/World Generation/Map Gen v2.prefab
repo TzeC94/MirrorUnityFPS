@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uniqueComponentID: 0
   generationTryCount: 10
-  maxConnectLegth: 100
+  maxConnectLegth: 50
   pointType: 1
   blockMask:
     serializedVersion: 2
