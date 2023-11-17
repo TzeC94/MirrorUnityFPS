@@ -131,13 +131,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8985246609167324018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cdd55966b2c8ef4491882e2eb2274ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 83751cb22a7f9674b8b0d51d60f5e2b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
   maxHealth: 100
+  playerAnimator: {fileID: 7538790818348734246}
   entityName: Centaur
   inventory: {fileID: 7316484457479395450}
   playerHeld: {fileID: 6373610247046128858}

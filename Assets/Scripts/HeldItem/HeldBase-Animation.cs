@@ -18,13 +18,29 @@ public abstract partial class HeldBase
 
     public void AnimFire() {
 
-        animator.SetTrigger(anim_Fire);
+        if (animator != null) {
+
+            animator.SetTrigger(anim_Fire);
+
+        }
+        
+        if(ownerObject.playerAnimator != null) {
+
+            ownerObject.playerAnimator.PlayAttack();
+
+        }
 
     }
 
     public void AnimReload() {
 
-        animator.SetTrigger(anim_Reload);
+        if(animator != null) {
+            animator.SetTrigger(anim_Reload);
+        }
+        
+        if(ownerObject.playerAnimator != null) {
+            ownerObject.playerAnimator.PlayReload();
+        }
 
     }
 }
