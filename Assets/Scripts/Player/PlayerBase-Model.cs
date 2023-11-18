@@ -5,7 +5,6 @@ using UnityEngine;
 
 public partial class PlayerBase
 {
-    //[Header("Animation")]
-    //[SerializeField]
-    //private CharacterAnimator playerAnimator;
+    [Header("Animation")]
+    public CharacterAnimator playerAnimator;
 }

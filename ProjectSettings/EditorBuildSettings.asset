@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: c0caf931477fcf043829b8ba16df6835
-  - enabled: 0
+  - enabled: 1
     path: Assets/StarterAssets/FirstPersonController/Scenes/Playground.unity
     guid: 707acc8dffb72b144bb1ffbe1c965f3d
   - enabled: 1

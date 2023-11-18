@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,5 +54,17 @@ public partial class GameManagerBase
         //Unload this scene
         SceneManager.UnloadSceneAsync("HUD UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
 
+    }
+
+    protected virtual IEnumerator ServerStartProcess() 
+    {
+        yield return null;
+    }
+
+    protected virtual IEnumerator ClientStartProcess() 
+    {
+        yield return null;
+
+        _ClientReady = true;
     }
 }

@@ -10,8 +10,10 @@ public partial class GameManagerBase : NetworkBehaviour
 
     public static PlayerBase LocalPlayer;
 
+    private static bool _ClientReady = false;
+
     //Make sure we set this at the end of it when we're really ready
-    public static bool ClientReady = false;
+    public static bool ClientReady { get { return _ClientReady; } }
 
     PlayerInventoryUIScript playerInventoryUI;
 
@@ -31,6 +33,13 @@ public partial class GameManagerBase : NetworkBehaviour
         if (isClient){
 
             LoadUI();
+            StartCoroutine(ClientStartProcess());
+
+        }
+
+        if (isServer) {
+
+            StartCoroutine(ServerStartProcess());
 
         }
     }

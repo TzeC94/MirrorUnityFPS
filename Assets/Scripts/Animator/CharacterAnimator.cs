@@ -12,6 +12,8 @@ public class CharacterAnimator : BaseAnimator
     private static int verticalKey = Animator.StringToHash("Vertical");
     private static int horizontalKey = Animator.StringToHash("Horizontal");
     private static int onGround = Animator.StringToHash("OnGround");
+    private static int anim_Fire = Animator.StringToHash("Fire");
+    private static int anim_Reload = Animator.StringToHash("Reload");
 
     NetworkBehaviour networkBehaviour;
 
@@ -58,6 +60,18 @@ public class CharacterAnimator : BaseAnimator
             }
 
         }
+
+    }
+
+    public void PlayAttack() {
+
+        networkAnimator.SetTrigger(anim_Fire);
+
+    }
+
+    public void PlayReload() {
+
+        networkAnimator.SetTrigger(anim_Reload);
 
     }
 }

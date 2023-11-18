@@ -30,6 +30,8 @@ public class NPCAttackNode : NPCThinkNode
         //Grab my target
         target = myThinkTree.unityTypeSharedData[NPCHelper.targetString] as GameObject;
 
+        myThinkTree.currentNPC.NPC_AttackStart();
+
     }
 
     public override void OnUpdate() {

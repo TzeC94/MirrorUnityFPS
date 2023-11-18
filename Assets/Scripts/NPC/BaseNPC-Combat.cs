@@ -1,5 +1,9 @@
 public partial class BaseNPC
 {
+    public virtual void NPC_AttackStart() {
+
+    }
+
     public virtual void NPC_AttackUpdate() {
 
         if (playerHeld == null)
