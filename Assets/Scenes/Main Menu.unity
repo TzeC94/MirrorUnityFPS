@@ -1936,6 +1936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6001169850591773642, guid: 1ed7af2edea884a4e8240686488ca192, type: 3}
+      propertyPath: onlineScene
+      value: Assets/StarterAssets/FirstPersonController/Scenes/Playground.unity
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
