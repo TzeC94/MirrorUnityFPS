@@ -1,0 +1,276 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1011 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Centaur_turn_body
+  m_Mask: 00000000010000000000000000000000000000000100000001000000010000000100000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Centaur_Armor
+    m_Weight: 1
+  - m_Path: Centaur_Body
+    m_Weight: 1
+  - m_Path: Centaur_hairs
+    m_Weight: 1
+  - m_Path: Centaur_rig
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/pelvis
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/pelvis/pelvis_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/belly
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/belly/belly_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/chest_horse
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/chest_horse/chest_horse_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.L/upper_arm.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.L/upper_arm.L/forearm.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.L/upper_arm.L/forearm.L/hoof.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.L/upper_arm.L/forearm.L/hoof.L/f_toe.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.L/upper_arm.L/forearm.L/hoof.L/f_toe.L/f_toe.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.R/upper_arm.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.R/upper_arm.R/forearm.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.R/upper_arm.R/forearm.R/hoof.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.R/upper_arm.R/forearm.R/hoof.R/f_toe.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/shoulder_horse.R/upper_arm.R/forearm.R/hoof.R/f_toe.R/f_toe.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/front_armor
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/front_armor/front_armor_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/back_armor
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/back_armor/back_armor_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_armor
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_armor/chest_armor_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/neck
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/neck/head
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/neck/head/head_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/index1.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/index1.L/index2.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/index1.L/index2.L/index3.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/index1.L/index2.L/index3.L/index3.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/little1.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/little1.L/little2.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/little1.L/little2.L/little3.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/little1.L/little2.L/little3.L/little3.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/middle1.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/middle1.L/middle2.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/middle1.L/middle2.L/middle3.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/middle1.L/middle2.L/middle3.L/middle3.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/ring1.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/ring1.L/ring2.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/ring1.L/ring2.L/ring3.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/ring1.L/ring2.L/ring3.L/ring3.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/thumb1.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/thumb1.L/thumb2.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/thumb1.L/thumb2.L/thumb3.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.L/arm.L/forearm_hum.L/hand.L.001/thumb1.L/thumb2.L/thumb3.L/thumb3.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/index1.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/index1.R/index2.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/index1.R/index2.R/index3.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/index1.R/index2.R/index3.R/index3.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/little1.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/little1.R/little2.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/little1.R/little2.R/little3.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/little1.R/little2.R/little3.R/little3.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/middle1.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/middle1.R/middle2.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/middle1.R/middle2.R/middle3.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/middle1.R/middle2.R/middle3.R/middle3.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/ring1.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/ring1.R/ring2.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/ring1.R/ring2.R/ring3.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/ring1.R/ring2.R/ring3.R/ring3.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/thumb1.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/thumb1.R/thumb2.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/thumb1.R/thumb2.R/thumb3.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/shoulder.R/arm.R/forearm_hum.R/hand.R/thumb1.R/thumb2.R/thumb3.R/thumb3.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/spine_hairs
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/spine1_horse/spine2_horse/spine_mix/spine_human/chest_human/spine_hairs/spine_hairs_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/Hip/tail1
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/tail1/tail2
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/tail1/tail2/tail3
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/tail1/tail2/tail3/tail4
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/tail1/tail2/tail3/tail4/tail4_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.L
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.L/shin.L
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.L/shin.L/foot.L
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.L/shin.L/foot.L/r_hoof.L
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.L/shin.L/foot.L/r_hoof.L/r_toe.L
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.L/shin.L/foot.L/r_hoof.L/r_toe.L/r_toe.L_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.R
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.R/shin.R
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.R/shin.R/foot.R
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.R/shin.R/foot.R/r_hoof.R
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.R/shin.R/foot.R/r_hoof.R/r_toe.R
+    m_Weight: 1
+  - m_Path: Centaur_rig/Hip/thigh.R/shin.R/foot.R/r_hoof.R/r_toe.R/r_toe.R_end
+    m_Weight: 1
+  - m_Path: Centaur_rig/IK_spine
+    m_Weight: 0
+  - m_Path: Centaur_rig/IK_spine/IK_spine_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_front_foot.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_front_foot.L/IK_front_kee.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_front_foot.L/IK_front_kee.L/IK_front_kee.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_front_foot.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_front_foot.R/IK_front_kee.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_front_foot.R/IK_front_kee.R/IK_front_kee.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_hand.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_hand.L/IK_elbow.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_hand.L/IK_elbow.L/IK_elbow.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_hand.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_hand.R/IK_elbow.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_hand.R/IK_elbow.R/IK_elbow.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.L/IK_rear_knee.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.L/IK_rear_knee.L/IK_rear_knee.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.L/IK_upper_leg.L
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.L/IK_upper_leg.L/IK_upper_leg.L_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.R/IK_rear_knee.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.R/IK_rear_knee.R/IK_rear_knee.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.R/IK_upper_leg.R
+    m_Weight: 0
+  - m_Path: Centaur_rig/root/IK_rear_foot.R/IK_upper_leg.R/IK_upper_leg.R_end
+    m_Weight: 0
+  - m_Path: Centaur_rig/weapon_bone
+    m_Weight: 0
+  - m_Path: Centaur_rig/weapon_bone/weapon_bone_end
+    m_Weight: 0
+  - m_Path: Lance
+    m_Weight: 1

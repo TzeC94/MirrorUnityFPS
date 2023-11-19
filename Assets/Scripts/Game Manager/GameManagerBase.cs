@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Mirror;
 
-public partial class GameManagerBase : NetworkBehaviour
+public abstract partial class GameManagerBase : NetworkBehaviour
 {
     public static GameManagerBase instance;
 
     public static PlayerBase LocalPlayer;
 
+    private static bool _ClientReady = false;
+
     //Make sure we set this at the end of it when we're really ready
-    public static bool ClientReady = false;
+    public static bool ClientReady { get { return _ClientReady; } }
 
     PlayerInventoryUIScript playerInventoryUI;
 
@@ -31,6 +30,13 @@ public partial class GameManagerBase : NetworkBehaviour
         if (isClient){
 
             LoadUI();
+            StartCoroutine(ClientProcess());
+
+        }
+
+        if (isServer) {
+
+            StartCoroutine(ServerProcess());
 
         }
     }

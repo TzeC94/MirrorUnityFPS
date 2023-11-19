@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(BaseHeld))]
 public partial class PlayerBase : BaseCombatScript, IAnimator {
 
+    [Header("Naming")]
+    public string entityName;
+
     [Header("Inventory")]
     public PlayerInventory inventory;
     public BaseHeld playerHeld;

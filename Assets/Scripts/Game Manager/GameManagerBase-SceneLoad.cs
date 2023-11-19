@@ -1,10 +1,11 @@
+using Mirror;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public partial class GameManagerBase
+public abstract partial class GameManagerBase
 {
+    [Client]
     void LoadUI() {
 
         var loadMasterAsync = SceneManager.LoadSceneAsync("Master UI", LoadSceneMode.Additive);
@@ -13,6 +14,7 @@ public partial class GameManagerBase
 
     }
 
+    [Client]
     void LoadMasterUICompleted(AsyncOperation asyncOperation) {
 
         var loadInventoryAynsc = SceneManager.LoadSceneAsync("Inventory UI", LoadSceneMode.Additive);
@@ -21,6 +23,7 @@ public partial class GameManagerBase
 
     }
 
+    [Client]
     void LoadInventoryUICompleted(AsyncOperation asyncOperation) {
 
         var uiObject = GameObject.Find("Inventory Panel");
@@ -37,6 +40,7 @@ public partial class GameManagerBase
         LoadHUDUI();
     }
 
+    [Client]
     void LoadHUDUI() {
 
         var hudUIAsync = SceneManager.LoadSceneAsync("HUD UI", LoadSceneMode.Additive);
@@ -45,6 +49,7 @@ public partial class GameManagerBase
 
     }
 
+    [Client]
     void LoadHUDUICompleted(AsyncOperation asyncOperation) {
 
         var uiObject = GameObject.Find("HUD");
@@ -53,5 +58,24 @@ public partial class GameManagerBase
         //Unload this scene
         SceneManager.UnloadSceneAsync("HUD UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
 
+    }
+
+    protected abstract IEnumerator ServerStartProcess();
+
+    [Server]
+    private IEnumerator ServerProcess() {
+
+        yield return ServerStartProcess();
+
+    }
+
+    protected abstract IEnumerator ClientStartProcess();
+
+    [Client]
+    private IEnumerator ClientProcess() 
+    {
+        yield return ClientStartProcess();
+
+        _ClientReady = true;
     }
 }
