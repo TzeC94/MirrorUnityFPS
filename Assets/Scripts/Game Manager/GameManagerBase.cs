@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Mirror;
 
-public partial class GameManagerBase : NetworkBehaviour
+public abstract partial class GameManagerBase : NetworkBehaviour
 {
     public static GameManagerBase instance;
 
@@ -33,13 +30,13 @@ public partial class GameManagerBase : NetworkBehaviour
         if (isClient){
 
             LoadUI();
-            StartCoroutine(ClientStartProcess());
+            StartCoroutine(ClientProcess());
 
         }
 
         if (isServer) {
 
-            StartCoroutine(ServerStartProcess());
+            StartCoroutine(ServerProcess());
 
         }
     }
