@@ -1,7 +1,5 @@
 using Mirror;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GameManagerProcBase : GameManagerBase
@@ -15,7 +13,6 @@ public class GameManagerProcBase : GameManagerBase
     //Client
     bool clientReceivedMapData = false;
 
-    [Server]
     protected override IEnumerator ServerStartProcess() {
 
         yield return mapGenManager.GenerationProcess();
@@ -47,7 +44,6 @@ public class GameManagerProcBase : GameManagerBase
         clientReceivedMapData = true;
     }
 
-    [Client]
     protected override IEnumerator ClientStartProcess() {
 
         clientReceivedMapData = false;
@@ -77,8 +73,6 @@ public class GameManagerProcBase : GameManagerBase
         yield return mapGenManager.GenerationProcess();
 
         UIHUD.Instance.SetLoadingProgress(1f);
-
-        yield return base.ClientStartProcess();
 
         UIHUD.Instance.ShowLoading(false);
 
