@@ -32,6 +32,6 @@ Features
     - Server will sync the map to client when join
     - Bridge Generator
 
-I'm using Unity 2022.3.5f1
+I'm using Unity 2022.3.14f1
 
 Everything start in Bootstrap Scene
