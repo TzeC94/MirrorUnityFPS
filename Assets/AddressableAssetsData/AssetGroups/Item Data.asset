@@ -22,26 +22,38 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item Data
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f7afa5d0bd2279542887eeb44a2fb723
     m_Address: Assets/Content/Ammo/Pistol/Ammo Item Data.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item Data
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dcf4290ca0254f047810f07b0ae8afca
     m_Address: Assets/Content/Ammo/Assault Rifle/Ammo Item Data.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item Data
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1afa83e89d28a7b418719dc9bc44f967
     m_Address: Assets/Content/Weapon/Range/Pistol/Data/Pistol Data.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item Data
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a108464923bec74bb776a371d125c3c
     m_Address: Assets/Content/Weapon/Melee/Mid Range Knife/Data/Mid Range Knife Data.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item Data
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bd36247c34e79d4c90e91a2730b202e
+    m_Address: Assets/Content/Weapon/Melee/Centaur Invisible Spear/Data/Centaur Invisible
+      Spear.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Item Data
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 11dfbf2985608a04fb902fc1a128fa67, type: 2}
   m_SchemaSet:
