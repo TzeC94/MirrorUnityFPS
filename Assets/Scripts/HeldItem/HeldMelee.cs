@@ -54,8 +54,13 @@ public abstract class HeldMelee : HeldBase {
 
     protected void OnDrawGizmosSelected() {
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(attackCheckPoint.position, attackSize);
+        if(attackCheckPoint != null) {
+
+            Gizmos.color = Color.red;
+            Gizmos.matrix = Matrix4x4.TRS(attackCheckPoint.position, attackCheckPoint.rotation, attackCheckPoint.lossyScale);
+            Gizmos.DrawCube(Vector3.zero, attackSize);
+
+        }
 
     }
 
