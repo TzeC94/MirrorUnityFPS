@@ -23,11 +23,15 @@ public class NPCIDLENode : NPCThinkNode {
         
     }
 
-    public override void OnStart() {
+    protected override void OnStart() {
         
     }
 
-    public override void OnUpdate() {
+    protected override void OnUpdate() {
+        
+    }
+
+    protected override void OnEnd() {
         
     }
 }

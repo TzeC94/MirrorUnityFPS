@@ -29,4 +29,8 @@ MonoBehaviour:
       nextNodeIndex: 0
     - title: Fail To Kill
       nextNodeIndex: 1
-  alwaysRunNode: []
+  alwaysRunNode:
+  - thinkNode: {fileID: 11400000, guid: 92b8d214775d7cd43a58ec57a1417591, type: 2}
+    nextNode:
+    - title: Below Health Hit
+      nextNodeIndex: 0

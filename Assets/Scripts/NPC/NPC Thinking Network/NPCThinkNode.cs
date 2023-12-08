@@ -4,15 +4,8 @@ using UnityEngine;
 
 public abstract class NPCThinkNode : ScriptableObject
 {
-    public enum State {
-        None,
-        Success,
-        Running,
-        Failed
-    }
-
-    [NonSerialized]
-    public State _state = State.None;
+    public bool StopRunAfterDone = false;
+    private bool stopRun = false;
 
     protected NPCThinkTree myThinkTree;
 
@@ -43,16 +36,50 @@ public abstract class NPCThinkNode : ScriptableObject
 
     }
 
-    public abstract void OnStart();
+    protected abstract void OnStart();
 
-    protected virtual void OnEnd(int nextNodeIndex) {
+    protected abstract void OnEnd();
 
-        myThinkTree.CurrentNodeEnded(nextNodeIndex);
+    protected abstract void OnUpdate();
+
+    protected abstract void OnFailed();
+
+    public void StartNode() {
+
+        OnStart();
 
     }
 
-    public abstract void OnUpdate();
-    protected abstract void OnFailed();
+    public void UpdateNode() {
+        
+        if(stopRun) 
+            return;
+
+        OnUpdate();
+
+    }
+
+    public void EndNode(int nextNodeIndex) {
+
+        OnEnd();
+
+        myThinkTree.CurrentNodeEnded(nextNodeIndex);
+
+        if (StopRunAfterDone) {
+            stopRun = true;
+        }
+
+    }
+
+    public void FailNode() {
+
+        OnFailed();
+
+        if (StopRunAfterDone) {
+            stopRun = true;
+        }
+
+    }
 
 }
 

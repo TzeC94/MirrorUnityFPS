@@ -175,7 +175,7 @@ MonoBehaviour:
   playerHeld: {fileID: 6373610247046128858}
   weaponHoldingRoot: {fileID: 5393615471623235500}
   localWeaponHoldingRoot: {fileID: 0}
-  npcThinkTree: {fileID: 11400000, guid: 908914fb9f0d353428a4a876f00a6e2e, type: 2}
+  npcThinkTree: {fileID: 11400000, guid: 816d5ad362c9e1247ac37ebc909b3587, type: 2}
   navAgent: {fileID: 6672257650121582488}
 --- !u!114 &7316484457479395450
 MonoBehaviour:

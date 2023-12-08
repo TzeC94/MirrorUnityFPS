@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6270fb1ac8c6e6e4183899c38ed2f389, type: 3}
-  m_Name: IDLE Scout Node
+  m_Script: {fileID: 11500000, guid: b326777155f31ac43987861d43b08996, type: 3}
+  m_Name: Centaur Below Health
   m_EditorClassIdentifier: 
   StopRunAfterDone: 0
   titleNameList:
-  - Scout Success
-  scoutLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  fov: 60
-  distance: 30
+  - Below Health Hit
+  healthBelowTarget: 30

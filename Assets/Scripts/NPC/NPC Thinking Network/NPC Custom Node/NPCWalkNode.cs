@@ -36,11 +36,11 @@ public class NPCWalkNode : NPCThinkNode {
         //Stop the agent
         navAgent.isStopped = true;
 
-        OnEnd(1);
+        EndNode(1);
 
     }
 
-    public override void OnStart() {
+    protected override void OnStart() {
 
         navAgent = myThinkTree.currentNPC.NavAgent;
 
@@ -55,7 +55,7 @@ public class NPCWalkNode : NPCThinkNode {
 
     }
 
-    public override void OnUpdate() {
+    protected override void OnUpdate() {
 
         //Update to target
         if (currentUpdateCount >= updateFrequency) {
@@ -74,7 +74,7 @@ public class NPCWalkNode : NPCThinkNode {
 
         if (myThinkTree.currentNPC.RemainingDistance <= stoppingDistance) {
 
-            OnEnd(0);
+            EndNode(0);
 
         }
 
@@ -106,5 +106,9 @@ public class NPCWalkNode : NPCThinkNode {
 
         OnFailed();
         return false;
+    }
+
+    protected override void OnEnd() {
+        
     }
 }

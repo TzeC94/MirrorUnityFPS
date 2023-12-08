@@ -32,13 +32,13 @@ public class NPCIDLEScoutNode : NPCIDLENode
 
     }
 
-    public override void OnStart() {
+    protected override void OnStart() {
 
         base.OnStart();
 
     }
 
-    public override void OnUpdate() {
+    protected override void OnUpdate() {
 
         base.OnUpdate();
 
@@ -56,7 +56,7 @@ public class NPCIDLEScoutNode : NPCIDLENode
 
             myThinkTree.unityTypeSharedData[NPCHelper.targetString] = target;
 
-            OnEnd(0);
+            EndNode(0);
 
         }
 
