@@ -1,12 +1,12 @@
 using Mirror;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerInventory : InventoryBase
 {
     //Singleton
     public static PlayerInventory instance;
+
+    public ItemData[] defaultInventoryItem;
 
     // Start is called before the first frame update
     public override void OnStartLocalPlayer() {
@@ -44,6 +44,18 @@ public class PlayerInventory : InventoryBase
         if (isLocalPlayer && PlayerInventoryUIScript.instance != null && PlayerInventoryUIScript.instance.isOpen) {
 
             PlayerInventoryUIScript.instance.RefreshItem();
+
+        }
+
+    }
+
+    public override void InitializeCollectedItem() {
+
+        base.InitializeCollectedItem();
+
+        foreach(var item in defaultInventoryItem) {
+
+            AddToInventory(new Item(item));
 
         }
 
