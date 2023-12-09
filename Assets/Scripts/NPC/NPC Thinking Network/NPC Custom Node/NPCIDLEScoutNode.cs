@@ -16,9 +16,9 @@ public class NPCIDLEScoutNode : NPCIDLENode
 
 #if UNITY_EDITOR
 
-    protected override void OnValidate() {
+    protected override void Reset() {
 
-        base.OnValidate();
+        base.Reset();
 
         titleNameList[0] = "Scout Success";
 

@@ -11,9 +11,9 @@ public class NPCBelowHealth : NPCThinkNode {
 
 #if UNITY_EDITOR
 
-    protected override void OnValidate() {
+    protected override void Reset() {
 
-        base.OnValidate();
+        base.Reset();
 
         titleNameList[0] = "Below Health Hit";
 

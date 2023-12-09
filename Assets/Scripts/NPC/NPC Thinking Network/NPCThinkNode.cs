@@ -18,9 +18,9 @@ public abstract class NPCThinkNode : ScriptableObject
 
     public string[] titleNameList = new string[0];
 
-    protected virtual void OnValidate() {
-        
-        if(titleNameList.Length != outputNodeCount) {
+    protected virtual void Reset() {
+
+        if (titleNameList.Length != outputNodeCount) {
 
             titleNameList = new string[outputNodeCount];
 
