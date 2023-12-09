@@ -33,6 +33,10 @@ MonoBehaviour:
     nextNode:
     - title: Espace Done
       nextNodeIndex: 4
+  - thinkNode: {fileID: 11400000, guid: 66f1805e69610ab4a9001b9f1e3cee44, type: 2}
+    nextNode:
+    - title: Swap Item Done
+      nextNodeIndex: 5
   - thinkNode: {fileID: 11400000, guid: f10196fe6e3cbbc4bb56ebf9a5e1dda9, type: 2}
     nextNode:
     - title: Kill Target

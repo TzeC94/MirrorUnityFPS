@@ -16,10 +16,10 @@ MonoBehaviour:
   itemName: Centaur Spear
   itemDescription: Don't use this
   itemIcon: Mid Range Knife Icon
-  itemIndex: 12
+  itemIndex: 14
   itemType: 1
-  itemDataAddress: Assets/Content/Weapon/Melee/Centaur Invisible Spear/Data/Mid Range
-    Knife Data.asset
+  itemDataAddress: Assets/Content/Weapon/Melee/Centaur Invisible Spear/Data/Centaur
+    Invisible Spear.asset
   itemHeldPrefab: {fileID: 3377064176178791969, guid: ab728314c9f794149ac899d312f730e3, type: 3}
   itemHeldPrefab_Local: {fileID: 6294001000978569977, guid: 49945451bfde24f4b94c4277bdccaacd, type: 3}
   stackable: 0

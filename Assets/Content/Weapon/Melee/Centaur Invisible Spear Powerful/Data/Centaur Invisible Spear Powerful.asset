@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faecdc19e42794c4faacd25645011c4f, type: 3}
   m_Name: Centaur Invisible Spear Powerful
   m_EditorClassIdentifier: 
-  itemID: weapon.centaurInvisibleSpear
-  itemName: Centaur Spear
+  itemID: weapon.centaurInvisibleSpearPowerful
+  itemName: Centaur Spear Powerful
   itemDescription: Don't use this
   itemIcon: Mid Range Knife Icon
-  itemIndex: 12
+  itemIndex: 16
   itemType: 1
   itemDataAddress: Assets/Content/Weapon/Melee/Centaur Invisible Spear Powerful/Data/Centaur
-    Invisible Spear.asset
+    Invisible Spear Powerful.asset
   itemHeldPrefab: {fileID: 3377064176178791969, guid: 2f7d36fd6db367b4ca0048888205b2e0, type: 3}
   itemHeldPrefab_Local: {fileID: 6294001000978569977, guid: 6b3a97d7927d6a2419afa3c5224c0044, type: 3}
   stackable: 0
