@@ -193,7 +193,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _inventoryType: 0
-  inventoryMax: 20
+  inventoryMax: 10
 --- !u!114 &6373610247046128858
 MonoBehaviour:
   m_ObjectHideFlags: 0
