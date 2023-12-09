@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Below Health", menuName = "AI/Below Health")]
 public class NPCBelowHealth : NPCThinkNode {
 
-    public float healthBelowTarget = 50f;
+    public float healthBelowPercent = 50f;
 
     public override int outputNodeCount => 1;
 
@@ -27,7 +27,9 @@ public class NPCBelowHealth : NPCThinkNode {
 
     protected override void OnUpdate() {
         
-        if(healthBelowTarget >= myThinkTree.currentNPC.CurrentHealth) {
+        float healthThresold = myThinkTree.currentNPC.MaxHealth / 100f * healthBelowPercent;
+
+        if(healthThresold >= myThinkTree.currentNPC.CurrentHealth) {
 
             EndNode(0);
 

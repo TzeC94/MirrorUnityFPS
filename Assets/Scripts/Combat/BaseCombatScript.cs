@@ -9,6 +9,7 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
     private int maxHealth = 100;
     [SyncVar]
     protected int currentHealth = 0;
+    public int MaxHealth { get { return maxHealth;  } }
     public int CurrentHealth { get { return currentHealth; } }
     public bool IsDead { get { return currentHealth <= 0f; } }
 
