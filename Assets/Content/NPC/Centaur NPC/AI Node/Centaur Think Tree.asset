@@ -29,8 +29,12 @@ MonoBehaviour:
       nextNodeIndex: 0
     - title: Fail To Kill
       nextNodeIndex: 1
+  - thinkNode: {fileID: 11400000, guid: 6b69fe974cd228b478a7aaa3747bf661, type: 2}
+    nextNode:
+    - title: Espace Done
+      nextNodeIndex: 0
   alwaysRunNode:
-  - thinkNode: {fileID: 11400000, guid: 92b8d214775d7cd43a58ec57a1417591, type: 2}
+  - thinkNode: {fileID: 11400000, guid: 550206c2d102cac40b9dbb734d4f1ff3, type: 2}
     nextNode:
     - title: Below Health Hit
-      nextNodeIndex: 0
+      nextNodeIndex: 3
