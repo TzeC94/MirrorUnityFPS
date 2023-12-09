@@ -194,6 +194,8 @@ MonoBehaviour:
   syncInterval: 0.1
   _inventoryType: 0
   inventoryMax: 10
+  defaultInventoryItem:
+  - {fileID: 11400000, guid: f737bea2c25345544b26942b6b0526cc, type: 2}
 --- !u!114 &6373610247046128858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +213,7 @@ MonoBehaviour:
   syncInterval: 0.1
   _inventoryType: 1
   inventoryMax: 1
-  heldDefault: {fileID: 11400000, guid: 7a108464923bec74bb776a371d125c3c, type: 2}
+  heldDefault: {fileID: 11400000, guid: 1bd36247c34e79d4c90e91a2730b202e, type: 2}
 --- !u!114 &4116271345607674581
 MonoBehaviour:
   m_ObjectHideFlags: 0

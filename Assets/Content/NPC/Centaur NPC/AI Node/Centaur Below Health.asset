@@ -15,4 +15,4 @@ MonoBehaviour:
   StopRunAfterDone: 1
   titleNameList:
   - Below Health Hit
-  healthBelowTarget: 30
+  healthBelowPercent: 20
