@@ -45,12 +45,14 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     #region Death
 
+    [Server, Client]
     public virtual bool DeathCheck() {
 
         return IsDead;
 
     }
 
+    [Server]
     public virtual void OnKilled(HitInfo hitInfo) {
 
         OnDeathCallback?.Invoke();
@@ -58,6 +60,7 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     }
 
+    [Server]
     public virtual void Respawn() {
 
         ResetHealth();

@@ -62,9 +62,20 @@ public partial class PlayerBase : BaseCombatScript, IAnimator {
 
     #endregion
 
+    public override void OnKilled(HitInfo hitInfo) {
+
+        base.OnKilled(hitInfo);
+
+        //Dead animation??
+
+
+    }
+
 #if UNITY_EDITOR
 
-    public virtual void OnValidate() {
+    protected override void OnValidate() {
+
+        base.OnValidate();
 
         if (inventory == null) {
 

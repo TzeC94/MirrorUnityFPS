@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1238561139720260112}
+  - component: {fileID: 4944164406201175954}
   m_Layer: 0
   m_Name: grab point
   m_TagString: Untagged
@@ -62,6 +63,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8578125151547813638}
   m_LocalEulerAnglesHint: {x: -3.184, y: -4.879, z: 93.149}
+--- !u!114 &4944164406201175954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591513936155077694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619e444b369a66940ad2f6dd5602d564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointName: grab point
 --- !u!1 &8004541998766766819
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +322,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  animator: {fileID: 0}
+  animator: {fileID: 8578125151538703040}
 --- !u!114 &7538790818348734246
 MonoBehaviour:
   m_ObjectHideFlags: 0
