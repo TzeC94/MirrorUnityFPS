@@ -9,9 +9,9 @@ public class NPCIDLENode : NPCThinkNode {
 
 #if UNITY_EDITOR
 
-    protected override void OnValidate() {
+    protected override void Reset() {
 
-        base.OnValidate();
+        base.Reset();
 
         titleNameList[0] = "IDLE Success";
 
@@ -23,11 +23,15 @@ public class NPCIDLENode : NPCThinkNode {
         
     }
 
-    public override void OnStart() {
+    protected override void OnStart() {
         
     }
 
-    public override void OnUpdate() {
+    protected override void OnUpdate() {
+        
+    }
+
+    protected override void OnEnd() {
         
     }
 }

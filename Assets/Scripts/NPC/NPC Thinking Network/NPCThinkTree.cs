@@ -27,7 +27,7 @@ public class NPCThinkTree : ScriptableObject
         _currentNPC = thisNPC;
 
         currentNode = nodeList[0];
-        currentNode.thinkNode.OnStart();
+        currentNode.thinkNode.StartNode();
 
         //SETTTTT
         foreach(var thinkNode in nodeList) {
@@ -52,7 +52,7 @@ public class NPCThinkTree : ScriptableObject
 
         if (currentNode != null) {
 
-            currentNode.thinkNode.OnUpdate();
+            currentNode.thinkNode.UpdateNode();
 
         }
 
@@ -63,7 +63,7 @@ public class NPCThinkTree : ScriptableObject
         //Find the next node
         var nextNodeData = currentNode.nextNode[nextNodeIndex];
         currentNode = nodeList[nextNodeData.nextNodeIndex];
-        currentNode.thinkNode.OnStart();
+        currentNode.thinkNode.StartNode();
 
     }
 
@@ -72,7 +72,7 @@ public class NPCThinkTree : ScriptableObject
         for (int i = 0; i < alwaysNodeCount; i++) {
 
             var currentAlwaysNode = alwaysRunNode[i];
-            currentAlwaysNode.thinkNode.OnUpdate();
+            currentAlwaysNode.thinkNode.UpdateNode();
 
         }
 

@@ -122,13 +122,13 @@ public static class RayTracer
                     if(targetObject == null) {
 
                         targetObject = sphereTarget.gameObject;
-                        cachedDistance = Vector3.Distance(targetPos, myPos);
+                        cachedDistance = (targetPos - myPos).sqrMagnitude;
 
                     } else {
 
                         //Check distance
-                        var betweenDistance = Vector3.Distance(targetPos, myPos);
-                        if(betweenDistance < cachedDistance) {
+                        var betweenDistance = (targetPos - myPos).sqrMagnitude;
+                        if (betweenDistance < cachedDistance) {
 
                             cachedDistance = betweenDistance;
                             targetObject = sphereTarget.gameObject;

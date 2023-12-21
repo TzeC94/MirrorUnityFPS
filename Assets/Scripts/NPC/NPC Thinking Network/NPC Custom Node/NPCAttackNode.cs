@@ -14,9 +14,9 @@ public class NPCAttackNode : NPCThinkNode
 
 #if UNITY_EDITOR
 
-    protected override void OnValidate() {
+    protected override void Reset() {
 
-        base.OnValidate();
+        base.Reset();
 
         titleNameList[0] = "Kill Target";
         titleNameList[1] = "Fail To Kill";
@@ -25,7 +25,7 @@ public class NPCAttackNode : NPCThinkNode
 
 #endif
 
-    public override void OnStart() {
+    protected override void OnStart() {
 
         //Grab my target
         target = myThinkTree.unityTypeSharedData[NPCHelper.targetString] as GameObject;
@@ -34,7 +34,7 @@ public class NPCAttackNode : NPCThinkNode
 
     }
 
-    public override void OnUpdate() {
+    protected override void OnUpdate() {
 
         AttackUpdate();
 
@@ -42,7 +42,7 @@ public class NPCAttackNode : NPCThinkNode
 
     protected override void OnFailed() {
 
-        OnEnd(1);
+        EndNode(1);
 
     }
 
@@ -77,4 +77,7 @@ public class NPCAttackNode : NPCThinkNode
 
     }
 
+    protected override void OnEnd() {
+        
+    }
 }

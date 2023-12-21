@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6270fb1ac8c6e6e4183899c38ed2f389, type: 3}
   m_Name: IDLE Scout Node
   m_EditorClassIdentifier: 
-  outputNode:
-  - title: Chase
-    nextNodeIndex: 1
-  initialized: 1
+  StopRunAfterDone: 0
+  titleNameList:
+  - Scout Success
   scoutLayerMask:
     serializedVersion: 2
     m_Bits: 64
   fov: 60
-  distance: 20
+  distance: 30

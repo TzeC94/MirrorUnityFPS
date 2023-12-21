@@ -73,6 +73,20 @@ MonoBehaviour:
   - {fileID: 4726437905770876371, guid: 4c30120d51f383441b017cde43b311c4, type: 3}
   - {fileID: 3377064176178791969, guid: 0e9e7da358e77884c98bffb93c0bb965, type: 3}
   - {fileID: 788805738652152201, guid: 590bf541e58430e4db6a47c8f8301eb4, type: 3}
+  - {fileID: 3377064176178791969, guid: ab728314c9f794149ac899d312f730e3, type: 3}
+  - {fileID: 788805738652152201, guid: 9ce920298168dec48b1301ff06b6cf40, type: 3}
+  - {fileID: 3377064176178791969, guid: 2f7d36fd6db367b4ca0048888205b2e0, type: 3}
+  - {fileID: 788805738652152201, guid: 99cf34fdc916f5b4f98fd9af1c331225, type: 3}
+  snapshotSettings:
+    bufferTimeMultiplier: 2
+    catchupNegativeThreshold: -1
+    catchupPositiveThreshold: 1
+    catchupSpeed: 0.019999999552965164
+    slowdownSpeed: 0.03999999910593033
+    driftEmaDuration: 1
+    dynamicAdjustment: 1
+    dynamicAdjustmentTolerance: 1
+    deliveryTimeEmaDuration: 2
   timeInterpolationGui: 0
 --- !u!114 &3863060069754316772
 MonoBehaviour:
@@ -86,20 +100,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Port: 7777
+  port: 7777
   DualMode: 1
   NoDelay: 1
   Interval: 10
   Timeout: 10000
+  RecvBufferSize: 7361536
+  SendBufferSize: 7361536
   FastResend: 2
-  CongestionWindow: 0
-  SendWindowSize: 4096
   ReceiveWindowSize: 4096
+  SendWindowSize: 4096
   MaxRetransmit: 40
-  NonAlloc: 1
-  MaximizeSendReceiveBuffersToOSLimit: 1
-  ReliableMaxMessageSize: 298449
-  UnreliableMaxMessageSize: 1199
+  MaximizeSocketBuffers: 1
+  ReliableMaxMessageSize: 297433
+  UnreliableMaxMessageSize: 1195
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0

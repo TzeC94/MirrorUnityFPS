@@ -8,7 +8,7 @@ public class ItemSetupEditor : Editor
 {
     private const string networkManagerPath = "Assets/Prefab/Networking/Network Manager.prefab";
 
-    [MenuItem(EditorConstant.CustomPath + "Item Data/Setup All Item Data")]
+    [MenuItem(EditorConstant.CustomPath + "Added New Item/Setup All Item Data")]
     private static void SetupItemsData() {
 
         //Need look for the network manager for the information
@@ -27,7 +27,7 @@ public class ItemSetupEditor : Editor
 
                     var itemData = pickupBase.itemData.GetItemData();
                     itemData.itemIndex = i;
-
+                    Debug.Log(pickupBase.name + ", " + i.ToString());
                     //SetDirty
                     EditorUtility.SetDirty(itemData);
 
@@ -40,5 +40,10 @@ public class ItemSetupEditor : Editor
             Debug.LogError($"Can't Find Network Manager Prefab, is the path changed???\nCurrent Looking Up Path: {networkManagerPath}");
 
         }
+    }
+
+    [MenuItem(EditorConstant.CustomPath + "Added New Item/How To")]
+    private static void HowTo() {
+
     }
 }
