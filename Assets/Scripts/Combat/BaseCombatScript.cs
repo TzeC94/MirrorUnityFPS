@@ -33,6 +33,7 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     #region Health
 
+    [ConCommand("Reset Health")]
     public virtual void ResetHealth() {
 
         if (isServer) {
