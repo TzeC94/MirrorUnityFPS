@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Data.Common;
+using System.ComponentModel.Design;
 
 public static partial class ConsoleCommandManager
 {
@@ -58,9 +59,14 @@ public static partial class ConsoleCommandManager
 
         #region Generation Class Data
 
+        //Clear dictionary
+        commandDic.Clear();
+
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.AppendLine("using System;");
+
+        stringBuilder.AppendLine("");
 
         //Start with class
         stringBuilder.AppendLine("public static partial class ConsoleCommandManager {");
@@ -75,6 +81,10 @@ public static partial class ConsoleCommandManager
         stringBuilder.AppendLine("");
 
         stringBuilder.AppendLine("\tpublic static Command[] command = {");
+
+        stringBuilder.AppendLine("");
+
+        int counter = 0;
 
         foreach (var commandBuilder in commandBuilderDic) {
 
@@ -91,11 +101,18 @@ public static partial class ConsoleCommandManager
 
                 //End
                 stringBuilder.AppendLine("\t\t}");
+
+                //Expand the dictionary for caching
+                commandDic.Add(command.commandName, counter);
+
+                counter++;
             }
 
         }
 
         stringBuilder.AppendLine("\t};");
+
+        stringBuilder.AppendLine("");
 
         //End
         stringBuilder.AppendLine("}");
@@ -122,6 +139,19 @@ public static partial class ConsoleCommandManager
     }
 
 #endif
+
+    public static Dictionary<string, int> commandDic = new Dictionary<string, int>();
+
+    public static void TriggerCommand(string commandName) {
+
+        //Find from the dictionary
+        if (commandDic.ContainsKey(commandName)) {
+
+            command[commandDic[commandName]].callAction.Invoke();
+
+        }
+
+    }
 }
 
 [AttributeUsage(AttributeTargets.Method)]
