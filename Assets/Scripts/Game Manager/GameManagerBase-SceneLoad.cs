@@ -1,10 +1,11 @@
 using Mirror;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract partial class GameManagerBase
-{
+public abstract partial class GameManagerBase {
+
     [Client]
     void LoadUI() {
 
@@ -17,6 +18,20 @@ public abstract partial class GameManagerBase
     [Client]
     void LoadMasterUICompleted(AsyncOperation asyncOperation) {
 
+        //Inventory UI
+        LoadInventoryUI();
+
+        //Load HUD
+        LoadHUDUI();
+
+        //Console Command
+        LoadConsoleCommandUI();
+    }
+
+    [Client]
+    void LoadInventoryUI() {
+
+        //Load the rest
         var loadInventoryAynsc = SceneManager.LoadSceneAsync("Inventory UI", LoadSceneMode.Additive);
         loadInventoryAynsc.allowSceneActivation = true;
         loadInventoryAynsc.completed += LoadInventoryUICompleted;
@@ -35,9 +50,6 @@ public abstract partial class GameManagerBase
 
         //Unload this scene
         SceneManager.UnloadSceneAsync("Inventory UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-
-        //Load HUD
-        LoadHUDUI();
     }
 
     [Client]
@@ -57,6 +69,27 @@ public abstract partial class GameManagerBase
 
         //Unload this scene
         SceneManager.UnloadSceneAsync("HUD UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+
+    }
+
+    [Client]
+    void LoadConsoleCommandUI() {
+
+        var hudUIAsync = SceneManager.LoadSceneAsync("Console Command UI", LoadSceneMode.Additive);
+        hudUIAsync.allowSceneActivation = true;
+        hudUIAsync.completed += LoadConsoleCommandUICompleted;
+
+        
+    }
+
+    [Client]
+    void LoadConsoleCommandUICompleted(AsyncOperation asyncOperation) {
+
+        var uiObject = GameObject.Find("Console Command UI");
+        uiObject.transform.SetParent(MasterUIScript.instance.transform);
+
+        //Unload this scene
+        SceneManager.UnloadSceneAsync("Console Command UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
 
     }
 

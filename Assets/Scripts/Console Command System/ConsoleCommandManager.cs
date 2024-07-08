@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -7,8 +6,9 @@ using System.IO;
 using System.Reflection;
 using System.Linq;
 using System.Text;
-using System.Data.Common;
-using System.ComponentModel.Design;
+using Mirror;
+using Cysharp;
+using Cysharp.Text;
 
 public static partial class ConsoleCommandManager
 {
@@ -46,7 +46,7 @@ public static partial class ConsoleCommandManager
 
                 ConCommandAttribute commandAttribute = method.GetCustomAttribute(typeof(ConCommandAttribute)) as ConCommandAttribute;
 
-                commandBuilderDic[method.DeclaringType.Name].Add(commandAttribute.commandName, method.Name);
+                commandBuilderDic[method.DeclaringType.Name].Add(commandAttribute.commandName, method.Name, commandAttribute.serverCommand);
 
                 Debug.LogFormat("[Console Command Builder] Add New Function Value {0}", method.Name);
 
@@ -99,6 +99,9 @@ public static partial class ConsoleCommandManager
                 //Body
                 stringBuilder.AppendLine("\t\t\tcallAction = " + commandBuilder.Key + "." + command.methodName);
 
+                //Server
+                stringBuilder.AppendLine("\t\t\tisServerCommand = " + command.serverOnly);
+
                 //End
                 stringBuilder.AppendLine("\t\t}");
 
@@ -142,15 +145,54 @@ public static partial class ConsoleCommandManager
 
     public static Dictionary<string, int> commandDic = new Dictionary<string, int>();
 
+    public static Action<string> onCommandEnter;
+
     public static void TriggerCommand(string commandName) {
+
+        InitialiseMessage();
+
+        //Lets build a message for server
+        var localPlayer = GameManagerBase.LocalPlayer;
+
+        CommandMessage commandMessage;
+        commandMessage.playerID = localPlayer != null? localPlayer.netId : 0;
+        commandMessage.commandName = commandName;
 
         //Find from the dictionary
         if (commandDic.ContainsKey(commandName)) {
 
-            command[commandDic[commandName]].callAction.Invoke();
+            var commandInfo = command[commandDic[commandName]];
 
+            //If is server but calling from client, lets build a message and send to server
+            if (commandInfo.isServerCommand && GameManagerBase.instance.isClient) {
+
+                //Send the command to server
+                NetworkClient.Send(commandMessage);
+
+                return;
+            }
         }
 
+        //Proceed to call the command if we can call it directly
+        TriggerCommand(commandMessage);
+    }
+
+    public static void TriggerCommand(CommandMessage commandMessage) {
+
+        InitialiseMessage();
+
+        //Find from the dictionary
+        if (commandDic.ContainsKey(commandMessage.commandName)) {
+
+            var commandInfo = command[commandDic[commandMessage.commandName]];
+
+            commandInfo.callAction.Invoke();
+
+            onCommandEnter?.Invoke(commandMessage.commandName);
+        }
+
+        const string ERROR = "Failed execute command {0}";
+        onCommandEnter?.Invoke(ZString.Format(ERROR, commandMessage.commandName));
     }
 }
 
@@ -158,14 +200,16 @@ public static partial class ConsoleCommandManager
 public class ConCommandAttribute : Attribute 
 {
     public string commandName;
+    public bool serverCommand;
 
     /// <summary>
     /// Please make sure you're adding this in a partial class only
     /// </summary>
     /// <param name="commandName"></param>
-    public ConCommandAttribute(string commandName)
+    public ConCommandAttribute(string commandName, bool serverCommand = false)
     {
         this.commandName = commandName;
+        this.serverCommand = serverCommand;
     }
 }
 
@@ -173,16 +217,18 @@ public struct CommandData {
 
     public string commandName;
     public string methodName;
+    public bool serverOnly;
 
 }
 
 public class CommandQueue : Queue<CommandData> {
 
-    public void Add(string commandName, string methodName) {
+    public void Add(string commandName, string methodName, bool serverCommand) {
 
         CommandData commandData = new CommandData();
         commandData.commandName = commandName;
         commandData.methodName = methodName;
+        commandData.serverOnly = serverCommand;
 
         Enqueue(commandData);
     }
@@ -199,5 +245,12 @@ public class CommandQueue : Queue<CommandData> {
         return false;
 
     }
+
+}
+
+public struct CommandMessage : NetworkMessage {
+
+    public uint playerID;
+    public string commandName;
 
 }
