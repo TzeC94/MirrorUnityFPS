@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cb81e0eb61ead421bbccb78028641643
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.8.0
+  assetPath: Assets/Mirror/Examples/TankTheftAuto/MirrorTankTheftAuto.unity
+  uploadId: 670838

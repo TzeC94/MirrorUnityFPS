@@ -5,3 +5,11 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.8.0
+  assetPath: Assets/Mirror/Examples/Tanks/Models/(Public Domain) Recon_Tank/Recon_Tank
+    - License.txt
+  uploadId: 670838

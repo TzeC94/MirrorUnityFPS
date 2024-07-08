@@ -6,6 +6,13 @@ MonoImporter:
   defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.8.0
+  assetPath: Assets/Mirror/Examples/Benchmark/Scripts/BenchmarkNetworkManager.cs
+  uploadId: 670838

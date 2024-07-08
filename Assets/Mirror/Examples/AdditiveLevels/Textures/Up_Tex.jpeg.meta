@@ -90,3 +90,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.8.0
+  assetPath: Assets/Mirror/Examples/AdditiveLevels/Textures/Up_Tex.jpeg
+  uploadId: 670838
