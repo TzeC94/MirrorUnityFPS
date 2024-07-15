@@ -59,8 +59,7 @@ public class PlayerInputInstance : StarterAssetsInputs
                 CursorVisibility(true);
             }
 
-            //Lock the input base on inventory
-            cursorInputForLook = PlayerInventoryUIScript.instance.isOpen == false;
+            UpdateInputLock();
 
         }
 
@@ -84,17 +83,29 @@ public class PlayerInputInstance : StarterAssetsInputs
 
     public void OnConsoleCommand(InputValue value) {
 
-        if (ConsoleCommandUI.Instance.isOpen == false) {
+        if (value.isPressed) {
 
-            ConsoleCommandUI.Instance.Open();
-            CursorVisibility(true);
+            if (ConsoleCommandUI.Instance.isOpen == false) {
 
-        } else {
+                ConsoleCommandUI.Instance.Open();
+                CursorVisibility(true);
 
-            ConsoleCommandUI.Instance.Close();
-            CursorVisibility(false);
+            } else {
+
+                ConsoleCommandUI.Instance.Close();
+                CursorVisibility(false);
+
+            }
+
+            UpdateInputLock();
 
         }
+
+    }
+
+    private void UpdateInputLock() {
+
+        cursorInputForLook = ConsoleCommandUI.Instance.isOpen || PlayerInventoryUIScript.instance.isOpen;
 
     }
 
