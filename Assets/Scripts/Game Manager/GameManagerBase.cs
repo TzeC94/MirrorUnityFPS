@@ -48,25 +48,6 @@ public abstract partial class GameManagerBase : NetworkBehaviour
 
     }
 
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        //Debug console command
-        if (Keyboard.current.f1Key.wasPressedThisFrame) {
-
-            if (ConsoleCommandUI.Instance.isOpen == false) {
-
-                ConsoleCommandUI.Instance.Open();
-
-            } else {
-
-                ConsoleCommandUI.Instance.Close();
-
-            }
-
-        }
-    }
-
     #region Pick up
 
     [Client]

@@ -31,6 +31,8 @@ public partial class InventoryUIItemScript : IBeginDragHandler, IDragHandler, IE
 
     public void OnDrop(PointerEventData eventData) {
 
+        if (dragTargetUIItem == null || dragTargetUIItem.inventoryContainer == null) return;
+
         //IF move within same inventory
         if (dragTargetUIItem.inventoryContainer == inventoryContainer) {
 
