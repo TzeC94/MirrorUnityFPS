@@ -79,7 +79,6 @@ public abstract partial class GameManagerBase {
         hudUIAsync.allowSceneActivation = true;
         hudUIAsync.completed += LoadConsoleCommandUICompleted;
 
-        
     }
 
     [Client]
@@ -87,6 +86,9 @@ public abstract partial class GameManagerBase {
 
         var uiObject = GameObject.Find("Console Command UI");
         uiObject.transform.SetParent(MasterUIScript.instance.transform);
+
+        var consoleCommandUI =  uiObject.GetComponent<ConsoleCommandUI>();
+        consoleCommandUI.Close();
 
         //Unload this scene
         SceneManager.UnloadSceneAsync("Console Command UI", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);

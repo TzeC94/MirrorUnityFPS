@@ -76,6 +76,7 @@ public static partial class ConsoleCommandManager
         stringBuilder.AppendLine("\tpublic struct Command{");
         stringBuilder.AppendLine("\t\tpublic string name;");
         stringBuilder.AppendLine("\t\tpublic Action callAction;");
+        stringBuilder.AppendLine("\t\tpublic bool isServerCommand;");
         stringBuilder.AppendLine("\t}");
 
         stringBuilder.AppendLine("");
@@ -97,10 +98,10 @@ public static partial class ConsoleCommandManager
                 stringBuilder.AppendLine("\t\t\tname = \u0022" + command.commandName + "\u0022,");
 
                 //Body
-                stringBuilder.AppendLine("\t\t\tcallAction = " + commandBuilder.Key + "." + command.methodName);
+                stringBuilder.AppendLine("\t\t\tcallAction = " + commandBuilder.Key + "." + command.methodName + ",");
 
                 //Server
-                stringBuilder.AppendLine("\t\t\tisServerCommand = " + command.serverOnly);
+                stringBuilder.AppendLine("\t\t\tisServerCommand = " + command.serverOnly.ToString().ToLower() + ",");
 
                 //End
                 stringBuilder.AppendLine("\t\t}");

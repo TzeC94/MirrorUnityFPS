@@ -1,4 +1,5 @@
 using System;
+
 public static partial class ConsoleCommandManager {
 
 	public struct Command{
@@ -8,10 +9,12 @@ public static partial class ConsoleCommandManager {
 	}
 
 	public static Command[] command = {
+
 		new Command{
 			name = "RestoreHealth",
 			callAction = BaseCombatScript.RestoreAllHealth,
-            isServerCommand = false
-        }
+			isServerCommand = true,
+		}
 	};
+
 }

@@ -41,9 +41,9 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     }
 
-    [ConCommand("RestoreHealth")]
+    [ConCommand("RestoreHealth", true)]
     public static void RestoreAllHealth() {
-
+        Debug.Log("call");
     }
 
     #endregion

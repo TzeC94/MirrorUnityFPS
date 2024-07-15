@@ -9,7 +9,7 @@ public class ConsoleCommandUI : UIBase {
 
     public TextMeshProUGUI commandTextField;
 
-    private void Start() {
+    private void Awake() {
 
         if (_Instance != null)
             return;
@@ -18,6 +18,7 @@ public class ConsoleCommandUI : UIBase {
 
         ConsoleCommandManager.onCommandEnter = ReceiveCommand;
 
+        Init();
     }
 
     private void OnDestroy() {

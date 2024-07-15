@@ -23,10 +23,10 @@ public abstract class UIBase : MonoBehaviour
     }
 
     public virtual void Close(){
-
-        if(!isOpen)
+        
+        if (!isOpen)
             return;
-
+        
         isOpen = false;
         gameObject.SetActive(isOpen);
 
