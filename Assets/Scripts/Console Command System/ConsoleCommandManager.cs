@@ -160,9 +160,9 @@ public static partial class ConsoleCommandManager
         commandMessage.commandName = commandName;
 
         //Find from the dictionary
-        if (commandDic.ContainsKey(commandName)) {
+        if (commandDic.TryGetValue(commandName, out int index)) {
 
-            var commandInfo = command[commandDic[commandName]];
+            var commandInfo = command[index];
 
             //If is server but calling from client, lets build a message and send to server
             if (commandInfo.isServerCommand && GameManagerBase.instance.isClient) {
