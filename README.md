@@ -31,7 +31,9 @@ Features
     - Map generated on server base on seed
     - Server will sync the map to client when join
     - Bridge Generator
+8. Simple console comment
+    - Currently only support static function generation
 
-I'm using Unity 2022.3.14f1
+I'm using Unity 6.0.30f1
 
 Everything start in Bootstrap Scene
