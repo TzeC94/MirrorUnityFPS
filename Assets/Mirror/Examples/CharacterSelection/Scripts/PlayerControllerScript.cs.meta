@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2a507efeb4218499aaa7cd74f326f5de
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.8.0
+  assetPath: Assets/Mirror/Examples/CharacterSelection/Scripts/PlayerControllerScript.cs
+  uploadId: 670838

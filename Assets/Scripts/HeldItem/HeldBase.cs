@@ -11,7 +11,7 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
 
     [Header("Parent")]
     [SyncVar(hook = nameof(Reparent))]
-    [ReadOnly]
+    [MyBox.ReadOnly]
     public uint parentNetID;
     [Tooltip("Name of the attach point")]
     public string heldAttachPoint = "grab point";
@@ -20,7 +20,7 @@ public abstract partial class HeldBase : BaseScriptNetwork, IHeld
     public float fireInterval = 1;
     public bool holdFire = false;
     [SyncVar]
-    [ReadOnly]
+    [MyBox.ReadOnly]
     public bool canFire = true;
     public Action fireCallback;
 

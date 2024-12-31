@@ -72,7 +72,16 @@
                     "name": "Reload",
                     "type": "Button",
                     "id": "3c6c3d8f-c7b4-4ba5-8172-21c16b177e2a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConsoleCommand",
+                    "type": "Button",
+                    "id": "a5db692e-1af6-4d5f-b0f3-5492e87af6de",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -296,6 +305,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d01c75e-6a3c-426b-bf5c-9cde02c96990",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "ConsoleCommand",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

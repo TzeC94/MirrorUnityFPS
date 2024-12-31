@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace Mirror.Experimental
 {
-    [AddComponentMenu("Network/ Experimental/Network Lerp Rigidbody")]
+    [AddComponentMenu("")]
     [HelpURL("https://mirror-networking.gitbook.io/docs/components/network-lerp-rigidbody")]
+    [Obsolete("Use the new NetworkRigidbodyReliable/Unreliable component with Snapshot Interpolation instead.")]
     public class NetworkLerpRigidbody : NetworkBehaviour
     {
         [Header("Settings")]
@@ -36,8 +38,15 @@ namespace Mirror.Experimental
         protected override void OnValidate()
         {
             base.OnValidate();
+            Reset();
+        }
+
+        public virtual void Reset()
+        {
             if (target == null)
                 target = GetComponent<Rigidbody>();
+
+            syncDirection = SyncDirection.ClientToServer;
         }
 
         void Update()

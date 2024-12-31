@@ -51,18 +51,15 @@ public class PlayerInputInstance : StarterAssetsInputs
             if (PlayerInventoryUIScript.instance.isOpen) {
 
                 PlayerInventoryUIScript.instance.Close();
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                CursorVisibility(false);
 
             } else {
 
                 PlayerInventoryUIScript.instance.Open();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                CursorVisibility(true);
             }
 
-            //Lock the input base on inventory
-            cursorInputForLook = PlayerInventoryUIScript.instance.isOpen == false;
+            UpdateInputLock();
 
         }
 
@@ -81,6 +78,41 @@ public class PlayerInputInstance : StarterAssetsInputs
     public void OnReload(InputValue value) {
 
         _reload = value.isPressed;
+
+    }
+
+    public void OnConsoleCommand(InputValue value) {
+
+        if (value.isPressed) {
+
+            if (ConsoleCommandUI.Instance.isOpen == false) {
+
+                ConsoleCommandUI.Instance.Open();
+                CursorVisibility(true);
+
+            } else {
+
+                ConsoleCommandUI.Instance.Close();
+                CursorVisibility(false);
+
+            }
+
+            UpdateInputLock();
+
+        }
+
+    }
+
+    private void UpdateInputLock() {
+
+        cursorInputForLook = ConsoleCommandUI.Instance.isOpen || PlayerInventoryUIScript.instance.isOpen;
+
+    }
+
+    public void CursorVisibility(bool visible) {
+
+        Cursor.lockState = visible? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = visible;
 
     }
 }

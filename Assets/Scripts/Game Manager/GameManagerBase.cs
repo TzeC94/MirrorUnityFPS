@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using UnityEngine.InputSystem;
 
 public abstract partial class GameManagerBase : NetworkBehaviour
 {
@@ -45,12 +46,6 @@ public abstract partial class GameManagerBase : NetworkBehaviour
 
         instance = null;
 
-    }
-
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        
     }
 
     #region Pick up

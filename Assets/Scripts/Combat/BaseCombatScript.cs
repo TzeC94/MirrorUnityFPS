@@ -41,6 +41,11 @@ public class BaseCombatScript : BaseScriptNetwork, IHitable {
 
     }
 
+    [ConCommand("RestoreHealth", true)]
+    public static void RestoreAllHealth() {
+        Debug.Log("call");
+    }
+
     #endregion
 
     #region Death
